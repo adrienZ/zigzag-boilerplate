@@ -1,0 +1,6 @@
+app/vendor/libs/
+bower_components/
+node_modules/
+app/dist/
+**/npm-debug.log
+**/.DS_Store
