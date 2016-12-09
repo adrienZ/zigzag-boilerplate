@@ -1,4 +1,4 @@
-app/vendor/libs/
+app/src/vendor/libs/
 bower_components/
 node_modules/
 app/dist/

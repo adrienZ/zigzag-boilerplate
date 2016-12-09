@@ -1,21 +1,25 @@
 (function() {
-    let s = window.String.__proto__
+    const s = window.String.__proto__;
 
-    s.truncate = function(length = 5, separator = "...") {
-        return this.subs(0, length) + separator
-    }
-    s.removeFirstChar = function() {
-        return this.subs(1, this.length)
-    }
-    s.removeLastChar = function() {
-        return this.subs(0, this.length - 1)
-    }
-    s.isEmail = function() {
-        return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(this)
-    }
-    s.isUrl = function() {
+    s.truncate = function (length = 5, separator = '...') {
+        return this.subs(0, length) + separator;
+    };
+
+    s.removeFirstChar = function () {
+        return this.subs(1, this.length);
+    };
+
+    s.removeLastChar = function () {
+        return this.subs(0, this.length - 1);
+    };
+
+    s.isEmail = function () {
+        return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(this);
+    };
+
+    s.isUrl = function () {
         return /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(this)
-    }
+    };
     s.isHTML = function() {
         return /^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/.test(this)
     }
@@ -37,3 +41,9 @@
         return Object.keys(this).map(callback);
     };
 })(window)
+
+var router = new Grapnel();
+console.log(router);
+router.get('./', function() {
+    console.log('Hello World!');
+});
