@@ -1,5 +1,6 @@
 # ZigZag Boilerplate
 
+
 This boilerplate use :
 - ES6 + import plugin via webpack
 - sass via gulp
@@ -23,11 +24,11 @@ $ npm run hello
 ### commands
 
 ```
-$ gulp build # create dist files
+$ gulp build #create dist folder
 ```
 
 ```
-$ gulp dev # work condition, sync server
+$ gulp dev #work condition, sync server
 ```
 
 ```
@@ -37,7 +38,7 @@ $ gulp prod #compress css and js from dist/
 ### linters
 - editorconfig : http://editorconfig.org/
 - linter-sass-lint : `apm install linter-sass-lint`
-- linter-eslint : 
+- linter-eslint :
 	- Atom : `apm install linter-eslint`
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
 
