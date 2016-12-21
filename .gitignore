@@ -4,3 +4,4 @@ node_modules/
 app/dist/
 **/npm-debug.log
 **/.DS_Store
+PRODUCTION/

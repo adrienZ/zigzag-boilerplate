@@ -3,12 +3,11 @@ var root = path.resolve(__dirname);
 var webpack = require("webpack");
 
 module.exports = {
-  name: 'main',
   context: __dirname,
   node: {
     __filename: true
   },
-  watch: true,
+  watch: false,
   entry: {
     // for multiples entries
     bundle: ["./app/src/js/main.js"],
@@ -30,5 +29,11 @@ module.exports = {
         }
       }
     ]
-  }
-};
+  },
+  plugins: [new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    })]
+}

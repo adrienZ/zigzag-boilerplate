@@ -32,13 +32,17 @@ gulp.task('sync', () => {
 
 gulp.task("importDatas", () => {
 
-    gulp.src("./app/src/data/*.json").pipe(gulp.dest("./app/dist/data"));
+    gulp.src("./app/src/datas/*.json").pipe(gulp.dest("./app/dist/datas"));
 
 });
-gulp.task("importImages", () => {});
+gulp.task("importImages", () => {
+
+  gulp.src("./app/src/img/**/*").pipe(gulp.dest("./app/dist/media/img"));
+
+});
 gulp.task("importVideos", () => {
 
-    gulp.src("./app/src/video/*.mp4").pipe(gulp.dest("./app/dist/video"));
+    gulp.src("./app/src/video/**/*").pipe(gulp.dest("./app/dist/media/video"));
 
 });
 
@@ -51,8 +55,18 @@ gulp.task('build', [
     'importFonts'
 ], () => {
     gulp.src('./app/src/js/main.js').pipe(webpack(require('./webpack.build.config.js'))).pipe(gulp.dest('app/dist/js/'));
-
 });
+
+
+gulp.task('prod', [
+  'build'
+], () => {
+  gulp.src("./app/*.html").pipe(gulp.dest("./PRODUCTION/"));
+  gulp.src("./app/dist/**/*").pipe(gulp.dest("./PRODUCTION/dist/"));
+});
+
+
+
 
 gulp.task('dev', [
     'sync', 'sass', 'webpack'
@@ -67,5 +81,5 @@ gulp.task('dev', [
 gulp.task('default', ["dev"])
 
 gulp.task("importFonts", () => {
-    gulp.src("./app/src/font/*").pipe(gulp.dest("./app/dist/font/"));
+    gulp.src("./app/src/media/fonts/*").pipe(gulp.dest("./app/dist/media/fonts/"));
 });
