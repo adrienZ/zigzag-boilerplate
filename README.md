@@ -1,5 +1,6 @@
 # ZigZag Boilerplate
 
+> if you have question or want to add an issue please read first the [notice](https://github.com/adrienZ/zigzag-boilerplate/blob/master/NOTICE.md)
 
 This boilerplate use :
 - ES6 + import plugin via webpack
