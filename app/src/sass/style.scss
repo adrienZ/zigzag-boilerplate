@@ -1,24 +1,36 @@
 // sass/
 // |
-// |-- modules/
-// |   |-- functions.scss
+// |-- modules/              # All your magic mixins, include all these files in partials/_base.scss
+// |   |-- _functions.scss       # prefixers, loops, etc..
 // |
-// |-- globals/
-// |   |-- typography.scss
-// |   |-- colors.scss
+// |-- fonts/                # Import all the font you need and include the file in partials/_base.scss
+// |   |-- _font_import.scss     # all your font face
 // |
-// |-- partials/             # Partials
+// |-- components/           # Non reususable parts of your website: cool animation on your home, contact form, timelines...
+// |   |-- _example.scss         # import each component in pages/_the_page.scss
+// |
+// |-- globals/              # /!\ Import all theses files in partials/_base.scss /!\
+// |   |-- _typography.scss      # body text, headlines, font, em, rem, line-height, letter spacing
+// |   |-- _colors.scss          # backgrounds, font colors, borders, grandients ...
+// |   |-- _layout.scss          # container, grid, full screen section...
+// |
+// |-- partials/             # Partials : reususable parts of your website
 // |   |-- _base.sass           # imports for all mixins + global project variables
 // |   |-- _reset.scss          # reset
 // |   |-- _header.scss         # reset
 // |   |-- _footer.scss         # reset
+// |   |-- _reset.scss          # reset
 // |   ...
 // |
 // |-- vendor/               # CSS or Sass from other projects
-// |   |-- _colorpicker.scss
+// |   |-- _bootsrap.scss
 // |   ...
 // |
-// `-- style.scss            # primary Sass file
+// `-- style.scss            # each file at the root will render a css file, use one css file per page;
 
 
-@import 'partials/_base';
+@import 'partials/base';
+@import 'pages/page-base';
+@import 'pages/home';
+
+// DONT WRITE CODE AFTER IMPORTS

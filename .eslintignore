@@ -1,3 +1,7 @@
 gulpfile.js
 dist/
 vendor/
+gulpfile.js
+webpack.build.config.js
+webpack.build.prod.js
+webpack.config.js

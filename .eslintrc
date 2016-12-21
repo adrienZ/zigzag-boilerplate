@@ -15,7 +15,7 @@
       "requireParamDescription": false,
       "requireReturnDescription": false
     }],
-    "indent": ["error", 4],
+    "indent": ["error", 2],
     "prefer-template" : 0,
     "no-trailing-spaces": 0,
     "no-mixed-operators": 0,

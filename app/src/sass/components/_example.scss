@@ -1,0 +1,133 @@
+// create a mixin that include all the part of your component
+// and include it at the end of the file.
+// You juste have to import this file on your page to enbale the component
+
+
+
+
+
+@mixin Moon {
+  .moon {
+    @include MoonPosition;
+    @include MoonGlobe;
+    @include MoonTimeline;
+    @include MoonCursor;
+    @include MoonSteps;
+  }
+}
+
+@mixin MoonPosition {
+  bottom: -15%;
+  display: flex;
+  height: $moon-size;
+  justify-content: center;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  transform: translateY(-5%);
+  width: $moon-size;
+  z-index: 2;
+}
+
+
+
+@mixin MoonGlobe {
+  .rs-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  .rs-path {
+    background: transparent;
+  }
+
+  .rs-block {
+    padding: 0;
+
+    .rs-inner {
+      background: url('../media/img/pink-moon.png') center center no-repeat;
+      background-size: cover;
+      height: $moon-globe-ratio;
+      margin: 5% auto;
+      width: $moon-globe-ratio;
+    }
+  }
+}
+
+@mixin MoonTimeline {
+  .rs-seperator {
+    border: 0;
+  }
+  .rs-border {
+    border-color: $moon-color;
+    border-width: 2px;
+  }
+  .rs-inner {
+    &.rs-border {
+      border: 0;
+    }
+  }
+}
+
+@mixin MoonCursor {
+  .rs-handle {
+    background-color: $white;
+    border-radius: 50%;
+    box-shadow:
+    0 0 0 5px rgba(255, 255, 255, 1),
+    0 0 0 10px  rgba(255, 255, 255, .45),
+    0 0 0 15px rgba(255, 255, 255, .65);
+    margin-left: -4px;
+  }
+}
+
+@mixin MoonSteps {
+  li {
+    background: red;
+    border-radius: 50%;
+    height: 20px;
+    list-style: none;
+    width: 20px;
+
+    &:nth-of-type(1) {
+      background: brown;
+      left: 20.5%;
+      position: absolute;
+      top: 8%;
+    }
+    &:nth-of-type(2) {
+      background: blue;
+      left: 33.5%;
+      position: absolute;
+      top: 15px;
+    }
+    &:nth-of-type(3) {
+      background: green;
+      left: 43.5%;
+      position: absolute;
+      top: -6px;
+    }
+    &:nth-of-type(4) {
+      background: yellow;
+      position: absolute;
+      right: 43.5%;
+      top: -6px;
+    }
+    &:nth-of-type(5) {
+      background: yellow;
+      position: absolute;
+      right: 33.5%;
+      top: 15px;
+    }
+    &:nth-of-type(6) {
+      background: brown;
+      right: 20.5%;
+      position: absolute;
+      top: 8%;
+    }
+  }
+}
+
+
+@include Moon;
