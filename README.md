@@ -18,6 +18,8 @@ $ npm i -g webpack
 
 ### installation
 ```
+$ git clone https://github.com/adrienZ/zigzag-boilerplate.git
+$ cd zigzag-boilerplate
 $ npm run hello
 ```
 

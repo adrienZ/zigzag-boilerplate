@@ -1,6 +1,6 @@
 # ZigZag Boilerplate
 
-> If you have a question about the sass architecture pleas go to
+> If you have a question about the sass architecture please go to
 > ./app/src/sass/style.scss
 
 ### How do i add HTML ?
