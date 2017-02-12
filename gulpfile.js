@@ -16,6 +16,8 @@ gulp.task('webpack', () => {
 gulp.task('vendor', () => {
     gulp.src('app/src/vendor/**/*.js').pipe(uglify()).pipe(gulp.dest('app/dist/vendor'))
 });
+gulp.task('tet', () => {
+
 
 gulp.task('sass', () => {
     gulp.src('app/src/sass/*.scss').pipe(sass().on('error', sass.logError)).pipe(postcss(processors)).pipe(csscomb()).pipe(gulp.dest('app/dist/css')).pipe(sync.stream());
@@ -77,6 +79,7 @@ gulp.task('dev', [
     gulp.watch('app/src/templates/*.hbs', ['templates'])
     // Other watchers
 });
+
 
 gulp.task('default', ["dev"])
 
