@@ -4,8 +4,7 @@
 * @return HTMLnodeElement                                                 *
 * ======================================================================= *
 **/
-
-export class DomManipulator {
+class DomManipulator {
   // constructor() {}
   id(id) {
       return document.getElementById(id);
@@ -23,3 +22,5 @@ export class DomManipulator {
       return document.querySelectorAll(els);
   }
 }
+
+module.exports = DomManipulator;

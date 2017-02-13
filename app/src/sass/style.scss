@@ -6,8 +6,6 @@
 // |-- fonts/                # Import all the font you need and include the file in partials/_base.scss
 // |   |-- _font_import.scss     # all your font face
 // |
-// |-- components/           # Non reususable parts of your website: cool animation on your home, contact form, timelines...
-// |   |-- _example.scss         # import each component in pages/_the_page.scss
 // |
 // |-- globals/              # /!\ Import all theses files in partials/_base.scss /!\
 // |   |-- _typography.scss      # body text, headlines, font, em, rem, line-height, letter spacing
@@ -17,9 +15,15 @@
 // |-- partials/             # Partials : reususable parts of your website
 // |   |-- _base.sass           # imports for all mixins + global project variables
 // |   |-- _reset.scss          # reset
-// |   |-- _header.scss         # reset
-// |   |-- _footer.scss         # reset
+// |   |-- _header.scss         # header
+// |   |-- _footer.scss         # footer
 // |   |-- _reset.scss          # reset
+// |   |-- example.scss         # example
+// |
+// |
+// |-- views/             # Partials : reususable parts of your website
+// |   |-- page_base.sass       #
+// |   |-- _home.scss           # home
 // |   ...
 // |
 // |-- vendor/               # CSS or Sass from other projects
@@ -30,7 +34,6 @@
 
 
 @import 'partials/base';
-@import 'pages/page-base';
-@import 'pages/home';
+@import 'views/home';
 
 // DONT WRITE CODE AFTER IMPORTS
