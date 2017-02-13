@@ -1,9 +1,9 @@
-app/src/vendor/libs/
+app/src/js/vendor/
 bower_components/
 node_modules/
-app/dist/
-**/npm-debug.log
-**/.DS_Store
+dist/
+npm-debug.log
+yarn-error.log
 
 
 

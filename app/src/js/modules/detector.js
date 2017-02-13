@@ -14,7 +14,7 @@ browsers.isChrome = !!window.chrome && !!window.chrome.webstore;
 // Blink engine detection
 browsers.isBlink = (browsers.isChrome || browsers.isOpera) && !!window.CSS;
 
-export const detector = {
+ const detector = {
   isMobile: navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/),
   browsers: browsers,
 };
