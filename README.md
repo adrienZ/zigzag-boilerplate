@@ -5,7 +5,7 @@
 This boilerplate use :
 - ES6 & HTML templating (optionnal) via webpack
 - sass via gulp
-- linters
+[//]: # (- linters )
 - npm (or yarn) & bower
 
 
@@ -26,7 +26,6 @@ $ npm i -g webpack
 $ git clone https://github.com/adrienZ/zigzag-boilerplate.git
 $ cd zigzag-boilerplate
 $ npm run hello
-$ open http://localhost:1234/webpack-dev-server/
 ```
 
 
