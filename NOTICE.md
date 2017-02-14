@@ -7,7 +7,7 @@
 add your file(s) at the root of  `app/` and relaunch your server.
 
 ### What if want to add HTML elsewhere than root ?
-Your shouldn't, i suggest you using a front-end router instead.
+You shouldn't, i suggest you using a front-end router instead.
 
 ### How do i add CSS ?
 add your files(s) in `app/src/sass/` as long as `npm run watchSass` is running.
