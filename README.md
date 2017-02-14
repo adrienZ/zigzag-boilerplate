@@ -32,13 +32,13 @@ $ npm run hello
 ### commands
 
 ```
-$ npm build #create dist folder (prod)
+$ npm run build #create dist folder (prod)
 ```
 ```
-$ npm server #work condition, sync server for html & js
+$ npm run server #work condition, sync server for html & js
 ```
 ```
-$ npm watchSass #work condition, sync server for sass
+$ npm run watchSass #work condition, sync server for sass
 ```
 
 
