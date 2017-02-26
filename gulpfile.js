@@ -2,12 +2,10 @@
 // !  DEPENDENCIES                                                        //
 // =======================================================================//
 let gulp = require('gulp'),
-sass = require('gulp-sass'),
-path = require('path'),
-autoprefixer = require('autoprefixer'),
-postcss = require('gulp-postcss');
-
-
+  sass = require('gulp-sass'),
+  path = require('path'),
+  autoprefixer = require('autoprefixer'),
+  postcss = require('gulp-postcss');
 
 // =======================================================================//
 // !  CONFIG URLS                                                         //
@@ -18,28 +16,29 @@ const APP_ASSETS_URL = path.join(__dirname) + '/app/src/';
 const DIST_URL = path.join(__dirname) + '/dist/';
 const DIST_ASSETS_URL = path.join(__dirname) + '/dist/src/';
 
-
 // =======================================================================//
 // !  CONFIG SASS                                                         //
 // =======================================================================//
 const processors = [autoprefixer];
 
-gulp.task('sass', (mode) => {
-  gulp.src(APP_ASSETS_URL + 'sass/*.scss')
-  .pipe(sass().on('error', sass.logError))
-  .pipe(postcss(processors))
-  .pipe(gulp.dest(DIST_ASSETS_URL+ 'css'));
-
-  gulp.watch(APP_ASSETS_URL+ 'sass/**/*.scss', ['sass']);
+gulp.task('sassDev', () => {
+  return gulp
+      .src(APP_ASSETS_URL + 'sass/*.scss')
+      .pipe(sass().on('error', sass.logError)).pipe(postcss(processors))
+      .pipe(gulp.dest(DIST_ASSETS_URL + 'css'));
 });
-gulp.task('sassProd', (mode) => {
-  return gulp.src(APP_ASSETS_URL+'sass/*.scss')
-  .pipe(sass({outputStyle: 'compressed'}) .on('error', sass.logError))
-  .pipe(postcss(processors))
-  .pipe(gulp.dest(DIST_ASSETS_URL + 'css'));
-}
-);
 
+gulp.task('sassProd', () => {
+  return gulp
+      .src(APP_ASSETS_URL + 'sass/*.scss')
+      .pipe(sass({outputStyle: 'compressed'})
+      .on('error', sass.logError)).pipe(postcss(processors))
+      .pipe(gulp.dest(DIST_ASSETS_URL + 'css'));
+});
+
+gulp.task('sass', ['sassDev'], () => {
+  return gulp.watch(APP_ASSETS_URL + 'sass/**/*.scss', ['sassDev']);
+})
 // =======================================================================//
 // !  CONFIG ASSETS                                                       //
 // =======================================================================//
@@ -59,10 +58,4 @@ gulp.task("importFonts", () => {
 // =======================================================================//
 // ! PROD                                                                 //
 // =======================================================================//
-gulp.task('build', [
-  'importImages',
-  'importDatas',
-  'importVideos',
-  'sassProd',
-  'importFonts'
-]);
+gulp.task('build', ['importImages', 'importDatas', 'importVideos', 'sassProd', 'importFonts']);
