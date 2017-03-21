@@ -35,11 +35,9 @@ $ npm run hello
 $ npm run build #create dist folder (prod)
 ```
 ```
-$ npm run server #work condition, sync server for html & js
+$ npm run server #work condition, sync server for html & js & sass
 ```
-```
-$ npm run watchSass #work condition, sync server for sass
-```
+
 
 
 ### linters
