@@ -34,7 +34,6 @@ fs.readdirSync(APP_ASSETS_URL + 'js').filter((file) => {
 // =======================================================================//
 // !  CONFIG ENTRIES / STYLES / BUNDLES                                   //
 // =======================================================================//
-
 let STYLES = {};
 fs.readdirSync(APP_ASSETS_URL + 'sass').filter((file) => {
     // get all .js at the root of app/src/js
@@ -76,18 +75,19 @@ const VIEWS = fs.readdirSync(APP_URL).filter(file => {
 // =======================================================================//
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
+
 const DEV_SERVER = {
     contentBase: path.join(BASE_URL, "dist"),
     // change this as you want
     compress: true,                 // enable gzip compression
     inline: false,                  // iframe mode,
     noInfo: true,                   // cut the fat
-    historyApiFallback: false,      //history API fallback.
+    historyApiFallback: false,      // history API fallback.
     hot: false,                     // hot reload
     https: true,                    // open new tab
     open: false,                    // remove useless infos
     port: 1234,
-    quiet: false,                    // shut down console
+    quiet: true,                    // shut down console
 }
 
 

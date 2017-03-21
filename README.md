@@ -1,7 +1,5 @@
 # ZigZag Boilerplate
 
-> if you have question or want to add an issue please read first the [notice](https://github.com/adrienZ/zigzag-boilerplate/blob/master/NOTICE.md)
-
 This boilerplate use :
 - ES6 & HTML templating (optionnal) via webpack
 - sass via gulp
@@ -51,3 +49,31 @@ $ npm run server #work condition, sync server for html & js & sass
 export PKG=eslint-config-airbnb;
 npm info "$PKG" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG"
 ```
+
+### notice
+> If you have a question about the sass architecture please go to
+> ./app/src/sass/style.scss
+
+##### How do i add HTML ?
+add your file(s) at the root of  `app/` and restart your server.
+
+##### What if want to add HTML elsewhere than root ?
+You shouldn't, i suggest you using a front-end router instead.
+
+##### What files will I in `dist/` ?
+- .html at the root of `app/`
+- .css at the root of `app/src/sass`
+- .js at the root of `app/src/js`
+
+##### How do i import bootstrap or any CSS libraries?
+- use a cdn
+- add your files(s) in `app/src/sass/vendor/` as long as `npm run start` is running.
+- use bower
+
+##### What if want to add JS elsewhere than root ?
+use ES6 import feature.
+
+##### How do i import jQuery or any JS libraries?
+if possible, use bower :
+`$ bower install jquery —save`
+or add your files(s) in `app/src/js/vendor/` and use `npm run build`
