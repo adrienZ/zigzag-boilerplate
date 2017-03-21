@@ -1,16 +1,11 @@
 // sass/
 // |
-// |-- modules/              # All your magic mixins, include all these files in partials/_base.scss
-// |   |-- _functions.scss       # prefixers, loops, etc..
-// |
-// |-- fonts/                # Import all the font you need and include the file in partials/_base.scss
-// |   |-- _font_import.scss     # all your font face
-// |
-// |
 // |-- globals/              # /!\ Import all theses files in partials/_base.scss /!\
 // |   |-- _typography.scss      # body text, headlines, font, em, rem, line-height, letter spacing
 // |   |-- _colors.scss          # backgrounds, font colors, borders, grandients ...
 // |   |-- _layout.scss          # container, grid, full screen section...
+// |   |-- _functions.scss       # prefixers, loops, etc..
+// |   |-- _fonts.scss           # all your font face
 // |
 // |-- partials/             # Partials : reususable parts of your website
 // |   |-- _base.sass           # imports for all mixins + global project variables
@@ -35,5 +30,6 @@
 
 @import 'partials/base';
 @import 'views/home';
+
 
 // DONT WRITE CODE AFTER IMPORTS

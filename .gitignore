@@ -1,4 +1,4 @@
-app/src/js/vendor/
+app/src/vendor/
 bower_components/
 node_modules/
 dist/

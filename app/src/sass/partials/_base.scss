@@ -3,8 +3,10 @@
 @import 'globals/typography';
 @import 'globals/layout';
 
+
 // import your helpers functions
-@import 'modules/functions';
+@import 'globals/functions';
 
 // start coding
 @import 'partials/reset';
+@import 'globals/fonts';
