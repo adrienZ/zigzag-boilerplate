@@ -1,19 +1,15 @@
-//set the color of a element by looking og the lightness of his backgtound
-// -->  set-text-color($backgound-color)
-@function set-text-color($color) {
-  @if (lightness($color) > 50) {
-    @return #000000; // Lighter backgorund, return dark color
+@function contrast-text($backgound-color) {
+  @if (lightness($backgound-color) > 50) {
+    @return #000; // Lighter backgorund, return dark color
   } @else {
-    @return #FFFFFF; // Darker background, return light color
+    @return #fff; // Darker background, return light color
   }
 }
 
-
-
-@mixin alpha-prop($prop, $color, $background) {
-  $percent: alpha($color) * 100%;
-  $opaque: opacify($color, 1);
-  $solid-color: mix($opaque, $background, $percent);
-  #{$prop}: $solid-color;
-  #{$prop}: $color;
+@mixin import-props($selector, $object) {
+  #{$selector} {
+    @each $prop, $value in $object {
+      #{$prop}:  $value;
+    }
+  }
 }
