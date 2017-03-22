@@ -4,10 +4,10 @@
   "description": "Boilerplate on steroids",
   "main": "gulpfile.js",
   "scripts": {
-    "build": "gulp build && webpack -p",
+    "build": "gulp build && webpack -p --hide-modules --cache",
     "start": "webpack-dev-server --colors",
     "open": "open . -a atom",
-    "hello": "(yarn install || npm i) && bower i && (gulp build && webpack -p) && npm run start"
+    "hello": "(yarn install || npm i) && bower i && npm run build && npm run start"
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "license": "ISC",
