@@ -14,9 +14,7 @@ This template requires
 and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) to run .
 
 ```sh
-$ npm i -g gulp
-$ npm i -g bower
-$ npm i -g webpack
+$ npm i -g gulp bower webpack
 ```
 
 ### installation
@@ -30,10 +28,10 @@ $ npm run hello
 ### commands
 
 ```
-$ npm run build #create dist folder (prod)
+$ npm run build #production
 ```
 ```
-$ npm run server #work condition, sync server for html & js & sass
+$ npm run start #server
 ```
 
 
@@ -54,26 +52,26 @@ npm info "$PKG" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' 
 > If you have a question about the sass architecture please go to
 > ./app/src/sass/style.scss
 
-##### How do i add HTML ?
+#### How do i add HTML ?
 add your file(s) at the root of  `app/` and restart your server.
 
-##### What if want to add HTML elsewhere than root ?
+#### What if want to add HTML elsewhere than root ?
 You shouldn't, i suggest you using a front-end router instead.
 
-##### What files will I in `dist/` ?
+#### What files will I in `dist/` ?
 - .html at the root of `app/`
 - .css at the root of `app/src/sass`
 - .js at the root of `app/src/js`
 
-##### How do i import bootstrap or any CSS libraries?
+#### How do i import bootstrap or any CSS libraries?
 - use a cdn
 - add your files(s) in `app/src/sass/vendor/` as long as `npm run start` is running.
 - use bower
 
-##### What if want to add JS elsewhere than root ?
+#### What if want to add JS elsewhere than root ?
 use ES6 import feature.
 
-##### How do i import jQuery or any JS libraries?
+#### How do i import jQuery or any JS libraries?
 if possible, use bower :
 `$ bower install jquery —save`
 or add your files(s) in `app/src/js/vendor/` and use `npm run build`
