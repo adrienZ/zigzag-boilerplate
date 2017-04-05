@@ -63,6 +63,6 @@ You shouldn't, i suggest you using a front-end router instead.
 use ES6 import feature.
 
 #### How do i import jQuery or any JS libraries?
-if possible, use bower :
-`$ bower install jquery —save`
-or add your files(s) in `app/src/js/vendor/` and use `npm run build`
+- use a cdn
+- add your files(s) in `app/src/js/vendor/` as long as `npm run start` is running.
+- use bower
