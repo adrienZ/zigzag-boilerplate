@@ -56,7 +56,7 @@ You shouldn't, i suggest you using a front-end router instead.
 
 #### How do i import bootstrap or any CSS libraries?
 - use a cdn
-- add your files(s) in `app/src/sass/vendor/` as long as `npm run start` is running.
+- add your files(s) in `app/src/sass/bower_vendor/` as long as `npm run start` is running.
 - use bower
 
 #### What if want to add JS elsewhere than root ?
@@ -65,4 +65,4 @@ use ES6 import feature.
 #### How do i import jQuery or any JS libraries?
 if possible, use bower :
 `$ bower install jquery —save`
-or add your files(s) in `app/src/js/vendor/` and use `npm run build`
+or add your files(s) in `app/src/js/bower_vendor/` and use `npm run build`
