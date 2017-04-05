@@ -7,13 +7,5 @@
   ],
   "license": "ISC",
   "homepage": "https://github.com/adrienZ/zigzag-boilerplate",
-  "moduleType": [],
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "app/src/js/vendor/",
-    "test",
-    "tests"
-  ]
+  "moduleType": []
 }

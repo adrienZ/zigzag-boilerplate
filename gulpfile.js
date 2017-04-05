@@ -28,8 +28,11 @@ gulp.task('importVideos', () => {
 gulp.task('importFonts', () => {
   gulp.src(APP_ASSETS_URL + 'media/fonts/**/*').pipe(gulp.dest(DIST_ASSETS_URL + 'media/fonts/'));
 });
+gulp.task('importBowerLibs', () => {
+  gulp.src(APP_ASSETS_URL + 'bower_vendor/**/*').pipe(gulp.dest(DIST_ASSETS_URL + 'bower_vendor/'));
+});
 
 // =======================================================================//
 // ! PROD                                                                 //
 // =======================================================================//
-gulp.task('build', ['importImages', 'importDatas', 'importVideos', 'importFonts']);
+gulp.task('build', ['importImages', 'importDatas', 'importVideos', 'importFonts', 'importBowerLibs']);
