@@ -2,10 +2,10 @@
 // !  DEPENDENCIES                                                        //
 // =======================================================================//
 const path = require('path');
-const webpack = require("webpack");
+const webpack = require('webpack');
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // =======================================================================//
 // !  CONFIG URLS                                                         //
@@ -45,8 +45,8 @@ fs.readdirSync(APP_ASSETS_URL + 'sass').filter((file) => {
 });
 
 const extractSass = new ExtractTextPlugin({
-  filename: "src/css/[name].css",
-  disable: process.env.NODE_ENV === "development",
+  filename: 'src/css/[name].css',
+  disable: process.env.NODE_ENV === 'development',
 });
 
 const ENTRIES = Object.assign({}, SCRIPTS, STYLES);
@@ -77,7 +77,7 @@ const VIEWS = fs.readdirSync(APP_URL).filter(file => {
 // =======================================================================//
 
 const DEV_SERVER = {
-  contentBase: path.join(BASE_URL, "dist"),
+  contentBase: path.join(BASE_URL, 'dist'),
   // change this as you want
   compress: true,                 // enable gzip compression
   inline: false,                  // iframe mode,
@@ -97,7 +97,7 @@ module.exports = [
     devServer: DEV_SERVER,
     entry: SCRIPTS,
     output: {
-      path: path.resolve(BASE_URL, "./dist/"),
+      path: path.resolve(BASE_URL, './dist/'),
       // not at the root
       filename: 'src/js/[name].js',
     },
@@ -107,7 +107,7 @@ module.exports = [
           // ES6
           test: /\.js$/,
           exclude: /node_modules/,
-          loader: "babel-loader"
+          loaders: ['babel-loader']
         },
       ]
     },
@@ -121,7 +121,7 @@ module.exports = [
     devServer: DEV_SERVER,
     entry: STYLES,
     output: {
-      path: path.resolve(BASE_URL, "./dist/"),
+      path: path.resolve(BASE_URL, './dist/'),
       // not at the root
       filename: 'src/css/[name].css',
     },
@@ -132,16 +132,16 @@ module.exports = [
           use: extractSass.extract({
             use: [
               {
-                loader: "css-loader?importLoaders=1",
+                loader: 'css-loader?importLoaders=1',
               },
               {
-                loader: "postcss-loader"
+                loader: 'postcss-loader'
               },
               {
-                loader: "sass-loader"
+                loader: 'sass-loader'
               }],
               // use style-loader in development
-              fallback: "style-loader"
+              fallback: 'style-loader'
             }),
 
           }

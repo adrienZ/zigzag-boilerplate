@@ -4,8 +4,9 @@
 * @return HTMLnodeElement                                                 *
 * ======================================================================= *
 **/
+
+/* eslint-disable */
 class DomManipulator {
-  // constructor() {}
   id(id) {
       return document.getElementById(id);
   }

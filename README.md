@@ -3,15 +3,14 @@
 This boilerplate use :
 - ES6 & HTML templating (optionnal) via webpack
 - sass via gulp
-[//]: # (- linters )
+- linters & prettier
 - npm (or yarn) & bower
-
 
 This template requires
 [Node.js](https://nodejs.org/) v6+,
 [Webpack](http://webpack.github.io/docs/),
 [Bower](https://bower.io/#install-bower),
-and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) to run .
+and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) to run.
 
 ```sh
 $ npm i -g gulp bower webpack
@@ -24,17 +23,14 @@ $ cd zigzag-boilerplate
 $ npm run hello
 ```
 
-
 ### commands
 
 ```
 $ npm run build #production
 ```
 ```
-$ npm run start #server
+$ npm run start #dev
 ```
-
-
 
 ### linters
 - editorconfig : http://editorconfig.org/
@@ -42,11 +38,6 @@ $ npm run start #server
 - linter-eslint :
 	- Atom : `apm install linter-eslint`
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
-
-```
-export PKG=eslint-config-airbnb;
-npm info "$PKG" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG"
-```
 
 ### notice
 > If you have a question about the sass architecture please go to

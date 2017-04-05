@@ -6,7 +6,7 @@ rules:
   indentation: 4
   clean-import-paths:
       - leading-underscore: true
-      -  filename-extension: false
+      - filename-extension: false
 
 linters:
   BorderZero:
