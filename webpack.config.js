@@ -80,7 +80,7 @@ const DEV_SERVER = {
 	noInfo: true, // cut the fat
 	historyApiFallback: false, // history API fallback.
 	hot: false, // hot reload
-	https: true, // open new tab
+	https: false, // open new tab
 	open: false, // remove useless infos
 	port: 1234,
 	quiet: true, // shut down console
@@ -137,7 +137,7 @@ module.exports = [
 					})
 				},
 				{
-					test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+					test: /\.(woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/,
 					loader: 'url-loader?limit=100'
 				}
 			]
