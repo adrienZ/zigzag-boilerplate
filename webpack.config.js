@@ -6,6 +6,8 @@ const webpack = require('webpack');
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ip = require('ip');
+const devMode = process.env.NODE_ENV === 'dev';
 
 // =======================================================================//
 // !  CONFIG URLS                                                         //
@@ -82,7 +84,8 @@ const DEV_SERVER = {
 	hot: false, // hot reload
 	https: false, // open new tab
 	open: false, // remove useless infos
-	port: 1234,
+  port: 1234,
+  host:  ip.adrees, //current ip, same url for multiple devices
 	quiet: true, // shut down console
 }
 
@@ -95,7 +98,8 @@ module.exports = [
 			path: path.resolve(BASE_URL, './dist/'),
 			// not at the root
 			filename: 'src/js/[name].js'
-		},
+    },
+    devtool: devMode ? 'cheap-eval-source-map' :false,
 		module: {
 			loaders: [
 				{
@@ -111,12 +115,13 @@ module.exports = [
 	}, {
 		name: 'CUSTOM SASS CONFIG',
 		devServer: DEV_SERVER,
-		entry: STYLES,
+    entry: STYLES,
 		output: {
 			path: path.resolve(BASE_URL, './dist/'),
 			// not at the root
 			filename: 'src/css/[name].css'
-		},
+    },
+    devtool: devMode ? 'cheap-eval-source-map' : false,
 		module: {
 			loaders: [
 				{
