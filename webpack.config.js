@@ -7,7 +7,12 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ip = require('ip');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
 const devMode = process.env.NODE_ENV === 'dev';
+const clearDist = process.env.CLEAR_DIST;
+
 
 // =======================================================================//
 // !  CONFIG URLS                                                         //
@@ -89,7 +94,7 @@ const DEV_SERVER = {
 	quiet: true, // shut down console
 }
 
-module.exports = [
+let configs = [
 	{
 		name: 'JS + HTML CONFIG',
 		devServer: DEV_SERVER,
@@ -97,9 +102,9 @@ module.exports = [
 		output: {
 			path: path.resolve(BASE_URL, './dist/'),
 			// not at the root
-			filename: 'src/js/[name].js'
+			filename: devMode ? 'src/js/[name].js' : 'src/js/[name].[chunkhash:8].js'
     },
-    devtool: devMode ? 'cheap-eval-source-map' :false,
+    devtool: devMode ? 'cheap-eval-source-map' : false,
 		module: {
 			loaders: [
 				{
@@ -119,7 +124,7 @@ module.exports = [
 		output: {
 			path: path.resolve(BASE_URL, './dist/'),
 			// not at the root
-			filename: 'src/css/[name].css'
+			filename: devMode ? 'src/css/[name].css' : 'src/css/[name].[chunkhash:8].css'
     },
     devtool: devMode ? 'cheap-eval-source-map' : false,
 		module: {
@@ -150,3 +155,23 @@ module.exports = [
 		plugins: [extractSass]
 	}
 ];
+
+if (!devMode) {
+  configs[0].plugins.push(
+     new ManifestPlugin({
+      basePath: '/dist/',
+      fileName: 'webpack-manifest.json',
+    })
+  );
+
+  clearDist && configs[0].plugins.push(
+    new CleanWebpackPlugin(['dist'], {
+      root: BASE_URL,
+      verbose: true,
+      dry: false,
+      exclude: ['dist/src/media/']
+    })
+  );
+}
+
+module.exports = configs;
