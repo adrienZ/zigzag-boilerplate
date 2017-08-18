@@ -157,6 +157,7 @@ let configs = [
 ];
 
 if (!devMode) {
+  // manifest for hashes
   configs[0].plugins.push(
      new ManifestPlugin({
       basePath: '/dist/',
@@ -164,6 +165,7 @@ if (!devMode) {
     })
   );
 
+  // clear dist folder
   clearDist && configs[0].plugins.push(
     new CleanWebpackPlugin(['dist'], {
       root: BASE_URL,
@@ -172,6 +174,10 @@ if (!devMode) {
       exclude: ['dist/src/media/']
     })
   );
+
+  configs.map( config => {
+    config.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+  });
 }
 
 module.exports = configs;
