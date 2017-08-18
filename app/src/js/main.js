@@ -1,5 +1,5 @@
-import detector from './modules/detector';
-import DomManipulator from './models/class.dom-manipulator';
+import detector from '@jssss/modules/detector';
+import DomManipulator from '@jssss/models/class.dom-manipulator';
 
 const $ = new DomManipulator();
 
