@@ -1,4 +1,4 @@
-import DomManipulator from './models/class.dom-manipulator';
+import DomManipulator from '@jssss/models/class.dom-manipulator';
 
 const $ = new DomManipulator();
 

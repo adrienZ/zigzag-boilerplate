@@ -71,7 +71,11 @@ const VIEWS = fs.readdirSync(APP_URL).filter(file => {
     prevent code of config entries to fire.
     scripts/bundles have to be called in .html to be executed
     */
-		excludeChunks: Object.keys(ENTRIES).map(bundle_name => bundle_name)
+    excludeChunks: Object.keys(ENTRIES).map(bundle_name => bundle_name),
+    minify: {
+      removeComments: true,
+      removeRedundantAttributes: true
+    }
 	});
 });
 
@@ -84,7 +88,8 @@ const DEV_SERVER = {
 	// change this as you want
 	compress: true, // enable gzip compression
 	inline: false, // iframe mode,
-	noInfo: true, // cut the fat
+  noInfo: true, // cut the fat
+  overlay: true,
 	historyApiFallback: false, // history API fallback.
 	hot: false, // hot reload
 	https: false, // open new tab
@@ -98,7 +103,12 @@ let configs = [
 	{
 		name: 'JS + HTML CONFIG',
 		devServer: DEV_SERVER,
-		entry: SCRIPTS,
+    entry: SCRIPTS,
+    resolve: {
+      alias: {
+        '@jssss': APP_ASSETS_URL + 'js/'
+      },
+    },
 		output: {
 			path: path.resolve(BASE_URL, './dist/'),
 			// not at the root
@@ -157,6 +167,7 @@ let configs = [
 ];
 
 if (!devMode) {
+  // manifest for hashes
   configs[0].plugins.push(
      new ManifestPlugin({
       basePath: '/dist/',
@@ -164,6 +175,7 @@ if (!devMode) {
     })
   );
 
+  // clear dist folder
   clearDist && configs[0].plugins.push(
     new CleanWebpackPlugin(['dist'], {
       root: BASE_URL,
@@ -172,6 +184,19 @@ if (!devMode) {
       exclude: ['dist/src/media/']
     })
   );
+
+  configs.map( config => {
+    config.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+    config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.[chunkhash].js',
+      minChunks (module) {
+        return module.context &&
+               module.context.indexOf('node_modules') >= 0;
+      }
+    }));
+
+  });
 }
 
 module.exports = configs;
