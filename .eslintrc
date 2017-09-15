@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb",
+  "extends": "eslint:recommended",
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -39,11 +39,6 @@
       }
     }]
   },
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack.config.js"
-      }
-    }
-  }
+  "settings": { "import/resolver": "webpack" }
+
 }

@@ -71,7 +71,7 @@ const VIEWS = fs.readdirSync(APP_URL).filter(file => {
     prevent code of config entries to fire.
     scripts/bundles have to be called in .html to be executed
     */
-    excludeChunks: Object.keys(ENTRIES).map(bundle_name => bundle_name),
+    excludeChunks: Object.keys(ENTRIES),
     minify: {
       removeComments: true,
       removeRedundantAttributes: true
@@ -106,7 +106,7 @@ let configs = [
     entry: SCRIPTS,
     resolve: {
       alias: {
-        '@jssss': APP_ASSETS_URL + 'js/'
+        '@js': path.resolve(APP_ASSETS_URL, 'js/')
       },
     },
 		output: {
@@ -169,7 +169,7 @@ let configs = [
 if (!devMode) {
   // manifest for hashes
   configs[0].plugins.push(
-     new ManifestPlugin({
+    new ManifestPlugin({
       basePath: '/dist/',
       fileName: 'webpack-manifest.json',
     })
@@ -192,11 +192,10 @@ if (!devMode) {
       filename: 'vendor.[chunkhash].js',
       minChunks (module) {
         return module.context &&
-               module.context.indexOf('node_modules') >= 0;
+              module.context.indexOf('node_modules') >= 0;
       }
     }));
 
   });
 }
-
 module.exports = configs;
