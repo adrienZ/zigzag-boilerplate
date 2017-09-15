@@ -13,40 +13,31 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const devMode = process.env.NODE_ENV === 'dev';
 const clearDist = process.env.CLEAR_DIST;
 
-
-// =======================================================================//
-// !  CONFIG URLS                                                         //
-// =======================================================================//
-const BASE_URL = path.join(__dirname);
-const APP_URL = path.join(__dirname) + '/app/';
-const APP_ASSETS_URL = path.join(__dirname) + '/app/src/';
-const DIST_URL = path.join(__dirname) + '/dist/';
-const DIST_APP_ASSETS_URL = path.join(__dirname) + '/dist/src/';
-
+const urls = require('./config/urls');
 // =======================================================================//
 // !  CONFIG ENTRIES / SCRIPTS / BUNDLES                                  //
 // =======================================================================//
 let SCRIPTS = {};
-fs.readdirSync(APP_ASSETS_URL + 'js').filter((file) => {
+fs.readdirSync(urls.APP_ASSETS_URL + 'js').filter((file) => {
 	// get all .js at the root of app/src/js
 	return file.match(/.js/);
 }).map(path => {
 	// all these files are now entries
 	const bundle_name = path.replace('.js', '');
-	SCRIPTS[`${bundle_name}_bundle`] = [`${APP_ASSETS_URL}js/${path}`];
+	SCRIPTS[`${bundle_name}_bundle`] = [`${urls.APP_ASSETS_URL}js/${path}`];
 });
 
 // =======================================================================//
 // !  CONFIG ENTRIES / STYLES / BUNDLES                                   //
 // =======================================================================//
 let STYLES = {};
-fs.readdirSync(APP_ASSETS_URL + 'sass').filter((file) => {
+fs.readdirSync(urls.APP_ASSETS_URL + 'sass').filter((file) => {
 	// get all .js at the root of app/src/js
 	return file.match(/.scss/);
 }).map(path => {
 	// all these files are now entries
 	const stylesheet = path.replace('.scss', '');
-	STYLES[`${stylesheet}`] = [`${APP_ASSETS_URL}sass/${path}`];
+	STYLES[`${stylesheet}`] = [`${urls.APP_ASSETS_URL}sass/${path}`];
 });
 
 const extractSass = new ExtractTextPlugin({
@@ -59,13 +50,13 @@ const ENTRIES = Object.assign({}, SCRIPTS, STYLES);
 // =======================================================================//
 // !  CONFIG VIEWS / HTML                                                 //
 // =======================================================================//
-const VIEWS = fs.readdirSync(APP_URL).filter(file => {
+const VIEWS = fs.readdirSync(urls.APP_URL).filter(file => {
 	// get all .html at the root of app/
 	return file.match(/.html$/);
 }).map(view => {
 	// all these files are now outputs
 	return new HtmlWebpackPlugin({
-		template: `${BASE_URL}/app/${view}`, filename: `${view}`, inject: 'body',
+		template: `${urls.BASE_URL}/app/${view}`, filename: `${view}`, inject: 'body',
 		/*
     /!\  this one is tricky /!\
     prevent code of config entries to fire.
@@ -84,7 +75,7 @@ const VIEWS = fs.readdirSync(APP_URL).filter(file => {
 // =======================================================================//
 
 const DEV_SERVER = {
-	contentBase: path.join(BASE_URL, 'dist'),
+	contentBase: path.join(urls.BASE_URL, 'dist'),
 	// change this as you want
 	compress: true, // enable gzip compression
 	inline: false, // iframe mode,
@@ -106,11 +97,11 @@ let configs = [
     entry: SCRIPTS,
     resolve: {
       alias: {
-        '@js': path.resolve(APP_ASSETS_URL, 'js/')
+        '@js': path.resolve(urls.APP_ASSETS_URL, 'js/')
       },
     },
 		output: {
-			path: path.resolve(BASE_URL, './dist/'),
+			path: path.resolve(urls.BASE_URL, './dist/'),
 			// not at the root
 			filename: devMode ? 'src/js/[name].js' : 'src/js/[name].[chunkhash:8].js'
     },
@@ -132,7 +123,7 @@ let configs = [
 		devServer: DEV_SERVER,
     entry: STYLES,
 		output: {
-			path: path.resolve(BASE_URL, './dist/'),
+			path: path.resolve(urls.BASE_URL, './dist/'),
 			// not at the root
 			filename: devMode ? 'src/css/[name].css' : 'src/css/[name].[chunkhash:8].css'
     },
@@ -178,7 +169,7 @@ if (!devMode) {
   // clear dist folder
   clearDist && configs[0].plugins.push(
     new CleanWebpackPlugin(['dist'], {
-      root: BASE_URL,
+      root: urls.BASE_URL,
       verbose: true,
       dry: false,
       exclude: ['dist/src/media/']
