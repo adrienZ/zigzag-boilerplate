@@ -8,16 +8,16 @@ const ip = require('ip');
 module.exports = {
 	contentBase: path.join(urls.BASE_URL, 'dist'),
 	// change this as you want
-	compress: true, // enable gzip compression
-	inline: false, // iframe mode,
-  noInfo: true, // cut the fat
+	compress: true,
+	inline: true,
+  noInfo: true,
   overlay: true,
-	historyApiFallback: false, // history API fallback.
-	hot: false, // hot reload
-	https: false, // open new tab
-	open: false, // remove useless infos
+	historyApiFallback: false,
+  hot: false,
+	https: false,
+  open: false,
+  progress: true,
   port: 1234,
-  host:  ip.adress, //current ip, same url for multiple devices
-  quiet: true, // shut down console
-  overlay: true
+  host:  ip.address(), //current ip, same url for multiple devices
+  quiet: false, // shut down console
 }
