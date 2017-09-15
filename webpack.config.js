@@ -3,8 +3,6 @@
 // =======================================================================//
 const path = require('path');
 const webpack = require('webpack');
-const fs = require('fs');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ip = require('ip');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -14,62 +12,12 @@ const devMode = process.env.NODE_ENV === 'dev';
 const clearDist = process.env.CLEAR_DIST;
 
 const urls = require('./config/urls');
-// =======================================================================//
-// !  CONFIG ENTRIES / SCRIPTS / BUNDLES                                  //
-// =======================================================================//
-let SCRIPTS = {};
-fs.readdirSync(urls.APP_ASSETS_URL + 'js').filter((file) => {
-	// get all .js at the root of app/src/js
-	return file.match(/.js/);
-}).map(path => {
-	// all these files are now entries
-	const bundle_name = path.replace('.js', '');
-	SCRIPTS[`${bundle_name}_bundle`] = [`${urls.APP_ASSETS_URL}js/${path}`];
-});
-
-// =======================================================================//
-// !  CONFIG ENTRIES / STYLES / BUNDLES                                   //
-// =======================================================================//
-let STYLES = {};
-fs.readdirSync(urls.APP_ASSETS_URL + 'sass').filter((file) => {
-	// get all .js at the root of app/src/js
-	return file.match(/.scss/);
-}).map(path => {
-	// all these files are now entries
-	const stylesheet = path.replace('.scss', '');
-	STYLES[`${stylesheet}`] = [`${urls.APP_ASSETS_URL}sass/${path}`];
-});
+const entries = require('./config/entries');
 
 const extractSass = new ExtractTextPlugin({
 	filename: 'src/css/[name].css',
 	disable: process.env.NODE_ENV === 'development'
 });
-
-const ENTRIES = Object.assign({}, SCRIPTS, STYLES);
-
-// =======================================================================//
-// !  CONFIG VIEWS / HTML                                                 //
-// =======================================================================//
-const VIEWS = fs.readdirSync(urls.APP_URL).filter(file => {
-	// get all .html at the root of app/
-	return file.match(/.html$/);
-}).map(view => {
-	// all these files are now outputs
-	return new HtmlWebpackPlugin({
-		template: `${urls.BASE_URL}/app/${view}`, filename: `${view}`, inject: 'body',
-		/*
-    /!\  this one is tricky /!\
-    prevent code of config entries to fire.
-    scripts/bundles have to be called in .html to be executed
-    */
-    excludeChunks: Object.keys(ENTRIES),
-    minify: {
-      removeComments: true,
-      removeRedundantAttributes: true
-    }
-	});
-});
-
 // =======================================================================//
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
@@ -94,7 +42,7 @@ let configs = [
 	{
 		name: 'JS + HTML CONFIG',
 		devServer: DEV_SERVER,
-    entry: SCRIPTS,
+    entry: entries.SCRIPTS,
     resolve: {
       alias: {
         '@js': path.resolve(urls.APP_ASSETS_URL, 'js/')
@@ -117,11 +65,11 @@ let configs = [
 			]
 		},
 		plugins: [// get all the views as HtmlWebpackPlugin instance
-			...VIEWS]
+			...entries.VIEWS]
 	}, {
 		name: 'CUSTOM SASS CONFIG',
 		devServer: DEV_SERVER,
-    entry: STYLES,
+    entry: entries.STYLES,
 		output: {
 			path: path.resolve(urls.BASE_URL, './dist/'),
 			// not at the root
