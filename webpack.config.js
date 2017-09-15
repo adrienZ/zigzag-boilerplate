@@ -4,7 +4,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ip = require('ip');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
@@ -13,30 +12,13 @@ const clearDist = process.env.CLEAR_DIST;
 
 const urls = require('./config/urls');
 const entries = require('./config/entries');
+const DEV_SERVER = require('./config/devserver.js');
 
 const extractSass = new ExtractTextPlugin({
 	filename: 'src/css/[name].css',
 	disable: process.env.NODE_ENV === 'development'
 });
-// =======================================================================//
-// !  CONFIG DEV SERVER                                                   //
-// =======================================================================//
 
-const DEV_SERVER = {
-	contentBase: path.join(urls.BASE_URL, 'dist'),
-	// change this as you want
-	compress: true, // enable gzip compression
-	inline: false, // iframe mode,
-  noInfo: true, // cut the fat
-  overlay: true,
-	historyApiFallback: false, // history API fallback.
-	hot: false, // hot reload
-	https: false, // open new tab
-	open: false, // remove useless infos
-  port: 1234,
-  host:  ip.adrees, //current ip, same url for multiple devices
-	quiet: true, // shut down console
-}
 
 let configs = [
 	{
