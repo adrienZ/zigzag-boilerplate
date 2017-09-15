@@ -6,6 +6,13 @@ const webpack = require('webpack');
 const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ip = require('ip');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+
+const devMode = process.env.NODE_ENV === 'dev';
+const clearDist = process.env.CLEAR_DIST;
+
 
 // =======================================================================//
 // !  CONFIG URLS                                                         //
@@ -64,7 +71,11 @@ const VIEWS = fs.readdirSync(APP_URL).filter(file => {
     prevent code of config entries to fire.
     scripts/bundles have to be called in .html to be executed
     */
-		excludeChunks: Object.keys(ENTRIES).map(bundle_name => bundle_name)
+    excludeChunks: Object.keys(ENTRIES),
+    minify: {
+      removeComments: true,
+      removeRedundantAttributes: true
+    }
 	});
 });
 
@@ -77,25 +88,33 @@ const DEV_SERVER = {
 	// change this as you want
 	compress: true, // enable gzip compression
 	inline: false, // iframe mode,
-	noInfo: true, // cut the fat
+  noInfo: true, // cut the fat
+  overlay: true,
 	historyApiFallback: false, // history API fallback.
 	hot: false, // hot reload
 	https: false, // open new tab
 	open: false, // remove useless infos
-	port: 1234,
+  port: 1234,
+  host:  ip.adrees, //current ip, same url for multiple devices
 	quiet: true, // shut down console
 }
 
-module.exports = [
+let configs = [
 	{
 		name: 'JS + HTML CONFIG',
 		devServer: DEV_SERVER,
-		entry: SCRIPTS,
+    entry: SCRIPTS,
+    resolve: {
+      alias: {
+        '@js': path.resolve(APP_ASSETS_URL, 'js/')
+      },
+    },
 		output: {
 			path: path.resolve(BASE_URL, './dist/'),
 			// not at the root
-			filename: 'src/js/[name].js'
-		},
+			filename: devMode ? 'src/js/[name].js' : 'src/js/[name].[chunkhash:8].js'
+    },
+    devtool: devMode ? 'cheap-eval-source-map' : false,
 		module: {
 			loaders: [
 				{
@@ -111,12 +130,13 @@ module.exports = [
 	}, {
 		name: 'CUSTOM SASS CONFIG',
 		devServer: DEV_SERVER,
-		entry: STYLES,
+    entry: STYLES,
 		output: {
 			path: path.resolve(BASE_URL, './dist/'),
 			// not at the root
-			filename: 'src/css/[name].css'
-		},
+			filename: devMode ? 'src/css/[name].css' : 'src/css/[name].[chunkhash:8].css'
+    },
+    devtool: devMode ? 'cheap-eval-source-map' : false,
 		module: {
 			loaders: [
 				{
@@ -145,3 +165,37 @@ module.exports = [
 		plugins: [extractSass]
 	}
 ];
+
+if (!devMode) {
+  // manifest for hashes
+  configs[0].plugins.push(
+    new ManifestPlugin({
+      basePath: '/dist/',
+      fileName: 'webpack-manifest.json',
+    })
+  );
+
+  // clear dist folder
+  clearDist && configs[0].plugins.push(
+    new CleanWebpackPlugin(['dist'], {
+      root: BASE_URL,
+      verbose: true,
+      dry: false,
+      exclude: ['dist/src/media/']
+    })
+  );
+
+  configs.map( config => {
+    config.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+    config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.[chunkhash].js',
+      minChunks (module) {
+        return module.context &&
+              module.context.indexOf('node_modules') >= 0;
+      }
+    }));
+
+  });
+}
+module.exports = configs;
