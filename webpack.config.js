@@ -48,7 +48,7 @@ if (!env.devMode) {
   // manifest for hashes
   config.plugins.push(
     new ManifestPlugin({
-      basePath: '/dist/',
+      // basePath: '/dist/',
       fileName: 'webpack-manifest.json',
     })
   );

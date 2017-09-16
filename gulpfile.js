@@ -21,11 +21,8 @@ gulp.task('importVideos', () => {
 gulp.task('importFonts', () => {
   gulp.src(urls.APP_ASSETS_URL + 'media/fonts/**/*').pipe(gulp.dest(urls.DIST_ASSETS_URL + 'media/fonts/'));
 });
-gulp.task('importBowerLibs', () => {
-  gulp.src(urls.APP_ASSETS_URL + 'bower_vendor/**/*').pipe(gulp.dest(urls.DIST_ASSETS_URL + 'bower_vendor/'));
-});
 
 // =======================================================================//
 // ! PROD                                                                 //
 // =======================================================================//
-gulp.task('build', ['importImages', 'importDatas', 'importVideos', 'importFonts', 'importBowerLibs']);
+gulp.task('build', ['importImages', 'importDatas', 'importVideos', 'importFonts']);
