@@ -16,9 +16,9 @@ const devServer = require('./config/devserver.js');
 
 let config =
 	{
-		name: 'JS + HTML CONFIG',
+		name: 'MAIN CONFIG',
 		devServer: devServer,
-    entry: entries.SCRIPTS,
+    entry: env.fullJsApp ? entries.SCRIPTS : entries.ALL,
     resolve: {
       alias: urls.aliases
     },

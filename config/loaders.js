@@ -3,7 +3,7 @@ const env = require('./env');
 
 const extractSass = new ExtractTextPlugin({
   filename: "src/css/[name].css",
-  // disable: env.devMode,
+  disable: true || env.devMode,
   allChunks: true,
 });
 
