@@ -1,6 +1,6 @@
 severity: error
 files:
- ignore:
+ignore:
     - 'sass/vendor/**/*.scss'
 rules:
   indentation: 4

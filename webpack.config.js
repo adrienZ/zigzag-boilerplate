@@ -4,12 +4,14 @@
 const path = require('path');
 const webpack = require('webpack');
 
+// =======================================================================//
+// !  CONFIG			                                                        //
+// =======================================================================//
 const urls = require('./config/urls');
 const entries = require('./config/entries');
 const loaders = require('./config/loaders');
 const env = require('./config/env');
 const plugins = require('./config/plugins');
-
 const devServer = require('./config/devserver.js');
 
 

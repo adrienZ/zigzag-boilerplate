@@ -7,7 +7,8 @@
     "build": "gulp build && webpack -p --hide-modules --cache",
     "start": "NODE_ENV=dev webpack-dev-server --colors",
     "open": "open . -a atom",
-    "hello": "(yarn install || npm i) && npm run build && npm run start"
+    "hello": "(yarn install || npm i) && npm run build && npm run start",
+    "prettier": "prettier '{app/src/js/***.js,!(node*)**/*.js}' --color --write"
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "license": "ISC",

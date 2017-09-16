@@ -2,7 +2,7 @@
 // !  CONFIG URLS                                                         //
 // =======================================================================//
 const path = require("path");
-const base_url = path.resolve(__dirname, '../');
+const base_url = path.resolve(__dirname, "../");
 const urls = {
   BASE_URL: base_url,
   APP_URL: path.join(base_url, "/app/"),
@@ -13,8 +13,8 @@ const urls = {
 };
 
 const aliases = {
-  '@js': path.resolve(urls.APP_ASSETS_URL, 'js/'),
-  '@sass': path.resolve(urls.APP_ASSETS_URL, 'sass/'),
+  "@js": path.resolve(urls.APP_ASSETS_URL, "js/"),
+  "@sass": path.resolve(urls.APP_ASSETS_URL, "sass/")
 };
 
 let exportObj = {};
@@ -22,6 +22,6 @@ let exportObj = {};
 for (directory in urls) {
   exportObj[directory] = urls[directory];
 }
-exportObj['aliases'] = aliases;
+exportObj["aliases"] = aliases;
 
-module.exports = exportObj
+module.exports = exportObj;
