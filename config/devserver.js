@@ -21,6 +21,6 @@ module.exports = {
   open: false,
   progress: false,
   port: 1234,
-  // host:  ip.address(), //current ip, same url for multiple devices
+  host:  ip.address(), //current ip, same url for multiple devices
   quiet: false // shut down console
 };
