@@ -8,7 +8,8 @@
     "start": "NODE_ENV=dev webpack-dev-server --colors",
     "open": "open . -a atom",
     "hello": "(yarn install || npm i) && npm run build && npm run start",
-    "prettier": "prettier '{app/src/js/***.js,!(node*)**/*.js}' --color --write"
+    "prettier": "prettier '{app/src/js/***.js,!(node*)**/*.js}' --color --write",
+    "install-react": "npm install --save-dev eslint-plugin-react eslint-plugin-jsx-a11y babel-preset-react && npm install --save react react-dom && echo ',{\"presets\": [\"react\"]}' > '.babelrc' && echo '\\033[1;34m dont forget to setup ESLINT, basic configuration: {\"plugins\": [\"react\"], \"extends\":[\"eslint:all\", \"plugin:react/all\"]} \\033[0m'"
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "license": "ISC",
@@ -20,12 +21,9 @@
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.27.3",
     "eslint": "^4.6.1",
-    "eslint-config-airbnb": "^14.1.0",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.1",
     "fs": "^0.0.1-security",
