@@ -48,7 +48,7 @@ const VIEWS = fs.readdirSync(urls.APP_URL).filter(file => {
     prevent code of config entries to fire.
     scripts/bundles have to be called in .html to be executed
     */
-		excludeChunks: env.fullJsApp ? [] : Object.keys(ENTRIES),
+		excludeChunks: env.fullJsApp ?  Object.keys(STYLES) : Object.keys(ENTRIES),
 		showErrors: env.devMode ? true : false,
     minify: {
       removeComments: true,

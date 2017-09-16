@@ -6,7 +6,7 @@ const urls = require('./urls');
 const ip = require('ip');
 
 module.exports = {
-	contentBase: path.join(urls.BASE_URL, 'dist'),
+	contentBase: path.join(urls.BASE_URL, 'app'),
 	// change this as you want
 	compress: true,
 	inline: true,
@@ -21,6 +21,6 @@ module.exports = {
   open: false,
   progress: false,
   port: 1234,
-  host:  ip.address(), //current ip, same url for multiple devices
+  // host:  ip.address(), //current ip, same url for multiple devices
   quiet: false, // shut down console
 }

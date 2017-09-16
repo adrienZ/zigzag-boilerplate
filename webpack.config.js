@@ -18,7 +18,7 @@ let config =
 	{
 		name: 'MAIN CONFIG',
 		devServer: devServer,
-    entry: env.fullJsApp ? entries.SCRIPTS : entries.ALL,
+    entry: entries.ALL,
     resolve: {
       alias: urls.aliases
     },
@@ -41,14 +41,14 @@ let config =
     },
 		plugins: [// get all the views as HtmlWebpackPlugin instance
 			...entries.VIEWS,
-			loaders.extractSass]
+      loaders.extractSass,
+    ]
 	}
 
 if (!env.devMode) {
   // manifest for hashes
   config.plugins.push(
     new ManifestPlugin({
-      // basePath: '/dist/',
       fileName: 'webpack-manifest.json',
     })
   );
