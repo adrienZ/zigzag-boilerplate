@@ -11,12 +11,15 @@ module.exports = {
 	compress: true,
 	inline: true,
   noInfo: true,
-  overlay: true,
-	historyApiFallback: false,
+  overlay: {
+    warnings: false,
+    errors: true
+  },
+  historyApiFallback: false,
   hot: false,
 	https: false,
   open: false,
-  progress: true,
+  progress: false,
   port: 1234,
   host:  ip.address(), //current ip, same url for multiple devices
   quiet: false, // shut down console

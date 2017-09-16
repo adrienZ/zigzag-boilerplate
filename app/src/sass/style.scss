@@ -1,4 +1,4 @@
-// sass/
+/* sass/
 // |
 // |-- globals/              # /!\ Import all theses files in partials/_base.scss /!\
 // |   |-- _typography.scss      # body text, headlines, font, em, rem, line-height, letter spacing
@@ -16,7 +16,7 @@
 // |   |-- example.scss         # example
 // |
 // |
-// |-- views/             # Partials : reususable parts of your website
+// |-- views/             # Views: page of your website
 // |   |-- page_base.sass       #
 // |   |-- _home.scss           # home
 // |   ...
@@ -26,13 +26,14 @@
 // |   ...
 // |
 // `-- style.scss            # each file at the root will render a css file, use one css file per page;
-
+*/
 
 @import 'partials/base';
 @import 'views/home';
 
 body {
-  background: lightgrey;
+  background: red;
+  transform: translateX(20px);
 }
 
 // DONT WRITE CODE AFTER IMPORTS

@@ -3,93 +3,50 @@
 // =======================================================================//
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-const devMode = process.env.NODE_ENV === 'dev';
-const clearDist = process.env.CLEAR_DIST;
-
 const urls = require('./config/urls');
 const entries = require('./config/entries');
-const DEV_SERVER = require('./config/devserver.js');
+const loaders = require('./config/loaders');
+const env = require('./config/env');
 
-const extractSass = new ExtractTextPlugin({
-	filename: 'src/css/[name].css',
-	disable: process.env.NODE_ENV === 'development'
-});
+const devServer = require('./config/devserver.js');
 
 
-let configs = [
+let config =
 	{
 		name: 'JS + HTML CONFIG',
-		devServer: DEV_SERVER,
+		devServer: devServer,
     entry: entries.SCRIPTS,
     resolve: {
-      alias: {
-        '@js': path.resolve(urls.APP_ASSETS_URL, 'js/')
-      },
+      alias: urls.aliases
     },
 		output: {
 			path: path.resolve(urls.BASE_URL, './dist/'),
 			// not at the root
-			filename: devMode ? 'src/js/[name].js' : 'src/js/[name].[chunkhash:8].js'
+			filename: env.devMode ? 'src/js/[name].js' : 'src/js/[name].[chunkhash:8].js'
     },
-    devtool: devMode ? 'cheap-eval-source-map' : false,
+    devtool: env.devMode ? 'cheap-eval-source-map' : false,
 		module: {
 			loaders: [
-				{
-					// ES6
-					test: /\.js$/,
-					exclude: /node_modules/,
-					loaders: ['babel-loader']
-				}
+				loaders.eslint,
+				loaders.js,
+				loaders.sass,
+				loaders.css,
 			]
-		},
+    },
+    externals: {
+      jquery: 'jQuery'
+    },
 		plugins: [// get all the views as HtmlWebpackPlugin instance
-			...entries.VIEWS]
-	}, {
-		name: 'CUSTOM SASS CONFIG',
-		devServer: DEV_SERVER,
-    entry: entries.STYLES,
-		output: {
-			path: path.resolve(urls.BASE_URL, './dist/'),
-			// not at the root
-			filename: devMode ? 'src/css/[name].css' : 'src/css/[name].[chunkhash:8].css'
-    },
-    devtool: devMode ? 'cheap-eval-source-map' : false,
-		module: {
-			loaders: [
-				{
-					test: /\.scss$/,
-					exclude: /fonts/,
-					use: extractSass.extract({
-						use: [
-							{
-								loader: 'css-loader?importLoaders=1'
-							}, {
-								loader: 'postcss-loader'
-							}, {
-								loader: 'sass-loader'
-							}
-						],
-						// use style-loader in development
-						fallback: 'style-loader'
-					})
-				},
-				{
-					test: /\.(woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/,
-					loader: 'url-loader?limit=100'
-				}
-			]
-		},
-		plugins: [extractSass]
+			...entries.VIEWS,
+			loaders.extractSass]
 	}
-];
 
-if (!devMode) {
+if (!env.devMode) {
   // manifest for hashes
-  configs[0].plugins.push(
+  config.plugins.push(
     new ManifestPlugin({
       basePath: '/dist/',
       fileName: 'webpack-manifest.json',
@@ -97,7 +54,7 @@ if (!devMode) {
   );
 
   // clear dist folder
-  clearDist && configs[0].plugins.push(
+  env.clearDist && config.plugins.push(
     new CleanWebpackPlugin(['dist'], {
       root: urls.BASE_URL,
       verbose: true,
@@ -106,7 +63,6 @@ if (!devMode) {
     })
   );
 
-  configs.map( config => {
     config.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
     config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -116,7 +72,5 @@ if (!devMode) {
               module.context.indexOf('node_modules') >= 0;
       }
     }));
-
-  });
 }
-module.exports = configs;
+module.exports = config;
