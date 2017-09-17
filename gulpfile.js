@@ -10,7 +10,7 @@ const urls = require('./config/urls');
 // !  CONFIG ASSETS                                                       //
 // =======================================================================//
 gulp.task('importDatas', () => {
-  gulp.src(urls.APP_ASSETS_URL + 'datas/*.json').pipe(gulp.dest(urls.DIST_URL + 'datas'));
+  gulp.src(urls.APP_ASSETS_URL + 'media/data/*.json').pipe(gulp.dest(urls.DIST_URL + 'datas'));
 });
 gulp.task('importImages', () => {
   gulp.src(urls.APP_ASSETS_URL + 'media/img/**/*').pipe(gulp.dest(urls.DIST_ASSETS_URL + 'media/img/'));

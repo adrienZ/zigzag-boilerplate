@@ -4,9 +4,9 @@
   "description": "Boilerplate on steroids",
   "main": "gulpfile.js",
   "scripts": {
-    "build": "gulp build && webpack -p --hide-modules --cache",
+    "build": "gulp build && CLEAR_DIST=true webpack -p --hide-modules --cache",
     "start": "NODE_ENV=dev webpack-dev-server --colors",
-    "open": "open . -a atom",
+    "open": "code . || open . -a atom",
     "hello": "(yarn install || npm i) && npm run build && npm run start",
     "prettier": "prettier '{app/src/js/***.js,!(node*)**/*.js}' --color --write",
     "install-react": "npm install --save-dev eslint-plugin-react eslint-plugin-jsx-a11y babel-preset-react && npm install --save react react-dom && echo ',{\"presets\": [\"react\"]}' > '.babelrc' && echo '\\033[1;34m dont forget to setup ESLINT, basic configuration: {\"plugins\": [\"react\"], \"extends\":[\"eslint:all\", \"plugin:react/all\"]} \\033[0m'"

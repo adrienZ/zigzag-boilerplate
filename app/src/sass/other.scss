@@ -31,9 +31,8 @@
 @import 'partials/base';
 @import 'views/home';
 
-body {
-  background: grey;
-  transform: translateX(20px);
+h3 {
+  color: red;
 }
 
 // DONT WRITE CODE AFTER IMPORTS

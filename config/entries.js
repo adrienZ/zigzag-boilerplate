@@ -3,6 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const urls = require("./urls");
 const env = require("./env");
+const devServer = require("./devserver");
 
 // =======================================================================//
 // !  CONFIG ENTRIES / SCRIPTS / BUNDLES                                  //
@@ -32,11 +33,18 @@ fs
   })
   .map(path => {
     // all these files are now entries
-    const stylesheet = path.replace(".scss", "");
+    const stylesheet = path.replace(".scss", "") // + "-static";
     STYLES[`${stylesheet}`] = [`${urls.APP_ASSETS_URL}sass/${path}`];
   });
 
-const ENTRIES = Object.assign({}, SCRIPTS, STYLES);
+const ENTRIES = Object.assign(
+  {
+    // serverUrl: devServer.watchOptions.url,
+    // hotReload: 'webpack/hot/dev-server'
+  },
+  SCRIPTS,
+  STYLES
+);
 
 // =======================================================================//
 // !  CONFIG VIEWS / HTML                                                 //
@@ -58,7 +66,7 @@ const VIEWS = fs
     prevent code of config entries to fire.
     scripts/bundles have to be called in .html to be executed
     */
-      excludeChunks: env.fullJsApp ? Object.keys(STYLES) : Object.keys(ENTRIES),
+      excludeChunks: env.fullJsApp ? [] : Object.keys(ENTRIES),
       showErrors: env.devMode ? true : false,
       minify: {
         removeComments: true,
