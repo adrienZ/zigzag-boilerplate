@@ -1,7 +1,0 @@
-{
-  "directory": "app/src/bower_vendor/",
-	"timeout": 120000,
-	"scripts": {
-		"postinstall": "npm run build"
-  }
-}
