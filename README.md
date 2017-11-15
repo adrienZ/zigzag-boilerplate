@@ -4,7 +4,7 @@ This boilerplate use :
 - ES6 & HTML templating (optionnal) via webpack
 - sass via gulp
 - linters & prettier
-- npm (or yarn)
+- yarn (or npm)
 
 This template requires
 [Node.js](https://nodejs.org/) v6+,
@@ -37,3 +37,19 @@ $ npm run start #dev
 - linter-eslint :
 	- Atom : `apm install linter-eslint`
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
+
+### TODO
+- [ ]get rid of gulp
+- [ ] use ejs instead of html
+- [ ] precss ? postcss-smart-import ? eslint-import-resolver-webpack ?
+- [ ] use img loader
+- [ ] add alias for non code ressources
+- [ ] LINTERS
+- [ ] complete useless infos in package.json
+- [ ] tell why this boilerplate is awesome
+- [ ] split logics of js / sass / media
+- [ ] HTML: less <head> more `html-webpack-plugin` (favicon, title)
+- [ ] easy deploy on github pages
+- [ ] git user release system
+- [ ] use webpack devserver core ip instead of new dependecy
+- [ ] Sass structure
