@@ -39,7 +39,7 @@ $ npm run start #dev
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
 
 ### TODO
-- [ ]get rid of gulp
+- [ ] get rid of gulp
 - [ ] use ejs instead of html
 - [ ] precss ? postcss-smart-import ? eslint-import-resolver-webpack ?
 - [ ] use img loader
@@ -53,3 +53,4 @@ $ npm run start #dev
 - [ ] git user release system
 - [ ] use webpack devserver core ip instead of new dependecy
 - [ ] Sass structure
+- [ ] pre-commit hooks
