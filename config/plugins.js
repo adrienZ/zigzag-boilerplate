@@ -54,13 +54,11 @@ if (!env.devMode) {
     })
   );
 
-  if (!env.fullJsApp) {
-    staticSassConfigPlugins.push(
-      new ManifestPlugin({
-        fileName: "statics-webpack-manifest.json"
-      })
-    );
-  }
+  staticSassConfigPlugins.push(
+    new ManifestPlugin({
+      fileName: "statics-webpack-manifest.json"
+    })
+  );
 }
 
 const plugins = {

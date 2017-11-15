@@ -23,7 +23,7 @@ module.exports = {
     errors: true
   },
   historyApiFallback: true,
-  hot: env.fullJsApp,
+  hot: true,
   https: false,
   open: false,
   progress: false,
