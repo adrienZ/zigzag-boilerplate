@@ -1,7 +1,6 @@
 import DomManipulator from "@js/models/class.dom-manipulator";
 
 import style from "@sass/other.scss";
-style;
 
 const $ = new DomManipulator();
 

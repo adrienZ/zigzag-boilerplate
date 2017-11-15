@@ -35,9 +35,6 @@ const mainConfig = 	{
 			loaders.css,
 		]
 	},
-	externals: {
-		jquery: 'jQuery'
-	},
 	plugins: plugins.mainConfigPlugins
 }
 
@@ -64,6 +61,6 @@ const staticSassConfig = {
 
 let config = [
 	mainConfig,
-	// staticSassConfig
+	staticSassConfig
 ]
 module.exports = config;

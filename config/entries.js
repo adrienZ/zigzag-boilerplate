@@ -62,10 +62,10 @@ const VIEWS = fs
       filename: `${view}`,
       inject: "body",
       /*
-    /!\  this one is tricky /!\
-    prevent code of config entries to fire.
-    scripts/bundles have to be called in .html to be executed
-    */
+        /!\  this one is tricky /!\
+        prevent code of config entries to fire.
+        scripts/bundles have to be called in .html to be executed
+      */
       excludeChunks: env.fullJsApp ? [] : Object.keys(ENTRIES),
       showErrors: env.devMode ? true : false,
       minify: {
