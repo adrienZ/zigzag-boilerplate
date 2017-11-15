@@ -16,6 +16,7 @@
     }
   },
   "rules": {
+    "no-console": "warn",
     "valid-jsdoc": ["error", {
       "requireReturn": false,
       "requireReturnType": false,
