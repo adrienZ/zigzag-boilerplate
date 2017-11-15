@@ -1,8 +1,8 @@
-import detector from './modules/detector';
-import DomManipulator from './models/class.dom-manipulator';
+import DomManipulator from "@js/models/class.dom-manipulator";
+
+import style from "@sass/other.scss";
 
 const $ = new DomManipulator();
 
-console.log('Elle est bonne !');
-console.info(detector);
-console.debug('move your ', $.el('body'));
+console.log("Elle est bonnee !", style);
+console.debug("move your ", $.el("body"));

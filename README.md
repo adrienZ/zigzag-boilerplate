@@ -4,16 +4,15 @@ This boilerplate use :
 - ES6 & HTML templating (optionnal) via webpack
 - sass via gulp
 - linters & prettier
-- npm (or yarn) & bower
+- npm (or yarn)
 
 This template requires
 [Node.js](https://nodejs.org/) v6+,
 [Webpack](http://webpack.github.io/docs/),
-[Bower](https://bower.io/#install-bower),
 and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) to run.
 
 ```sh
-$ npm i -g gulp bower webpack
+$ npm i -g gulp webpack
 ```
 
 ### installation
@@ -57,7 +56,7 @@ You shouldn't, i suggest you using a front-end router instead.
 #### How do i import bootstrap or any CSS libraries?
 - use a cdn
 - add your files(s) in `app/src/sass/vendor/` as long as `npm run start` is running.
-- use bower
+- use npm
 
 #### What if want to add JS elsewhere than root ?
 use ES6 import feature.
@@ -65,4 +64,4 @@ use ES6 import feature.
 #### How do i import jQuery or any JS libraries?
 - use a cdn
 - add your files(s) in `app/src/js/vendor/` as long as `npm run start` is running.
-- use bower
+- use npm
