@@ -40,15 +40,15 @@ $ npm run start #dev
 
 ### TODO
 - [ ] get rid of gulp
-- [ ] use ejs instead of html
-- [ ] precss ? postcss-smart-import ? eslint-import-resolver-webpack ?
+- [x] use ejs instead of html
+- [x] precss ? postcss-smart-import ? eslint-import-resolver-webpack ?
 - [ ] use img loader
 - [ ] add alias for non code ressources
 - [ ] LINTERS
 - [ ] complete useless infos in package.json
 - [ ] tell why this boilerplate is awesome
 - [ ] split logics of js / sass / media
-- [ ] HTML: less <head> more `html-webpack-plugin` (favicon, title)
+- [x] HTML: less <head> more `html-webpack-plugin` (favicon, title)
 - [ ] easy deploy on github pages
 - [ ] git user release system
 - [ ] use webpack devserver core ip instead of new dependecy
