@@ -6,7 +6,7 @@ const extractStaticSass = new ExtractTextPlugin({
     // remove the -static key from the chunkname
     const stylesheetName = getPath("[name]");
     return getPath(
-      env.devMode ? "src/css/[name].css" : "src/css/[name].[contenthash].css"
+      env.devMode ? "src/css/[name].css" : "src/css/[name].css"
     ).replace(stylesheetName, stylesheetName.replace("-static", ""));
   }
 });
@@ -16,7 +16,7 @@ const extractSass = new ExtractTextPlugin({
   //   ? "src/css/[name].css"
   //   : "src/css/[name].[contenthash].css",
   filename: "src/css/[name].css",
-  disable: (env.devMode && env.fullJsApp) || env.devMode,
+  disable: env.devMode,
   allChunks: true
 });
 
