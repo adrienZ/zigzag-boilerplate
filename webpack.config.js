@@ -26,7 +26,7 @@ const mainConfig = 	{
 		// not at the root
 		filename: env.devMode ? 'src/js/[name].js' : 'src/js/[name].[chunkhash:8].js'
 	},
-	devtool: env.devMode ? 'cheap-eval-source-map' : false,
+	devtool: env.devMode ? 'source-map' : false,
 	module: {
 		loaders: [
 			loaders.eslint,
@@ -58,9 +58,9 @@ const staticSassConfig = {
 	plugins: plugins.staticSassConfigPlugins
 }
 
-
+// static sass is available, prefer import style in main.js
 let config = [
 	mainConfig,
-	staticSassConfig
+	// staticSassConfig
 ]
 module.exports = config;

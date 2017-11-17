@@ -53,20 +53,15 @@ const VIEWS = fs
   .readdirSync(urls.APP_URL)
   .filter(file => {
     // get all .html at the root of app/
-    return file.match(/.html$/);
+    return file.match(/.ejs$/);
   })
   .map(view => {
     // all these files are now outputs
     return new HtmlWebpackPlugin({
+      title: '👋 Give me a title 🔥',
       template: `${urls.BASE_URL}/app/${view}`,
-      filename: `${view}`,
+      filename: `${view.replace('.ejs', '.html')}`,
       inject: "body",
-      /*
-        /!\  this one is tricky /!\
-        prevent code of config entries to fire.
-        scripts/bundles have to be called in .html to be executed
-      */
-      excludeChunks: env.fullJsApp ? [] : Object.keys(ENTRIES),
       showErrors: env.devMode ? true : false,
       minify: {
         removeComments: true,

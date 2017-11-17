@@ -1,8 +1,7 @@
 <html lang="en">
-
   <head>
     <meta charset="UTF-8">
-    <title>👋 Give me a title 🔥</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- https://github.com/joshbuchea/HEAD -->
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -10,18 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" type="image/png" href="favicon.png" />
-    <!-- STYLES are NOT auto-imported-->
-    <link rel="stylesheet" href="src/css/style.css">
 
     <!--[if lt IE 9]>
-          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-          <![endif]-->
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
 
   <body>
     <h3>Comment est votre blanquette ?</h3>
-
-    <!--SCRIPT are auto-imported-->
+    <% users =  ['geddy', 'neil', 'alex']; %>
+    <% users.forEach(function(user){ %>
+      <%= user %>
+    <% }); %>
+    <!--SCRIPTS are auto-imported-->
   </body>
-
 </html>

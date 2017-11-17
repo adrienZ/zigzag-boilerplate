@@ -4,7 +4,7 @@ This boilerplate use :
 - ES6 & HTML templating (optionnal) via webpack
 - sass via gulp
 - linters & prettier
-- npm (or yarn)
+- yarn (or npm)
 
 This template requires
 [Node.js](https://nodejs.org/) v6+,
@@ -38,30 +38,19 @@ $ npm run start #dev
 	- Atom : `apm install linter-eslint`
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
 
-### notice
-> If you have a question about the sass architecture please go to
-> ./app/src/sass/style.scss
-
-#### How do i add HTML ?
-add your file(s) at the root of  `app/` and restart your server.
-
-#### What if want to add HTML elsewhere than root ?
-You shouldn't, i suggest you using a front-end router instead.
-
-#### What files will I in `dist/` ?
-- .html at the root of `app/`
-- .css at the root of `app/src/sass`
-- .js at the root of `app/src/js`
-
-#### How do i import bootstrap or any CSS libraries?
-- use a cdn
-- add your files(s) in `app/src/sass/vendor/` as long as `npm run start` is running.
-- use npm
-
-#### What if want to add JS elsewhere than root ?
-use ES6 import feature.
-
-#### How do i import jQuery or any JS libraries?
-- use a cdn
-- add your files(s) in `app/src/js/vendor/` as long as `npm run start` is running.
-- use npm
+### TODO
+- [ ] get rid of gulp
+- [x] use ejs instead of html
+- [x] precss ? postcss-smart-import ? eslint-import-resolver-webpack ?
+- [ ] use img loader
+- [ ] add alias for non code ressources
+- [ ] LINTERS
+- [ ] complete useless infos in package.json
+- [ ] tell why this boilerplate is awesome
+- [ ] split logics of js / sass / media
+- [x] HTML: less <head> more `html-webpack-plugin` (favicon, title)
+- [ ] easy deploy on github pages
+- [ ] git user release system
+- [ ] use webpack devserver core ip instead of new dependecy
+- [ ] Sass structure
+- [ ] pre-commit hooks
