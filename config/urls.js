@@ -8,7 +8,7 @@ const urls = {
   APP_URL: path.join(base_url, "/app/"),
   APP_ASSETS_URL: path.join(base_url, "/app/src/"),
   DIST_URL: path.join(base_url, "/dist/"),
-  DIST_APP_ASSETS_URL: path.join(base_url, "/dist/src/"),
+  DIST_ASSETS_URL: path.join(base_url, "/dist/src/"),
   CONFIG: __dirname
 };
 
