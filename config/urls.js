@@ -14,14 +14,8 @@ const urls = {
 
 const aliases = {
   "@js": path.resolve(urls.APP_ASSETS_URL, "js/"),
-  "@sass": path.resolve(urls.APP_ASSETS_URL, "sass/")
+  "@sass": path.resolve(urls.APP_ASSETS_URL, "sass/"),
+  "@img": path.resolve(urls.APP_ASSETS_URL, "media/img/")
 };
 
-let exportObj = {};
-
-for (directory in urls) {
-  exportObj[directory] = urls[directory];
-}
-exportObj["aliases"] = aliases;
-
-module.exports = exportObj;
+module.exports = {...urls, aliases};
