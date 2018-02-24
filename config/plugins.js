@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const fs = require("fs");
 const path = require("path");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const env = require("./env");
 const entries = require("./entries");
@@ -16,7 +17,6 @@ const mainConfigPlugins = [
   ...entries.VIEWS,
   loaders.extractSass
 ];
-const staticSassConfigPlugins = [loaders.extractStaticSass];
 
 // HMR
 devServer.hot && mainConfigPlugins.push(
@@ -44,6 +44,7 @@ if (!env.devMode) {
 
   mainConfigPlugins.push(new webpack.optimize.OccurrenceOrderPlugin());
   mainConfigPlugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+  mainConfigPlugins.push(new FaviconsWebpackPlugin(urls.APP_URL + 'favicon.png'));
   mainConfigPlugins.push(
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
@@ -53,17 +54,10 @@ if (!env.devMode) {
       }
     })
   );
-
-  staticSassConfigPlugins.push(
-    new ManifestPlugin({
-      fileName: "statics-webpack-manifest.json"
-    })
-  );
 }
 
 const plugins = {
   mainConfigPlugins,
-  staticSassConfigPlugins
 };
 
 module.exports = plugins;

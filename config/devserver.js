@@ -1,21 +1,13 @@
 // =======================================================================//
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
-const path = require("path");
 const urls = require("./urls");
-const env = require("./env");
 const ip = require("ip");
 
-const urlComponents = {
-  host: ip.address(), //current ip, same url for multiple devices
-  port: 1234,
-  build: () => "http://" + ip.address() + ":" + 1234 + "/"
-};
-
 module.exports = {
-  contentBase: path.join(urls.BASE_URL, "dist"),
+  // contentBase: urls.APP_URL,
   // change this as you want
-  compress: true,
+  compress: true, //gzip
   inline: true,
   noInfo: true,
   overlay: {
@@ -25,9 +17,10 @@ module.exports = {
   historyApiFallback: true,
   hot: true,
   https: false,
-  open: false,
+  open: true,
   progress: false,
-  port: urlComponents.port,
-  host: urlComponents.host,
+  port: 1234,
+  useLocalIp: true,
+  host: ip.address(),
   quiet: false // shut down console,
 };
