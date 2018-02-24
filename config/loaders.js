@@ -1,15 +1,6 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const env = require("./env");
-
-const extractStaticSass = new ExtractTextPlugin({
-  filename: getPath => {
-    // remove the -static key from the chunkname
-    const stylesheetName = getPath("[name]");
-    return getPath(
-      env.devMode ? "src/css/[name].css" : "src/css/[name].css"
-    ).replace(stylesheetName, stylesheetName.replace("-static", ""));
-  }
-});
+const urls = require("./urls");
 
 const extractSass = new ExtractTextPlugin({
   filename: env.devMode
@@ -20,7 +11,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const cssLoaders = [
-  { loader: "css-loader", options: { importLoaders: 1 } },
+  { loader: "css-loader", options: { importLoaders: 1, url: false } },
   {
     loader: "postcss-loader",
     options: {
@@ -48,29 +39,41 @@ module.exports = {
   },
   css: {
     test: /\.css$/,
+    exclude: /node_modules/,
     use: extractSass.extract({
       fallback: "style-loader",
       use: [...cssLoaders]
     })
   },
-  staticSass: {
-    test: /\.scss$/,
-    use: extractStaticSass.extract({
-      use: [...cssLoaders, "sass-loader"],
-      fallback: "style-loader"
-    })
-  },
   sass: {
     test: /\.scss$/,
+    exclude: /node_modules/,
     use: extractSass.extract({
       use: [...cssLoaders, "sass-loader"],
       fallback: "style-loader"
     })
   },
   files: {
-    test: /\.(woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/,
-    loader: "url-loader?limit=100"
+    test: /\.(jpe?g|png|gif|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/i,
+    exclude: /node_modules/,
+    use: [
+    'url-loader',
+    {
+      loader: 'file-loader',
+      options: {
+        limit: 1024,
+        name: (file) => setFolder(file) + '[name].[ext]'
+      }
+    }]
   },
   extractSass,
-  extractStaticSass
 };
+
+
+const setFolder = file => {
+  const filename = file.replace(/^.*[\\\/]/, '')
+
+  return file
+      .replace(urls.APP_ASSETS_URL + "media/", "")
+      .replace(filename, "")
+}

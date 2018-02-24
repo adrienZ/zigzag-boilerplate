@@ -1,15 +1,13 @@
 // =======================================================================//
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
-const path = require("path");
 const urls = require("./urls");
-const env = require("./env");
 const ip = require("ip");
 
 module.exports = {
-  contentBase: path.join(urls.BASE_URL, "dist"),
+  // contentBase: urls.APP_URL,
   // change this as you want
-  compress: true,
+  compress: true, //gzip
   inline: true,
   noInfo: true,
   overlay: {

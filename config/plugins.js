@@ -16,7 +16,6 @@ const mainConfigPlugins = [
   ...entries.VIEWS,
   loaders.extractSass
 ];
-const staticSassConfigPlugins = [loaders.extractStaticSass];
 
 // HMR
 devServer.hot && mainConfigPlugins.push(
@@ -53,17 +52,10 @@ if (!env.devMode) {
       }
     })
   );
-
-  staticSassConfigPlugins.push(
-    new ManifestPlugin({
-      fileName: "statics-webpack-manifest.json"
-    })
-  );
 }
 
 const plugins = {
   mainConfigPlugins,
-  staticSassConfigPlugins
 };
 
 module.exports = plugins;
