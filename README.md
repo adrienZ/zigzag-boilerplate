@@ -1,25 +1,24 @@
 # ZigZag Boilerplate
 
+#### The no-framework boilerplate
+
 This boilerplate use :
-- ES6 & HTML templating (optionnal) via webpack
-- sass via gulp
+- HTML templating (optionnal) via ejs
+- sass & babel
 - linters & prettier
 - yarn (or npm)
 
 This template requires
-[Node.js](https://nodejs.org/) v6+,
-[Webpack](http://webpack.github.io/docs/),
-and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md) to run.
-
+[Node.js](https://nodejs.org/) v6+ and [Webpack](http://webpack.github.io/docs/)
 ```sh
-$ npm i -g gulp webpack
+$ npm i -g webpack
 ```
 
 ### installation
 ```
 $ git clone https://github.com/adrienZ/zigzag-boilerplate.git
 $ cd zigzag-boilerplate
-$ npm run hello
+$ npm run init
 ```
 
 ### commands
@@ -31,6 +30,18 @@ $ npm run build #production
 $ npm run start #dev
 ```
 
+### drawbacks
+
+webpack is optimized when importing images from the javascript. In our case just use relative urls as you always do.
+*THERE IS ONE EXCEPTION*: img in css. In order to set an image as background you must to this:
+
+```css
+  .mydiv {
+    background: url("../../src/media/your-file-path")
+  }
+```
+
+
 ### linters
 - editorconfig : http://editorconfig.org/
 - linter-sass-lint : `apm install linter-sass-lint`
@@ -39,18 +50,9 @@ $ npm run start #dev
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
 
 ### TODO
-- [ ] get rid of gulp
-- [x] use ejs instead of html
-- [x] precss ? postcss-smart-import ? eslint-import-resolver-webpack ?
-- [ ] use img loader
 - [ ] add alias for non code ressources
 - [ ] LINTERS
 - [ ] complete useless infos in package.json
-- [ ] tell why this boilerplate is awesome
-- [ ] split logics of js / sass / media
-- [x] HTML: less <head> more `html-webpack-plugin` (favicon, title)
 - [ ] easy deploy on github pages
-- [ ] git user release system
 - [ ] use webpack devserver core ip instead of new dependecy
 - [ ] Sass structure
-- [ ] pre-commit hooks

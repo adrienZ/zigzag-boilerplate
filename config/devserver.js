@@ -20,6 +20,7 @@ module.exports = {
   open: true,
   progress: false,
   port: 1234,
+  useLocalIp: true,
   host: ip.address(),
   quiet: false // shut down console,
 };

@@ -53,8 +53,9 @@ const staticConfig = {
 }
 
 
-let config = [
+const config = [
   mainConfig,
-  staticConfig,
 ]
+entries.FILES.length > 0 && config.push(staticConfig)
+
 module.exports = config;
