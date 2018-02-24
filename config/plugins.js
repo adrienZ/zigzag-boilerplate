@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const fs = require("fs");
 const path = require("path");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const env = require("./env");
 const entries = require("./entries");
@@ -43,6 +44,7 @@ if (!env.devMode) {
 
   mainConfigPlugins.push(new webpack.optimize.OccurrenceOrderPlugin());
   mainConfigPlugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+  mainConfigPlugins.push(new FaviconsWebpackPlugin(urls.APP_URL + 'favicon.png'));
   mainConfigPlugins.push(
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
