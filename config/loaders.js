@@ -11,7 +11,7 @@ const extractSass = new ExtractTextPlugin({
 });
 
 const cssLoaders = [
-  { loader: "css-loader", options: { importLoaders: 1, url: false } },
+  { loader: "css-loader", options: { importLoaders: 1, url: true } },
   {
     loader: "postcss-loader",
     options: {
@@ -57,7 +57,7 @@ module.exports = {
     test: /\.(jpe?g|png|gif|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/i,
     exclude: /node_modules/,
     use: [
-    'url-loader',
+    // 'url-loader',
     {
       loader: 'file-loader',
       options: {

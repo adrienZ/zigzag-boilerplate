@@ -17,7 +17,7 @@ module.exports = {
   historyApiFallback: true,
   hot: true,
   https: false,
-  open: true,
+  open: false,
   progress: false,
   port: 1234,
   useLocalIp: true,

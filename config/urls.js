@@ -15,6 +15,9 @@ const urls = {
 const aliases = {
   "@js": path.resolve(urls.APP_ASSETS_URL, "js/"),
   "@sass": path.resolve(urls.APP_ASSETS_URL, "sass/"),
+  "@img": path.resolve(urls.APP_ASSETS_URL, "media/img/"),
+  "@fonts": path.resolve(urls.APP_ASSETS_URL, "media/fonts/"),
+  "@video": path.resolve(urls.APP_ASSETS_URL, "media/video/"),
 };
 
 module.exports = {...urls, aliases};

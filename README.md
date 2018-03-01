@@ -3,26 +3,32 @@
 #### The no-framework boilerplate
 
 This boilerplate use :
-- HTML templating (optionnal) via ejs
+- HTML templating (optional) via ejs
 - sass & babel
-- linters & prettier
+- es lint & prettier
 - yarn (or npm)
+- webpack
 
-This template requires
-[Node.js](https://nodejs.org/) v6+ and [Webpack](http://webpack.github.io/docs/)
+This boilerplate requires:
+[Node.js](https://nodejs.org/) v6+ and [Webpack](http://webpack.github.io/docs/). [Yarn](https://yarnpkg.com/
+) is also great.
+
 ```sh
 $ npm i -g webpack
 ```
 
-### installation
+### Installation
 ```
 $ git clone https://github.com/adrienZ/zigzag-boilerplate.git
 $ cd zigzag-boilerplate
-$ npm run init
+$ npm run hello
 ```
 
-### commands
+### Commands
 
+```
+$ npm run hello #setup
+```
 ```
 $ npm run build #production
 ```
@@ -30,19 +36,41 @@ $ npm run build #production
 $ npm run start #dev
 ```
 
-### drawbacks
+### Features
 
-webpack is optimized when importing images from the javascript. In our case just use relative urls as you always do.
-*THERE IS ONE EXCEPTION*: img in css. In order to set an image as background you must to this:
+When you follow the folder structure, it give you access to some handy aliases.
+You can found them in `config/urls.js`.
 
-```css
-  .mydiv {
-    background: url("../../src/media/your-file-path")
-  }
+Adding media has never been so easy !
+
+In javascript:
+```javascript
+import myImgPath from "@img/test.jpg";
 ```
 
+In sass:
+```sass
+.myDiv {
+  background: url("~@img/test.jpg")
+}
+```
 
-### linters
+In html (.ejs)
+```ejs
+<img src="<%= require("@img/test.jpg") %>">
+```
+
+Font face
+```css
+@font-face {
+  font-family: 'MyFont';
+  src: url(~@fonts/font.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+```
+
+### Linters
 - editorconfig : http://editorconfig.org/
 - linter-sass-lint : `apm install linter-sass-lint`
 - linter-eslint :
@@ -50,7 +78,6 @@ webpack is optimized when importing images from the javascript. In our case just
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
 
 ### TODO
-- [ ] add alias for non code ressources
 - [ ] LINTERS
 - [ ] complete useless infos in package.json
 - [ ] easy deploy on github pages
