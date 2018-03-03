@@ -4,7 +4,7 @@ const setFileFolder = file => {
   const filename = file.replace(/^.*[\\\/]/, '')
 
   return file
-    .replace(urls.APP_ASSETS_URL + "media/", "")
+    .replace(urls.APP_MEDIA_URL, "")
     .replace(filename, "")
 }
 
