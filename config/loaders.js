@@ -5,8 +5,8 @@ const env = require("./env");
 const urls = require("./urls");
 const h = require("./helpers");
 
-const cssOutputPath = path.resolve(urls.DIST_ASSETS_URL, "css/")
-const relativeCssOutput = h.getRelativePath(cssOutputPath, urls.DIST_URL) + "/";
+const cssOutputPath = path.resolve(urls.prod.assets, "css/")
+const relativeCssOutput = h.getRelativePath(cssOutputPath, urls.prod.base) + "/";
 const configPath = h.getRelativePath(urls.CONFIG, urls.BASE_URL).substring(1) + "/"
 
 const extractSass = new ExtractTextPlugin({

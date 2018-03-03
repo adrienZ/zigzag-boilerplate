@@ -81,8 +81,6 @@ Font face
 - [ ] LINTERS
 - [ ] easy deploy on github pages
 - [ ] Sass structure
-- [ ] Js structure
-
 
 ### Warning
 

@@ -5,7 +5,7 @@ const ip = require("ip");
 const urls = require("./urls");
 
 module.exports = {
-  contentBase: urls.APP_URL,
+  contentBase: urls.dev.base,
   watchContentBase: true, // enable reload on save for html
   // change this as you want
   compress: true, //gzip

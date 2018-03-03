@@ -4,11 +4,11 @@ const setFileFolder = file => {
   const filename = file.replace(/^.*[\\\/]/, '')
 
   return file
-    .replace(urls.APP_MEDIA_URL, "")
+    .replace(urls.dev.media, "")
     .replace(filename, "")
 }
 
-const getRelativePath = (path, context = urls.APP_URL) => path.replace(context, '')
+const getRelativePath = (path, context = urls.dev.base) => path.replace(context, '')
 
 
 module.exports = { setFileFolder, getRelativePath };

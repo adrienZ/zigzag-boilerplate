@@ -13,7 +13,7 @@ const h = require("./helpers");
 
 const htmlExport = entries.VIEWS.map(view => new HtmlWebpackPlugin({
   title: env.appTitle,
-  template: `${urls.APP_URL}${view}`,
+  template: `${urls.dev.base}${view}`,
   filename: `${view.replace('.ejs', '.html')}`,
   inject: "body",
   showErrors: env.devMode ? true : false,
@@ -50,8 +50,8 @@ if (!env.devMode) {
 
   // clear dist folder
   if (env.clearDist) {
-    const relativeDist = h.getRelativePath(urls.DIST_URL, urls.BASE_URL).substring(1); // dist
-    const relativeDistMedia = h.getRelativePath(urls.DIST_MEDIA_URL, urls.BASE_URL).substring(1); // dist/src/media
+    const relativeDist = h.getRelativePath(urls.prod.base, urls.BASE_URL).substring(1); // dist
+    const relativeDistMedia = h.getRelativePath(urls.prod.media, urls.BASE_URL).substring(1); // dist/src/media
 
     mainConfigPlugins.push(
       new CleanWebpackPlugin([relativeDist], {
@@ -63,10 +63,10 @@ if (!env.devMode) {
     );
 
     // generate favicons
-    mainConfigPlugins.push(new FaviconsWebpackPlugin(urls.APP_URL + 'favicon.png'));
+    mainConfigPlugins.push(new FaviconsWebpackPlugin(urls.dev.base + 'favicon.png'));
 
     // generate manifest
-    const distSrc = h.getRelativePath(urls.DIST_ASSETS_URL, urls.DIST_URL)
+    const distSrc = h.getRelativePath(urls.prod.assets, urls.prod.base)
     mainConfigPlugins.push(
       new webpack.optimize.CommonsChunkPlugin({
         name: "vendor",

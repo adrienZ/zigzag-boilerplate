@@ -20,7 +20,7 @@ const mainConfig = 	{
     alias: urls.aliases
   },
   output: {
-    path: urls.DIST_URL,
+    path: urls.prod.base,
     // not at the root
     filename: env.devMode ? jsOutput + '[name].js' : jsOutput + '[name].[hash:8].js'
   },
@@ -41,7 +41,7 @@ const staticConfig = {
   name: 'statics',
   entry: entries.FILES,
   output: {
-    path: urls.DIST_MEDIA_URL,
+    path: urls.prod.media,
     filename: 'media.js'
   },
   module: {

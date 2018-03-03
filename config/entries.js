@@ -22,14 +22,14 @@ fs.readdirSync(jsPath)
 // !  CONFIG VIEWS / HTML                                                 //
 // =======================================================================//
 const VIEWS = fs
-  .readdirSync(urls.APP_URL)
+  .readdirSync(urls.dev.base)
   .filter(file => file.match(/.ejs$/))
 
 // =======================================================================//
 // !  FILES: IMG / VIDEO / FONTS ...                                      //
 // =======================================================================//
 
-const fileBasePath = h.getRelativePath(urls.APP_MEDIA_URL, urls.BASE_URL).substring(1);
+const fileBasePath = h.getRelativePath(urls.dev.media, urls.BASE_URL).substring(1);
 const FILES = glob
   .readdirSync(fileBasePath + "**/*",
     (err, files) => err ? console.log('Error', err) : files)
