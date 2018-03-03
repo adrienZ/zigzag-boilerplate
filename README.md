@@ -3,15 +3,15 @@
 #### The no-framework boilerplate
 
 This boilerplate use :
+- webpack & hot-reloading
 - HTML templating (optional) via ejs
 - sass & babel
-- es lint & prettier
+- eslint & prettier
 - yarn (or npm)
-- webpack
 
 This boilerplate requires:
-[Node.js](https://nodejs.org/) v6+ and [Webpack](http://webpack.github.io/docs/). [Yarn](https://yarnpkg.com/
-) is also great.
+[Node.js](https://nodejs.org/) v6+ and [Webpack](http://webpack.github.io/docs/).
+[Yarn](https://yarnpkg.com/) is also great.
 
 ```sh
 $ npm i -g webpack
@@ -79,7 +79,9 @@ Font face
 
 ### TODO
 - [ ] LINTERS
-- [ ] complete useless infos in package.json
 - [ ] easy deploy on github pages
-- [ ] use webpack devserver core ip instead of new dependecy
 - [ ] Sass structure
+
+### Warning
+
+Do not forget to edit your `package.json` before publish your repo !

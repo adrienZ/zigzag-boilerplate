@@ -4,7 +4,7 @@
   "env": {
     "browser": true,
     "jquery": false,
-    "node": false,
+    "node": true,
     "es6": true,
     "mocha": false
   },

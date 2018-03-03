@@ -1,11 +1,18 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path = require("path");
+
 const env = require("./env");
 const urls = require("./urls");
+const h = require("./helpers");
+
+const cssOutputPath = path.resolve(urls.prod.assets, "css/")
+const relativeCssOutput = h.getRelativePath(cssOutputPath, urls.prod.base) + "/";
+const configPath = h.getRelativePath(urls.CONFIG, urls.BASE_URL).substring(1) + "/"
 
 const extractSass = new ExtractTextPlugin({
   filename: env.devMode
-    ? "src/css/[name].css"
-    : "src/css/[name].[contenthash].css",
+    ? relativeCssOutput + "[name].css"
+    : relativeCssOutput + "[name].[contenthash].css",
   disable: env.devMode,
   allChunks: true
 });
@@ -17,7 +24,7 @@ const cssLoaders = [
     options: {
       plugins: loader => [require("autoprefixer")],
       config: {
-        path: 'config/postcss.config.js'
+        path: configPath + 'postcss.config.js'
       }
     }
   }
@@ -57,23 +64,14 @@ module.exports = {
     test: /\.(jpe?g|png|gif|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/i,
     exclude: /node_modules/,
     use: [
-    // 'url-loader',
-    {
-      loader: 'file-loader',
-      options: {
-        limit: 1024,
-        name: (file) => setFolder(file) + '[name].[ext]'
-      }
-    }]
+      // 'url-loader',
+      {
+        loader: 'file-loader',
+        options: {
+          limit: 1024,
+          name: (file) => h.setFileFolder(file) + '[name].[ext]'
+        }
+      }]
   },
   extractSass,
 };
-
-
-const setFolder = file => {
-  const filename = file.replace(/^.*[\\\/]/, '')
-
-  return file
-      .replace(urls.APP_ASSETS_URL + "media/", "")
-      .replace(filename, "")
-}
