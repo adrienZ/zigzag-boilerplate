@@ -1,6 +1,1 @@
 dist/
-vendor/
-gulpfile.js
-webpack.config.js
-config/
-./**/*

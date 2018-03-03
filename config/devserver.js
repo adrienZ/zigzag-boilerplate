@@ -1,7 +1,6 @@
 // =======================================================================//
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
-const urls = require("./urls");
 const ip = require("ip");
 
 module.exports = {
@@ -9,6 +8,7 @@ module.exports = {
   // change this as you want
   compress: true, //gzip
   inline: true,
+  watchContentBase: false, // enable reload on save for html
   noInfo: true,
   overlay: {
     warnings: false,
