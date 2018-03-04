@@ -56,6 +56,6 @@ const config = [
   mainConfig,
 ]
 
-if (entries.FILES.length > 0 && env.compileAll) config.push(staticsConfig)
+if (entries.FILES.length > 0 && env.forceStaticsCompilation) config.push(staticsConfig)
 
 module.exports = config;

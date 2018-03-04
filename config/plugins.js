@@ -25,12 +25,10 @@ const htmlExport = entries.VIEWS.map(view => new HtmlWebpackPlugin({
 }));
 
 
-const mainConfigPlugins = [
-  // get all the views as HtmlWebpackPlugin instance
-  // build css from scss import
+const mainConfigPlugins = env.compileHtml ? [
   ...htmlExport,
   loaders.extractSass
-];
+] : [loaders.extractSass];
 
 const pluginsExport = { mainConfigPlugins };
 
@@ -82,7 +80,7 @@ if (!env.devMode) {
     );
   }
 
-  if (env.compileAll) {
+  if (env.forceStaticsCompilation) {
     const toRoot = path.relative(urls.prod.media, urls.prod.base) + "/";
     pluginsExport['staticsConfigPlugins'] = [
       new ManifestPlugin({
