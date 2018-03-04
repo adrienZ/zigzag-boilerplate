@@ -69,7 +69,7 @@ module.exports = {
         loader: 'file-loader',
         options: {
           limit: 1024,
-          name: (file) => h.setFileFolder(file) + '[name].[ext]'
+          name: (file) => h.setFileFolder(file) + '[name].[hash].[ext]'
         }
       }]
   },

@@ -3,7 +3,7 @@
 #### The no-framework boilerplate
 
 This boilerplate use :
-- webpack & hot-reloading
+- cache-busting & hot-reloading
 - HTML templating (optional) via ejs
 - sass & babel
 - eslint & prettier

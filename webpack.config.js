@@ -37,7 +37,7 @@ const mainConfig = 	{
   plugins: plugins.mainConfigPlugins
 }
 
-const staticConfig = {
+const staticsConfig = {
   name: 'statics',
   entry: entries.FILES,
   output: {
@@ -48,13 +48,14 @@ const staticConfig = {
     loaders: [
       loaders.files
     ]
-  }
+  },
+  plugins: plugins.staticsConfigPlugins
 }
-
 
 const config = [
   mainConfig,
 ]
-entries.FILES.length > 0 && config.push(staticConfig)
+
+if (entries.FILES.length > 0 && env.compileAll) config.push(staticsConfig)
 
 module.exports = config;

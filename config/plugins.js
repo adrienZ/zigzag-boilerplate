@@ -1,6 +1,7 @@
 const ManifestPlugin = require("webpack-manifest-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
+const path = require("path");
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -31,6 +32,8 @@ const mainConfigPlugins = [
   loaders.extractSass
 ];
 
+const pluginsExport = { mainConfigPlugins };
+
 // HMR
 devServer.hot && mainConfigPlugins.push(
   new webpack.HotModuleReplacementPlugin()
@@ -40,7 +43,8 @@ if (!env.devMode) {
   // manifest for hashes
   mainConfigPlugins.push(
     new ManifestPlugin({
-      fileName: "webpack-manifest.json"
+      fileName: "webpack-manifest.json",
+      map: h.manifestDataFormatter
     })
   );
 
@@ -51,7 +55,7 @@ if (!env.devMode) {
   // clear dist folder
   if (env.clearDist) {
     const relativeDist = h.getRelativePath(urls.prod.base, urls.BASE_URL).substring(1); // dist
-    const relativeDistMedia = h.getRelativePath(urls.prod.media, urls.BASE_URL).substring(1); // dist/src/media
+    // const relativeDistMedia = h.getRelativePath(urls.prod.media, urls.BASE_URL).substring(1); // dist/src/media
 
     mainConfigPlugins.push(
       new CleanWebpackPlugin([relativeDist], {
@@ -77,6 +81,16 @@ if (!env.devMode) {
       })
     );
   }
+
+  if (env.compileAll) {
+    const toRoot = path.relative(urls.prod.media, urls.prod.base) + "/";
+    pluginsExport['staticsConfigPlugins'] = [
+      new ManifestPlugin({
+        fileName: toRoot + "statics-manifest.json",
+        map: h.manifestDataFormatter
+      })
+    ]
+  }
 }
 
-module.exports = { mainConfigPlugins };
+module.exports = pluginsExport
