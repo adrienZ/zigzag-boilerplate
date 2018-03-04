@@ -2,12 +2,18 @@
 
 #### The no-framework boilerplate
 
-This boilerplate use :
-- cache-busting & hot-reloading
-- HTML templating (optional) via ejs
-- sass & babel
-- eslint & prettier
-- yarn (or npm)
+
+## What’s Included?
+
+* ES6, SASS and EJS syntax support.
+* Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
+* A live development server that warns about common mistakes.
+* A build script to bundle JS, CSS, and images for production, with hashes.
+* Non obtrusive linter with prettier.
+* Aliases (@) to easily include files.
+
+
+## Installation
 
 This boilerplate requires:
 [Node.js](https://nodejs.org/) v6+ and [Webpack](http://webpack.github.io/docs/).
@@ -17,26 +23,26 @@ This boilerplate requires:
 $ npm i -g webpack
 ```
 
-### Installation
 ```
 $ git clone https://github.com/adrienZ/zigzag-boilerplate.git
 $ cd zigzag-boilerplate
 $ npm run hello
 ```
 
-### Commands
+## Commands
 
 ```
 $ npm run hello #setup
 ```
 ```
-$ npm run build #production
-```
-```
 $ npm run start #dev
 ```
+```
+$ npm run build #production
+```
 
-### Features
+
+## Features
 
 When you follow the folder structure, it give you access to some handy aliases.
 You can found them in `config/urls.js`.
@@ -70,18 +76,28 @@ Font face
 }
 ```
 
-### Linters
+## Caveats
+
+the `htmlWebpackPlugin` does not allow HMR.
+you can either :
+- forget about it
+- activate live reload, but lose HMR. you have to include your file in your js like this
+```javascript
+  import "ejs-loader!@views/index.ejs"
+```
+
+## Linters
 - editorconfig : http://editorconfig.org/
 - linter-sass-lint : `apm install linter-sass-lint`
 - linter-eslint :
 	- Atom : `apm install linter-eslint`
 	- Sublime Text package : `SublimeLinter-contrib-eslint`
 
-### TODO
+## TODO
 - [ ] LINTERS
 - [ ] easy deploy on github pages
 - [ ] Sass structure
 
-### Warning
+## Warning
 
 Do not forget to edit your `package.json` before publish your repo !
