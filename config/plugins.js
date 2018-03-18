@@ -79,16 +79,6 @@ if (!env.devMode) {
       })
     );
   }
-
-  if (env.forceStaticsCompilation) {
-    const toRoot = path.relative(urls.prod.media, urls.prod.base) + "/";
-    pluginsExport['staticsConfigPlugins'] = [
-      new ManifestPlugin({
-        fileName: toRoot + "statics-manifest.json",
-        map: h.manifestDataFormatter
-      })
-    ]
-  }
 }
 
 module.exports = pluginsExport

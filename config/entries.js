@@ -1,8 +1,6 @@
 const fs = require("fs");
-const glob = require('glob-fs')({ gitignore: true });
 
 const urls = require("./urls");
-const h = require("./helpers");
 
 // =======================================================================//
 // !  CONFIG ENTRIES / SCRIPTS / BUNDLES                                  //
@@ -25,16 +23,4 @@ const VIEWS = fs
   .readdirSync(urls.dev.base)
   .filter(file => file.match(/.ejs$/))
 
-// =======================================================================//
-// !  FILES: IMG / VIDEO / FONTS ...                                      //
-// =======================================================================//
-
-const fileBasePath = h.getRelativePath(urls.dev.media, urls.BASE_URL).substring(1);
-const FILES = glob
-  .readdirSync(fileBasePath + "**/*",
-    (err, files) => err ? console.log('Error', err) : files)
-  .filter(file => file.match(/\./))
-  .map(file => urls.BASE_URL + "/" + file)
-
-
-module.exports = { SCRIPTS, VIEWS, FILES };
+module.exports = { SCRIPTS, VIEWS };

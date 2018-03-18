@@ -37,25 +37,8 @@ const mainConfig = 	{
   plugins: plugins.mainConfigPlugins
 }
 
-const staticsConfig = {
-  name: 'statics',
-  entry: entries.FILES,
-  output: {
-    path: urls.prod.media,
-    filename: 'media.js'
-  },
-  module: {
-    loaders: [
-      loaders.files
-    ]
-  },
-  plugins: plugins.staticsConfigPlugins
-}
-
 const config = [
   mainConfig,
 ]
-
-if (entries.FILES.length > 0 && env.forceStaticsCompilation) config.push(staticsConfig)
 
 module.exports = config;

@@ -29,7 +29,6 @@
     "favicons-webpack-plugin": "^0.0.7",
     "file-loader": "^1.1.6",
     "fs": "^0.0.1-security",
-    "glob-fs": "^0.1.7",
     "html-webpack-plugin": "^2.30.1",
     "ip": "^1.1.5",
     "node-sass": "^4.5.2",
