@@ -1,9 +1,4 @@
 {
-  "name": "zigzag-boilerplate",
-  "version": "2.1.0",
-  "homepage": "https://github.com/adrienZ/zigzag-boilerplate",
-  "description": "Boilerplate on steroids",
-  "main": "gulpfile.js",
   "scripts": {
     "build": "CLEAR_DIST=true webpack -p --hide-modules --cache",
     "start": "NODE_ENV=dev webpack-dev-server --color",

@@ -1,7 +1,6 @@
 const ManifestPlugin = require("webpack-manifest-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
-const path = require("path");
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -14,7 +13,7 @@ const h = require("./helpers");
 
 const htmlExport = entries.VIEWS.map(view => new HtmlWebpackPlugin({
   title: env.appTitle,
-  template: `${urls.dev.base}${view}`,
+  template: `${urls.dev.base + view}`,
   filename: `${view.replace('.ejs', '.html')}`,
   inject: "body",
   showErrors: env.devMode ? true : false,

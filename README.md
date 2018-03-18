@@ -25,7 +25,7 @@ $ npm i -g webpack
 ```
 
 ```
-$ git clone https://github.com/adrienZ/zigzag-boilerplate.git
+$ curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
 $ cd zigzag-boilerplate
 $ npm run hello
 ```
