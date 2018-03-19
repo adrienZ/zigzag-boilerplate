@@ -1,3 +1,5 @@
+const path = require('path')
+
 // =======================================================================//
 // !  CONFIG			                                                        //
 // =======================================================================//
@@ -7,10 +9,9 @@ const loaders = require('./config/loaders');
 const env = require('./config/env');
 const plugins = require('./config/plugins');
 const devServer = require('./config/devserver');
-const h = require('./config/helpers');
 
 // src/js
-const jsOutput = h.getRelativePath(urls.aliases["@js"]) + '/'
+const jsOutput = path.relative(urls.dev.base, urls.aliases["@js"])
 
 const mainConfig = 	{
   name: 'MAIN CONFIG',

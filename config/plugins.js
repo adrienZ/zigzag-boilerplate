@@ -3,13 +3,13 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path')
 
 const env = require("./env");
 const entries = require("./entries");
 const loaders = require("./loaders");
 const urls = require("./urls");
 const devServer = require("./devserver");
-const h = require("./helpers");
 
 const htmlExport = entries.VIEWS.map(view => new HtmlWebpackPlugin({
   title: env.appTitle,
@@ -41,7 +41,6 @@ if (!env.devMode) {
   mainConfigPlugins.push(
     new ManifestPlugin({
       fileName: "webpack-manifest.json",
-      map: h.manifestDataFormatter
     })
   );
 
@@ -51,15 +50,13 @@ if (!env.devMode) {
 
   // clear dist folder
   if (env.clearDist) {
-    const relativeDist = h.getRelativePath(urls.prod.base, urls.BASE_URL).substring(1); // dist
-    // const relativeDistMedia = h.getRelativePath(urls.prod.media, urls.BASE_URL).substring(1); // dist/src/media
+    const relativeDist = path.relative(urls.BASE_URL, urls.prod.base) + "/"
 
     mainConfigPlugins.push(
       new CleanWebpackPlugin([relativeDist], {
         root: urls.BASE_URL,
         verbose: true,
         dry: false,
-        // exclude: [relativeDistMedia]
       })
     );
 
@@ -67,7 +64,7 @@ if (!env.devMode) {
     mainConfigPlugins.push(new FaviconsWebpackPlugin(urls.dev.base + 'favicon.png'));
 
     // generate manifest
-    const distSrc = h.getRelativePath(urls.prod.assets, urls.prod.base)
+    const distSrc = path.relative(urls.prod.base, urls.prod.assets) + "/"
     mainConfigPlugins.push(
       new webpack.optimize.CommonsChunkPlugin({
         name: "vendor",

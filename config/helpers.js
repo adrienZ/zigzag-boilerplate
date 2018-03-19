@@ -4,23 +4,14 @@ const path = require("path");
 const setFileFolder = file => {
   const filename = path.basename(file)
 
-  return file
+  const tt = file
     .replace(urls.dev.base, "")
     .replace(filename, "")
+
+  console.log("TRY", path.relative(urls.dev.base, file))
+  console.log("GET", tt)
+
+  return tt;
 }
 
-const getRelativePath = (path, context = urls.dev.base) => path.replace(context, '')
-
-
-const manifestDataFormatter = file => {
-  return file
-
-  // if needed
-  file.name = file.isModuleAsset ?
-    getRelativePath(urls.prod.base + setFileFolder(file.name), urls.prod.media) + path.basename(file.name)
-    : file.name
-  return file
-}
-
-
-module.exports = { setFileFolder, getRelativePath, manifestDataFormatter };
+module.exports = { setFileFolder };
