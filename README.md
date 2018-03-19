@@ -1,3 +1,6 @@
+![GitHub last commit](https://img.shields.io/github/last-commit/adrienz/zigzag-boilerplate.svg)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/adrienz/zigzag-boilerplate.svg)
+
 # ZigZag Boilerplate
 
 #### The no-framework boilerplate
