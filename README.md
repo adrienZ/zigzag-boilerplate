@@ -8,6 +8,7 @@
 * ES6, SASS and EJS syntax support.
 * Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
 * A live development server that warns about common mistakes.
+* Easily deploy your app to Github Pages
 * A build script to bundle JS, CSS, and images for production, with hashes.
 * Non obtrusive linter with prettier.
 * Aliases (@) to easily include files.
@@ -40,6 +41,12 @@ $ npm run start #dev
 ```
 $ npm run build #production
 ```
+
+## Deploy
+
+1. Run this command: `npm run deploy`
+2. Make sure you have activated Github pages and set the `gh-pages` branch as source.
+3. your app is now live at `https://{your-github-username}.github.io/{repo-name}/`
 
 
 ## Features
