@@ -11,7 +11,7 @@ const plugins = require('./config/plugins');
 const devServer = require('./config/devserver');
 
 // src/js
-const jsOutput = path.relative(urls.dev.base, urls.aliases["@js"])
+const jsOutput = path.relative(urls.dev.base, urls.aliases["@js"]) + "/"
 
 const mainConfig = 	{
   name: 'MAIN CONFIG',

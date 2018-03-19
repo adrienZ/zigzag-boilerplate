@@ -3,7 +3,6 @@ const path = require("path");
 
 const env = require("./env");
 const urls = require("./urls");
-const h = require("./helpers");
 
 const cssOutputPath = path.resolve(urls.prod.assets, "css/")
 const relativeCssOutput = path.relative(urls.prod.base, cssOutputPath) + "/";
@@ -70,7 +69,10 @@ module.exports = {
         loader: 'file-loader',
         options: {
           limit: 1024,
-          name: (file) => h.setFileFolder(file) + '[name].[hash].[ext]'
+          name: (file) => path.relative(
+            urls.dev.base,
+            path.parse(file).dir
+          ) + '/[name].[hash].[ext]'
         }
       }]
   },
