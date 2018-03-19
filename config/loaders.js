@@ -30,6 +30,19 @@ const cssLoaders = [
   }
 ];
 
+let setFileFolder = file => {
+  const dir = path.relative(
+    urls.dev.base,
+    path.parse(file).dir + "/"
+  )
+
+  const filename = env.devMode
+    ? "[name].[ext]"
+    : "[name].[hash].[ext]"
+
+  return dir + (dir ? '/' : '') + filename
+}
+
 module.exports = {
   eslint: {
     // ES6
@@ -69,10 +82,7 @@ module.exports = {
         loader: 'file-loader',
         options: {
           limit: 1024,
-          name: (file) => path.relative(
-            urls.dev.base,
-            path.parse(file).dir
-          ) + '/[name].[hash].[ext]'
+          name: file => setFileFolder(file)
         }
       }]
   },
