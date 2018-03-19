@@ -1,3 +1,5 @@
+const path = require('path')
+
 // =======================================================================//
 // !  CONFIG			                                                        //
 // =======================================================================//
@@ -7,10 +9,9 @@ const loaders = require('./config/loaders');
 const env = require('./config/env');
 const plugins = require('./config/plugins');
 const devServer = require('./config/devserver');
-const h = require('./config/helpers');
 
 // src/js
-const jsOutput = h.getRelativePath(urls.aliases["@js"]) + '/'
+const jsOutput = path.relative(urls.dev.base, urls.aliases["@js"]) + "/"
 
 const mainConfig = 	{
   name: 'MAIN CONFIG',
@@ -37,25 +38,8 @@ const mainConfig = 	{
   plugins: plugins.mainConfigPlugins
 }
 
-const staticsConfig = {
-  name: 'statics',
-  entry: entries.FILES,
-  output: {
-    path: urls.prod.media,
-    filename: 'media.js'
-  },
-  module: {
-    loaders: [
-      loaders.files
-    ]
-  },
-  plugins: plugins.staticsConfigPlugins
-}
-
 const config = [
   mainConfig,
 ]
-
-if (entries.FILES.length > 0 && env.forceStaticsCompilation) config.push(staticsConfig)
 
 module.exports = config;

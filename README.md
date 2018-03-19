@@ -8,7 +8,7 @@
 * ES6, SASS and EJS syntax support.
 * Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
 * A live development server that warns about common mistakes.
-* Easily deploy your app to Github Pages
+* Easily deploy your app to Github Pages.
 * A build script to bundle JS, CSS, and images for production, with hashes.
 * Non obtrusive linter with prettier.
 * Aliases (@) to easily include files.
@@ -25,7 +25,7 @@ $ npm i -g webpack
 ```
 
 ```
-$ git clone https://github.com/adrienZ/zigzag-boilerplate.git
+$ curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
 $ cd zigzag-boilerplate
 $ npm run hello
 ```
@@ -45,7 +45,7 @@ $ npm run build #production
 ## Deploy
 
 1. Run this command: `npm run deploy`
-2. Make sure you have activated Github pages and set the `gh-pages` branch as source.
+2. Make sure you have activated Github pages in your repository settings and set the `gh-pages` branch as source.
 3. your app is now live at `https://{your-github-username}.github.io/{repo-name}/`
 
 
@@ -88,7 +88,7 @@ Font face
 the `htmlWebpackPlugin` does not allow HMR.
 you can either :
 - forget about it
-- activate live reload, but lose HMR. you have to include your file in your js like this
+- activate live reload, but lose HMR. you have to include your file in your js like this:
 ```javascript
   import "ejs-loader!@views/index.ejs"
 ```
