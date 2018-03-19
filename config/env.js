@@ -3,4 +3,5 @@ module.exports = {
   clearDist: process.env.CLEAR_DIST,
   appTitle: '👋 Give me a title 🔥',
   compileHtml: true,
+  prodUrl: null
 };
