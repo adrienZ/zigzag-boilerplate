@@ -23,6 +23,7 @@
     "no-var": "warn",
     "no-implied-eval": "warn",
 
+    "semi": 0,
     "indent": ["error", 2],
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": ["error", {
