@@ -4,14 +4,14 @@
     "start": "NODE_ENV=dev webpack-dev-server --color",
     "open": "code . || open . -a atom",
     "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
-    "prettier": "prettier '{app/src/js/***.js,!(node*)**/*.js}' --color --write",
+    "prettier": "prettier '{app/src/js/**/*.js,!(node*)**/*.js}' --color",
     "deploy": "yarn build && gdd --branch gh-pages --src dist --remote origin"
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "devDependencies": {
     "@hswolff/git-directory-deploy": "^0.6.1",
     "babel-core": "^6.24.0",
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.0",
     "clean-webpack-plugin": "^0.1.16",

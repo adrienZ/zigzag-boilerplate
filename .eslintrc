@@ -15,24 +15,32 @@
       "jsx": true
     }
   },
+
   "rules": {
     "no-console": "warn",
-    "valid-jsdoc": ["error", {
+    "no-debugger": "warn",
+    "no-unused-vars": "warn",
+    "no-var": "warn",
+    "no-implied-eval": "warn",
+
+    "indent": ["error", 2],
+    "no-multi-spaces": "error",
+    "no-multiple-empty-lines": ["error", {
+      "max": 5,
+      "maxEOF": 1
+    }],
+    "no-duplicate-imports": "error",
+    "space-infix-ops": ["error", {
+      "int32Hint": false
+    }],
+
+    "valid-jsdoc": ["warn", {
       "requireReturn": false,
       "requireReturnType": false,
       "requireParamDescription": false,
       "requireReturnDescription": false
     }],
-    "indent": ["error", 2],
-    "curly": ["error", "multi-line"],
-    "space-infix-ops": ["error", {
-      "int32Hint": false
-    }],
-    "no-multiple-empty-lines": ["error", {
-      "max": 5,
-      "maxEOF": 1
-    }],
-    "require-jsdoc": ["error", {
+    "require-jsdoc": ["warn", {
       "require": {
         "FunctionDeclaration": false,
         "MethodDefinition": false,
@@ -41,5 +49,4 @@
     }]
   },
   "settings": { "import/resolver": "webpack" }
-
 }
