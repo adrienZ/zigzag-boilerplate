@@ -4,7 +4,6 @@
     "start": "NODE_ENV=dev webpack-dev-server --color",
     "open": "code . || open . -a atom",
     "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
-    "prettier": "prettier '{app/src/js/**/*.js,!(node*)**/*.js}' --color",
     "deploy": "yarn build && gdd --branch gh-pages --src dist --remote origin"
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
@@ -28,7 +27,6 @@
     "node-sass": "^4.5.2",
     "path": "^0.12.7",
     "postcss-loader": "^2.0.6",
-    "prettier": "^1.7.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.6.0",
