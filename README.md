@@ -1,5 +1,6 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/adrienz/zigzag-boilerplate.svg)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/adrienz/zigzag-boilerplate.svg)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # ZigZag Boilerplate
 
@@ -97,16 +98,13 @@ you can either :
 ```
 
 ## Linters
-- editorconfig : http://editorconfig.org/
-- linter-sass-lint : `apm install linter-sass-lint`
-- linter-eslint :
+- [https://eslint.org/](ESLint) :
 	- Atom : `apm install linter-eslint`
-	- Sublime Text package : `SublimeLinter-contrib-eslint`
+	- VS Code : `ext install vscode-eslint`
+- [https://prettier.io](Prettier) :
+  - Atom: `apm install prettier-atom`
+  - VS Code: `ext install prettier-vscode`
 
-## TODO
-- [ ] LINTERS
-- [ ] easy deploy on github pages
-- [ ] Sass structure
 
 ## Warning
 

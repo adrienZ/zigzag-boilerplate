@@ -1,3 +1,6 @@
 {
   "typescript.autoImportSuggestions.enabled": false,
+  "prettier.ignorePath": ".prettierignore",
+  "prettier.requireConfig": true,
+  "editor.formatOnSave": true,
 }

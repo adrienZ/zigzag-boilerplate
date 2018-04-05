@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const PrettierPlugin = require("prettier-webpack-plugin");
 
 const path = require('path')
 
@@ -30,6 +31,10 @@ const mainConfigPlugins = env.compileHtml ? [
   ...htmlExport,
   loaders.extractSass
 ] : [loaders.extractSass];
+
+mainConfigPlugins.push(
+  new PrettierPlugin()
+)
 
 const pluginsExport = { mainConfigPlugins };
 
