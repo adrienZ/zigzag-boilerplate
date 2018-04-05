@@ -1,7 +1,7 @@
 // =======================================================================//
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
-const ip = require("ip");
+const ip = require('ip')
 // const urls = require("./urls");
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
   noInfo: true,
   overlay: {
     warnings: false,
-    errors: true
+    errors: true,
   },
   historyApiFallback: true,
   hot: true,
@@ -23,5 +23,5 @@ module.exports = {
   port: 8899,
   useLocalIp: true,
   host: ip.address(),
-  quiet: false // shut down console,
-};
+  quiet: false, // shut down console,
+}
