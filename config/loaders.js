@@ -77,14 +77,15 @@ module.exports = {
     test: /\.(jpe?g|png|gif|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/i,
     exclude: /node_modules/,
     use: [
-      // 'url-loader',
+      'url-loader',
       {
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
-          limit: 1024,
-          name: file => setFileFolder(file)
+          limit: 10000,
+          name: file => setFileFolder(file),
         }
-      }]
+      }
+    ]
   },
   extractSass,
 };
