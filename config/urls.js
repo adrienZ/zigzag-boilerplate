@@ -19,7 +19,7 @@ const urls = {
 };
 
 const aliases = {
-  "@views": path.resolve(urls.dev.base),
+  "@base": path.resolve(urls.dev.base),
   "@js": path.resolve(urls.dev.assets, "js/"),
   "@sass": path.resolve(urls.dev.assets, "sass/"),
   "@img": path.resolve(urls.dev.media, "img/"),

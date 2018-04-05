@@ -93,7 +93,7 @@ you can either :
 - forget about it
 - activate live reload, but lose HMR. you have to include your file in your js like this:
 ```javascript
-  import "ejs-loader!@views/index.ejs"
+  import "ejs-loader!@base/index.ejs"
 ```
 
 ## Linters
