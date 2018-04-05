@@ -54,8 +54,13 @@ module.exports = {
   js: {
     // ES6
     test: /\.js$/,
-    exclude: /node_modules/,
-    loaders: ["babel-loader"]
+    exclude: /(node_modules|bower_components)/,
+    loaders: [{
+      loader: "babel-loader",
+      options: {
+        cacheDirectory: urls.BASE_URL + "/.cache/"
+      }
+    }],
   },
   css: {
     test: /\.css$/,
@@ -74,10 +79,9 @@ module.exports = {
     })
   },
   files: {
-    test: /\.(jpe?g|png|gif|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/i,
+    test: /\.(mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/i,
     exclude: /node_modules/,
     use: [
-      'url-loader',
       {
         loader: 'url-loader',
         options: {
