@@ -5,8 +5,9 @@
     "open": "code . || open . -a atom",
     "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "deploy": "yarn build && gdd --branch gh-pages --src dist --remote origin",
-    "prettier": "prettier app/src/js/*.js app/src/js/**/*.js app/src/sass/**/*.scss app/src/sass/*.scss --write",
-    "precommit": "pretty-quick --staged"
+    "prettier": "prettier \"app/src/**/*.@(js|scss)\" \"config/*.js\" --write",
+    "precommit": "pretty-quick --staged",
+    "wp": "NODE_ENV=dev webpack -w --progress --colors --hide-modules --cache --bail --display=minimal"
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "devDependencies": {
