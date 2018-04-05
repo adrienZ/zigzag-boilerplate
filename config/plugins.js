@@ -3,6 +3,8 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+
 const path = require('path')
 
 const env = require("./env");
@@ -37,6 +39,10 @@ devServer.hot && mainConfigPlugins.push(
 );
 
 if (!env.devMode) {
+  mainConfigPlugins.push(
+    new HardSourceWebpackPlugin()
+  )
+
   // manifest for hashes
   mainConfigPlugins.push(
     new ManifestPlugin({

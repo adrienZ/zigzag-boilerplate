@@ -26,21 +26,18 @@ const mainConfig = 	{
     // not at the root
     filename: env.devMode ? jsOutput + '[name].js' : jsOutput + '[name].[hash:8].js'
   },
-  devtool: env.devMode ? 'source-map' : false,
+  devtool: env.devMode ? 'cheap-module-eval-source-map' : 'eval',
   module: {
     loaders: [
       loaders.eslint,
       loaders.js,
       loaders.sass,
       loaders.css,
-      loaders.files
+      loaders.files,
+      loaders.imgs
     ]
   },
   plugins: plugins.mainConfigPlugins
 }
 
-const config = [
-  mainConfig,
-]
-
-module.exports = config;
+module.exports = mainConfig;

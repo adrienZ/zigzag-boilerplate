@@ -22,7 +22,7 @@ const cssLoaders = [
   {
     loader: "postcss-loader",
     options: {
-      plugins: loader => [require("autoprefixer")],
+      plugins: loader => [require("autoprefixer")], // eslint-disable-line
       config: {
         path: configPath + 'postcss.config.js'
       }
@@ -55,6 +55,7 @@ module.exports = {
     // ES6
     test: /\.js$/,
     exclude: /(node_modules|bower_components)/,
+    include: urls.aliases["@js"],
     loaders: [{
       loader: "babel-loader",
       options: {
@@ -72,6 +73,7 @@ module.exports = {
   },
   sass: {
     test: /\.scss$/,
+    include: urls.aliases["@sass"],
     exclude: /node_modules/,
     use: extractSass.extract({
       use: [...cssLoaders, "sass-loader"],
@@ -79,7 +81,19 @@ module.exports = {
     })
   },
   files: {
-    test: /\.(mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg|jpg|png|jpeg|gif|tiff|cr2)$/i,
+    test: /\.(mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg)$/i,
+    exclude: /node_modules/,
+    use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: file => setFileFolder(file),
+        }
+      }
+    ]
+  },
+  imgs: {
+    test: /\.(jpg|png|jpeg|gif|tiff|cr2)$/i,
     exclude: /node_modules/,
     use: [
       {
@@ -87,6 +101,12 @@ module.exports = {
         options: {
           limit: 10000,
           name: file => setFileFolder(file),
+        }
+      },
+      {
+        loader: 'img-loader',
+        options: {
+          enabled: !env.devMode
         }
       }
     ]
