@@ -9,7 +9,7 @@
 @mixin import-props($selector, $object) {
   #{$selector} {
     @each $prop, $value in $object {
-      #{$prop}:  $value;
+      #{$prop}: $value;
     }
   }
 }
