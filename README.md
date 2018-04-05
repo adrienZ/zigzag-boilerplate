@@ -6,7 +6,6 @@
 
 #### The no-framework boilerplate
 
-
 ## What’s Included?
 
 * ES6, SASS and EJS syntax support.
@@ -16,7 +15,7 @@
 * A build script to bundle JS, CSS, and images for production, with hashes.
 * Non obtrusive linter with prettier.
 * Aliases (@) to easily include files.
-
+* Javascript and sass files are prettyfied on save and on commits
 
 ## Installation
 
@@ -39,19 +38,24 @@ $ npm run hello
 ```
 $ npm run hello #setup
 ```
+
 ```
 $ npm run start #dev
 ```
+
 ```
 $ npm run build #production
 ```
 
+```
+$ npm run prettier #make my code pretty
+```
+
 ## Deploy
 
-1. Run this command: `npm run deploy`
-2. Make sure you have activated Github pages in your repository settings and set the `gh-pages` branch as source.
-3. your app is now live at `https://{your-github-username}.github.io/{repo-name}/`
-
+1.  Run this command: `npm run deploy`
+2.  Make sure you have activated Github pages in your repository settings and set the `gh-pages` branch as source.
+3.  your app is now live at `https://{your-github-username}.github.io/{repo-name}/`
 
 ## Features
 
@@ -61,11 +65,13 @@ You can found them in `config/urls.js`.
 Adding media has never been so easy !
 
 In javascript:
+
 ```javascript
-import myImgPath from "@img/test.jpg";
+import myImgPath from '@img/test.jpg'
 ```
 
 In sass:
+
 ```sass
 .myDiv {
   background: url("~@img/test.jpg")
@@ -73,11 +79,13 @@ In sass:
 ```
 
 In html (.ejs)
+
 ```ejs
 <img src="<%= require("@img/test.jpg") %>">
 ```
 
 Font face
+
 ```css
 @font-face {
   font-family: 'MyFont';
@@ -91,21 +99,23 @@ Font face
 
 the `htmlWebpackPlugin` does not allow HMR.
 you can either :
-- forget about it
-- activate live reload, but lose HMR. you have to include your file in your js like this:
+
+* forget about it
+* activate live reload, but lose HMR. you have to include your file in your js like this:
+
 ```javascript
-  import "ejs-loader!@base/index.ejs"
+import 'ejs-loader!@base/index.ejs'
 ```
 
 ## Linters
-- [https://eslint.org/](ESLint) :
-	- Atom : `apm install linter-eslint`
-	- VS Code : `ext install vscode-eslint`
-- [https://prettier.io](Prettier) :
-  - Atom: `apm install prettier-atom`
-  - VS Code: `ext install prettier-vscode`
 
+* [ESLint](https://eslint.org) :
+  * Atom : `apm install linter-eslint`
+  * VS Code : `ext install vscode-eslint`
+* [Prettier](https://prettier.io) :
+  * Atom: `apm install prettier-atom`
+  * VS Code: `ext install prettier-vscode`
 
 ## Warning
 
-Do not forget to edit your `package.json` before publish your repo !
+Do not forget to edit your `package.json` before publishing your repo !

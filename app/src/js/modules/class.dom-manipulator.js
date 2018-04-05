@@ -5,7 +5,7 @@
  * ======================================================================= *
  **/
 
-class DomManipulator {
+export default class DomManipulator {
   id(id) {
     return document.getElementById(id)
   }
@@ -22,5 +22,3 @@ class DomManipulator {
     return document.querySelectorAll(els)
   }
 }
-
-module.exports = DomManipulator
