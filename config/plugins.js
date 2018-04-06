@@ -28,12 +28,15 @@ const htmlExport = entries.VIEWS.map(
     })
 )
 
-const mainConfigPlugins = env.compileHtml ? [...htmlExport, loaders.extractSass] : [loaders.extractSass]
+const mainConfigPlugins = env.compileHtml
+  ? [...htmlExport, loaders.extractSass]
+  : [loaders.extractSass]
 
 const pluginsExport = { mainConfigPlugins }
 
 // HMR
-devServer.hot && mainConfigPlugins.push(new webpack.HotModuleReplacementPlugin())
+devServer.hot &&
+  mainConfigPlugins.push(new webpack.HotModuleReplacementPlugin())
 
 if (!env.devMode) {
   mainConfigPlugins.push(new HardSourceWebpackPlugin())
@@ -62,7 +65,9 @@ if (!env.devMode) {
     )
 
     // generate favicons
-    mainConfigPlugins.push(new FaviconsWebpackPlugin(urls.dev.base + 'favicon.png'))
+    mainConfigPlugins.push(
+      new FaviconsWebpackPlugin(urls.dev.base + 'favicon.png')
+    )
 
     // generate manifest
     const distSrc = path.relative(urls.prod.base, urls.prod.assets) + '/'

@@ -9,7 +9,9 @@ const relativeCssOutput = path.relative(urls.prod.base, cssOutputPath) + '/'
 const configPath = path.relative(urls.BASE_URL, urls.CONFIG) + '/'
 
 const extractSass = new ExtractTextPlugin({
-  filename: env.devMode ? relativeCssOutput + '[name].css' : relativeCssOutput + '[name].[contenthash].css',
+  filename: env.devMode
+    ? relativeCssOutput + '[name].css'
+    : relativeCssOutput + '[name].[contenthash].css',
   disable: env.devMode,
   allChunks: true,
 })
