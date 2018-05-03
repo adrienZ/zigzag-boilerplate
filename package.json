@@ -6,7 +6,7 @@
     "hello":
       "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "deploy": "yarn build && gdd --branch gh-pages --src dist --remote origin",
-    "prettier": "prettier \"app/src/**/*.@(js|scss)\" \"config/*.js\" --write",
+    "prettier": "prettier \"app/src/**/*.@(js|scss)\" --write",
     "precommit": "pretty-quick --staged",
     "wp":
       "NODE_ENV=dev webpack -w --progress --colors --hide-modules --cache --bail --display=minimal"
