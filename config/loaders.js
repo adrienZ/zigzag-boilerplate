@@ -37,6 +37,8 @@ let setFileFolder = file => {
   return dir + (dir ? '/' : '') + filename
 }
 
+const compressionEnabled = !!(env.clearDist && !env.devMode)
+
 module.exports = {
   eslint: {
     // ES6
@@ -90,6 +92,7 @@ module.exports = {
   },
   imgs: {
     test: /\.(jpg|png|jpeg|gif|tiff|cr2)$/i,
+    include: urls.aliases['@img'],
     exclude: /node_modules/,
     use: [
       {
@@ -99,13 +102,37 @@ module.exports = {
           name: file => setFileFolder(file),
         },
       },
-      {
-        loader: 'img-loader',
-        options: {
-          enabled: !env.devMode,
-        },
-      },
-    ],
+    ].concat(
+      compressionEnabled
+        ? [
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                mozjpeg: {
+                  progressive: true,
+                  quality: 80,
+                },
+                optipng: {},
+                pngquant: {
+                  quality: '70-85',
+                  speed: 6,
+                },
+                svgo: {
+                  addClassesToSVGElement: true,
+                },
+                gifsicle: {
+                  interlaced: true,
+                  color: 286,
+                },
+                // the webp option will enable WEBP
+                webp: {
+                  quality: 80,
+                },
+              },
+            },
+          ]
+        : []
+    ),
   },
   extractSass,
 }

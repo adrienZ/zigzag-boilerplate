@@ -3,13 +3,16 @@
     "build": "CLEAR_DIST=true webpack -p --hide-modules --cache",
     "start": "NODE_ENV=dev webpack-dev-server --color",
     "open": "code . || open . -a atom",
-    "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
+    "hello":
+      "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "deploy": "yarn build && gdd --branch gh-pages --src dist --remote origin",
     "prettier": "prettier \"app/src/**/*.@(js|scss)\" \"config/*.js\" --write",
     "precommit": "pretty-quick --staged",
-    "wp": "NODE_ENV=dev webpack -w --progress --colors --hide-modules --cache --bail --display=minimal"
+    "wp":
+      "NODE_ENV=dev webpack -w --progress --colors --hide-modules --cache --bail --display=minimal"
   },
-  "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
+  "author":
+    "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "devDependencies": {
     "@hswolff/git-directory-deploy": "^0.6.1",
     "babel-core": "^6.24.0",
@@ -28,7 +31,7 @@
     "hard-source-webpack-plugin": "^0.6.4",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
-    "img-loader": "^2.0.1",
+    "image-webpack-loader": "^4.2.0",
     "ip": "^1.1.5",
     "node-sass": "^4.8.3",
     "path": "^0.12.7",
