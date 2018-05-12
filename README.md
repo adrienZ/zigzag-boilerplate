@@ -11,7 +11,7 @@
 * ES6, SASS and EJS syntax support.
 * Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
 * A live development server that warns about common mistakes.
-* Easily deploy your app to Github Pages.
+* ~~Easily deploy your app to Github Pages.~~
 * A build script to bundle JS, CSS, and images for production, with hashes.
 * Non obtrusive linter with prettier.
 * Aliases (@) to easily include files.
@@ -20,16 +20,13 @@
 ## Installation
 
 This boilerplate requires:
-[Node.js](https://nodejs.org/) v6+ and [Webpack](http://webpack.github.io/docs/).
+[Node.js](https://nodejs.org/) v6+ and [Webpack](https://webpack.js.org/).
 [Yarn](https://yarnpkg.com/) is also great.
 
-```sh
-$ npm i -g webpack
 ```
-
-```
+$ mkdir my-app
+$ cd my-app
 $ curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
-$ cd zigzag-boilerplate
 $ npm run hello
 ```
 
@@ -40,7 +37,7 @@ $ npm run hello #setup
 ```
 
 ```
-$ npm run start #dev
+$ npm run start #dev on webpack dev server
 ```
 
 ```
@@ -49,6 +46,10 @@ $ npm run build #production
 
 ```
 $ npm run prettier #make my code pretty
+```
+
+```
+$ npm run watch #watch and ouput files
 ```
 
 ## Deploy

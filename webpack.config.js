@@ -1,43 +1,42 @@
 const path = require('path')
 
-// =======================================================================//
-// !  CONFIG			                                                        //
-// =======================================================================//
-const urls = require('./config/urls');
-const entries = require('./config/entries');
-const loaders = require('./config/loaders');
-const env = require('./config/env');
-const plugins = require('./config/plugins');
-const devServer = require('./config/devserver');
+const urls = require('./config/urls')
+const devServer = require('./config/devserver')
+const entries = require('./config/entries')
+const env = require('./config/env')
+const loaders = require('./config/loaders')
+const plugins = require('./config/plugins')
 
 // src/js
-const jsOutput = path.relative(urls.dev.base, urls.aliases["@js"]) + "/"
+const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
 
-const mainConfig = 	{
+const mainConfig = {
   name: 'MAIN CONFIG',
   devServer: devServer,
-  entry: entries.SCRIPTS,
+  entry: { ...entries.scripts({ multi: false }), ...entries.imgs },
   resolve: {
-    alias: urls.aliases
+    alias: urls.aliases,
   },
   output: {
-    path: urls.prod.base,
-    publicPath: env.devMode ? "" : env.prodUrl || "",
+    path: urls.prod.root,
+    publicPath: urls.publicPath,
     // not at the root
-    filename: env.devMode ? jsOutput + '[name].js' : jsOutput + '[name].[hash:8].js'
+    chunkFilename: '[name].bundle.js',
+    filename: env.serverMode
+      ? jsOutput + '/[name].js'
+      : jsOutput + '/[name].[hash:8].js',
   },
-  devtool: env.devMode ? 'cheap-module-eval-source-map' : 'eval',
+  devtool: env.devMode ? 'cheap-module-eval-source-map' : 'sourcemap',
+  mode: 'development',
   module: {
-    loaders: [
-      loaders.eslint,
-      loaders.js,
+    rules: [
       loaders.sass,
-      loaders.css,
+      loaders.js,
+      loaders.eslint,
+      loaders.imgs,
       loaders.files,
-      loaders.imgs
-    ]
+    ],
   },
-  plugins: plugins.mainConfigPlugins
+  plugins: plugins.mainConfigPlugins,
 }
-
-module.exports = mainConfig;
+module.exports = mainConfig

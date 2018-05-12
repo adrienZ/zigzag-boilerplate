@@ -1,7 +1,8 @@
 module.exports = {
-  devMode: process.env.NODE_ENV === 'dev',
-  clearDist: process.env.CLEAR_DIST,
+  serverMode: process.env.NODE_ENV === 'dev',
+  devMode:
+    process.env.NODE_ENV === 'dev' ||
+    process.argv.indexOf('--mode=production') === -1,
   appTitle: '👋 Give me a title 🔥',
-  compileHtml: true,
-  prodUrl: null,
+  prodUrl: '',
 }
