@@ -70,10 +70,6 @@ if (!env.serverMode) {
     })
   )
 
-  // some webpack optimization
-  mainConfigPlugins.push(new webpack.optimize.OccurrenceOrderPlugin())
-  mainConfigPlugins.push(new webpack.optimize.ModuleConcatenationPlugin())
-
   if (!env.devMode) {
     // clear dist folder
     const relativeDist = path.relative(urls.BASE_URL, urls.prod.root) + '/'
@@ -86,11 +82,29 @@ if (!env.serverMode) {
       })
     )
 
+    // some webpack optimization
+    mainConfigPlugins.push(new webpack.optimize.OccurrenceOrderPlugin())
+    mainConfigPlugins.push(new webpack.optimize.ModuleConcatenationPlugin())
+    mainConfigPlugins.push(
+      new webpack.optimize.AggressiveMergingPlugin() //Merge chunks
+    )
+
     const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
     // generate favicons
     mainConfigPlugins.push(
       new FaviconsWebpackPlugin(urls.dev.root + 'favicon.png')
     )
+
+    // const CompressionPlugin = require('compression-webpack-plugin')
+    // mainConfigPlugins.push(
+    //   new CompressionPlugin({
+    //     test: /\.(js|.scss)$/i,
+    //     deleteOriginalAssets: true,
+    //     cache: true,
+    //     asset: '[path].gz[query]',
+    //     algorithm: 'gzip',
+    //   })
+    // )
   }
 }
 

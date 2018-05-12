@@ -35,6 +35,7 @@ module.exports = {
     enforce: 'pre',
     test: /\.js$/,
     exclude: /node_modules/,
+    include: urls.aliases['@js'],
     loaders: ['eslint-loader'],
   },
   js: {
@@ -91,32 +92,32 @@ module.exports = {
     ].concat(
       compressionEnabled
         ? [
-            {
-              loader: 'image-webpack-loader',
-              options: {
-                mozjpeg: {
-                  progressive: true,
-                  quality: 80,
-                },
-                optipng: {},
-                pngquant: {
-                  quality: '70-85',
-                  speed: 6,
-                },
-                svgo: {
-                  addClassesToSVGElement: true,
-                },
-                gifsicle: {
-                  interlaced: true,
-                  color: 286,
-                },
-                // the webp option will enable WEBP
-                webp: {
-                  quality: 80,
-                },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 80,
+              },
+              optipng: {},
+              pngquant: {
+                quality: '70-85',
+                speed: 6,
+              },
+              svgo: {
+                addClassesToSVGElement: true,
+              },
+              gifsicle: {
+                interlaced: true,
+                color: 286,
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 80,
               },
             },
-          ]
+          },
+        ]
         : []
     ),
   },
