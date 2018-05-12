@@ -1,18 +1,22 @@
 // =======================================================================//
 // !  CONFIG URLS                                                         //
 // =======================================================================//
+
 const path = require('path')
+const env = require('./env')
+
 const base_url = path.resolve(__dirname, '../')
+
 const urls = {
   dev: {
     root: path.join(base_url, '/app/'),
     code: path.join(base_url, '/app/src/'),
-    assets: path.join(base_url, '/app/src/assets/'),
+    assets: path.join(base_url, '/app/assets/'),
   },
   prod: {
-    root: path.join(base_url, './dist/'),
+    root: path.join(base_url, '/dist/'),
     code: path.join(base_url, '/dist/src/'),
-    assets: path.join(base_url, '/dist/src/assets/'),
+    assets: path.join(base_url, '/dist/assets/'),
   },
   CONFIG: __dirname,
   BASE_URL: base_url,
@@ -28,4 +32,11 @@ const aliases = {
   '@video': path.resolve(urls.dev.assets, 'video/'),
 }
 
-module.exports = { ...urls, aliases }
+const publicPath = () => {
+  if (!env.devMode) return env.prodUrl || ''
+  if (!env.serverMode) return ''
+  // return path.relative(urls.prod.root, urls.prod.assets) + '/'
+  return ''
+}
+
+module.exports = { ...urls, aliases, publicPath: publicPath() }

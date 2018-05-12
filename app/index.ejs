@@ -1,7 +1,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>{{ htmlWebpackPlugin.options.title }}></title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- https://github.com/joshbuchea/HEAD -->
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -14,10 +14,10 @@
 
   <body>
     <h3>Comment est votre blanquette ?</h3>
-    {% set users =  ['Athos', 'Porthos', 'Aramis'] %}
-    {% for user in users %}
-      {{user}}
-    {% endfor %}
+    <% users =  ['Athos', 'Porthos', 'Aramis']; %>
+    <% users.forEach(function(user){ %>
+      <%= user %>
+    <% }); %>
     <!--SCRIPTS are auto-imported-->
   </body>
 </html>

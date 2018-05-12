@@ -13,13 +13,13 @@ const jsOutput = path.relative(urls.dev.root, urls.aliases['@js']) + '/'
 const mainConfig = {
   name: 'MAIN CONFIG',
   devServer: devServer,
-  entry: entries.scripts({ multi: false }),
+  entry: { ...entries.scripts({ multi: false }), ...entries.imgs },
   resolve: {
     alias: urls.aliases,
   },
   output: {
     path: urls.prod.root,
-    // publicPath: env.devMode ? "" : env.prodUrl || "",
+    publicPath: urls.publicPath,
     // not at the root
     chunkFilename: '[name].bundle.js',
     filename: env.serverMode
@@ -29,7 +29,13 @@ const mainConfig = {
   devtool: env.devMode ? 'cheap-module-eval-source-map' : 'sourcemap',
   mode: 'development',
   module: {
-    rules: [loaders.twig, loaders.sass, loaders.js, loaders.eslint],
+    rules: [
+      loaders.sass,
+      loaders.js,
+      loaders.eslint,
+      loaders.imgs,
+      loaders.files,
+    ],
   },
   plugins: plugins.mainConfigPlugins,
 }

@@ -30,9 +30,10 @@ const htmlExport = views.map(
     new HtmlWebpackPlugin({
       title: env.appTitle,
       template: `${urls.dev.root + view}`,
-      filename: `${view.replace('.twig', '.html')}`,
+      filename: `${view.replace('.ejs', '.html')}`,
       inject: 'body',
       showErrors: env.devMode ? true : false,
+      excludeChunks: Object.keys(entries.imgs),
       minify: {
         removeComments: true,
         removeRedundantAttributes: true,
@@ -89,16 +90,16 @@ if (!env.serverMode) {
       new webpack.optimize.AggressiveMergingPlugin() //Merge chunks
     )
 
-    const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+    // const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
     // generate favicons
-    mainConfigPlugins.push(
-      new FaviconsWebpackPlugin(urls.dev.root + 'favicon.png')
-    )
+    // mainConfigPlugins.push(
+    //   new FaviconsWebpackPlugin(urls.dev.root + 'favicon.png')
+    // )
 
     // const CompressionPlugin = require('compression-webpack-plugin')
     // mainConfigPlugins.push(
     //   new CompressionPlugin({
-    //     test: /\.(js|.scss)$/i,
+    //     test: /\.(js|.scss|jpg|png|jpeg|gif|tiff|cr2|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|obj)$/i,
     //     deleteOriginalAssets: true,
     //     cache: true,
     //     asset: '[path].gz[query]',

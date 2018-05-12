@@ -1,5 +1,4 @@
 const fs = require('fs')
-
 const urls = require('./urls')
 
 // =======================================================================//
@@ -24,10 +23,28 @@ const scripts = (options = {}) => {
   return { main_bundle: [`${jsPath}/main`] }
 }
 
+// List all files in a directory in Node.js recursively in a synchronous fashion
+const walkSync = (dir, filelist = {}) => {
+  const files = fs.readdirSync(dir)
+  let resfilelist = filelist
+  files.forEach((file, index) => {
+    if (fs.statSync(dir + '/' + file).isDirectory()) {
+      resfilelist = walkSync(dir + '/' + file + '/', resfilelist)
+    } else {
+      if (file.split('.')[0])
+        resfilelist['to_delete/' + index + '_' + file] =
+          urls.aliases['@img'] + '/' + file
+    }
+  })
+  return resfilelist
+}
+
+const imgs = () => walkSync(urls.aliases['@img'])
+
 // =======================================================================//
 // !  CONFIG VIEWS / HTML                                                 //
 // =======================================================================//
-const views = options =>
-  fs.readdirSync(urls.dev.root).filter(file => file.match(/.twig$/))
+const views = () =>
+  fs.readdirSync(urls.dev.root).filter(file => file.match(/.ejs$/))
 
-module.exports = { scripts, views }
+module.exports = { scripts, views, imgs: imgs() }

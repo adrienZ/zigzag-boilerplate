@@ -4,7 +4,9 @@ const path = require('path')
 const env = require('./env')
 const urls = require('./urls')
 
-const postCssConfigPath = path.relative(urls.BASE_URL, urls.CONFIG) + '/'
+const parentConfigFolder = path.resolve(urls.CONFIG, '../')
+const postCssConfigPath = path.relative(parentConfigFolder, urls.CONFIG)
+
 const cssLoaders = [
   env.serverMode ? 'style-loader' : MiniCssExtractPlugin.loader,
   {
@@ -15,7 +17,7 @@ const cssLoaders = [
     loader: 'postcss-loader',
     options: {
       config: {
-        path: postCssConfigPath + 'postcss.config.js',
+        path: postCssConfigPath + '/postcss.config.js',
       },
     },
   },
@@ -26,8 +28,6 @@ let setFileFolder = file => {
   const filename = env.devMode ? '[name].[ext]' : '[name].[hash].[ext]'
   return dir + (dir ? '/' : '') + filename
 }
-
-const compressionEnabled = !!(env.clearDist && !env.devMode)
 
 module.exports = {
   eslint: {
@@ -64,7 +64,7 @@ module.exports = {
     use: [...cssLoaders, 'sass-loader'],
   },
   files: {
-    test: /\.(mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg)$/i,
+    test: /\.(mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|obj)$/i,
     exclude: /node_modules/,
     use: [
       {
@@ -75,49 +75,47 @@ module.exports = {
       },
     ],
   },
-  twig: { test: /\.twig$/, loader: 'twig-loader' },
-
   imgs: {
-    test: /\.(jpg|png|jpeg|gif|tiff|cr2)$/i,
-    include: urls.aliases['@img'],
+    test: /\.(jpg|png|jpeg|gif|tiff|cr2|svg)$/i,
+    include: () => urls.aliases['@img'],
     exclude: /node_modules/,
     use: [
       {
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
           limit: 10000,
           name: file => setFileFolder(file),
         },
       },
     ].concat(
-      compressionEnabled
+      !env.devMode
         ? [
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 80,
-              },
-              optipng: {},
-              pngquant: {
-                quality: '70-85',
-                speed: 6,
-              },
-              svgo: {
-                addClassesToSVGElement: true,
-              },
-              gifsicle: {
-                interlaced: true,
-                color: 286,
-              },
-              // the webp option will enable WEBP
-              webp: {
-                quality: 80,
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                mozjpeg: {
+                  progressive: true,
+                  quality: 80,
+                },
+                optipng: {},
+                pngquant: {
+                  quality: '70-85',
+                  speed: 6,
+                },
+                svgo: {
+                  addClassesToSVGElement: true,
+                },
+                gifsicle: {
+                  interlaced: true,
+                  color: 286,
+                },
+                // the webp option will enable WEBP
+                webp: {
+                  quality: 80,
+                },
               },
             },
-          },
-        ]
+          ]
         : []
     ),
   },

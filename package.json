@@ -1,15 +1,18 @@
 {
   "scripts": {
-    "build": "webpack -p --mode=production --hide-modules --progress --color",
+    "build":
+      "webpack -p --mode=production --hide-modules --progress --color -display=minimal",
     "start": "NODE_ENV=dev webpack-dev-server --mode=development --color",
     "code": "code app || open app -a atom",
-    "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
-    "deploy": "yarn build && gdd --branch gh-pages --src dist --remote origin",
+    "hello":
+      "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "prettier": "prettier \"app/src/**/*.@(js|scss)\" --write",
     "precommit": "pretty-quick --staged",
-    "wp": "webpack -w --mode=development --progress --colors --hide-modules --cache --bail --display=minimal"
+    "wp":
+      "webpack -w --mode=development --progress --colors --hide-modules --cache --bail --display=minimal"
   },
-  "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
+  "author":
+    "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -21,8 +24,11 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "favicons-webpack-plugin": "^0.0.9",
+    "file-loader": "^1.1.11",
     "hard-source-webpack-plugin": "^0.6.7",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^0.14.3",
+    "image-webpack-loader": "^4.2.0",
     "ip": "^1.1.5",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
@@ -31,7 +37,6 @@
     "pretty-quick": "^1.4.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
-    "twig-loader": "^0.3.1",
     "webpack": "^4.8.2",
     "webpack-build-notifier": "^0.1.25",
     "webpack-cli": "^2.1.3",
