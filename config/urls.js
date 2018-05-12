@@ -34,8 +34,7 @@ const aliases = {
 
 const publicPath = () => {
   if (!env.devMode) return env.prodUrl || ''
-  if (!env.serverMode) return ''
-  // return path.relative(urls.prod.root, urls.prod.assets) + '/'
+  if (!env.serverMode) return urls.prod.root
   return ''
 }
 

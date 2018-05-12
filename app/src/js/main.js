@@ -11,6 +11,4 @@ const router = new Navigo(root, useHash, hash)
 router.on('/', HomePage).resolve()
 
 // 404 script
-router.notFound(() => {
-  console.warn(`no script for page ${window.location.href}`)
-})
+router.notFound(() => {})

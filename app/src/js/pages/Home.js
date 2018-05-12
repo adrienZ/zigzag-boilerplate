@@ -1,1 +1,1 @@
-export default () => console.log('homepage !')
+export default () => {}

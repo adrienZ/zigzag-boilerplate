@@ -8,7 +8,7 @@
       "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "prettier": "prettier \"app/src/**/*.@(js|scss)\" --write",
     "precommit": "pretty-quick --staged",
-    "wp":
+    "watch":
       "webpack -w --mode=development --progress --colors --hide-modules --cache --bail --display=minimal"
   },
   "author":

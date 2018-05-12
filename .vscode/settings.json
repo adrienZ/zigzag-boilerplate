@@ -1,5 +1,4 @@
 {
-  // "typescript.autoImportSuggestions.enabled": false,
   "prettier.ignorePath": ".prettierignore",
   "prettier.eslintIntegration": true,
   "prettier.requireConfig": true,

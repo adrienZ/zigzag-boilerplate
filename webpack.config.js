@@ -8,7 +8,7 @@ const loaders = require('./config/loaders')
 const plugins = require('./config/plugins')
 
 // src/js
-const jsOutput = path.relative(urls.dev.root, urls.aliases['@js']) + '/'
+const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
 
 const mainConfig = {
   name: 'MAIN CONFIG',
@@ -23,8 +23,8 @@ const mainConfig = {
     // not at the root
     chunkFilename: '[name].bundle.js',
     filename: env.serverMode
-      ? jsOutput + '[name].js'
-      : jsOutput + '[name].[hash:8].js',
+      ? jsOutput + '/[name].js'
+      : jsOutput + '/[name].[hash:8].js',
   },
   devtool: env.devMode ? 'cheap-module-eval-source-map' : 'sourcemap',
   mode: 'development',

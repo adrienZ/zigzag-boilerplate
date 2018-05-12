@@ -77,7 +77,7 @@ module.exports = {
   },
   imgs: {
     test: /\.(jpg|png|jpeg|gif|tiff|cr2|svg)$/i,
-    include: () => urls.aliases['@img'],
+    include: urls.aliases['@img'],
     exclude: /node_modules/,
     use: [
       {
