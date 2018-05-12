@@ -1,39 +1,29 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 const env = require('./env')
 const urls = require('./urls')
 
-const cssOutputPath = path.resolve(urls.prod.assets, 'css/')
-const relativeCssOutput = path.relative(urls.prod.base, cssOutputPath) + '/'
-const configPath = path.relative(urls.BASE_URL, urls.CONFIG) + '/'
-
-const extractSass = new ExtractTextPlugin({
-  filename: env.devMode
-    ? relativeCssOutput + '[name].css'
-    : relativeCssOutput + '[name].[contenthash].css',
-  disable: env.devMode,
-  allChunks: true,
-})
-
+const postCssConfigPath = path.relative(urls.BASE_URL, urls.CONFIG) + '/'
 const cssLoaders = [
-  { loader: 'css-loader', options: { importLoaders: 1, url: true } },
+  env.serverMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+  {
+    loader: 'css-loader',
+    options: { importLoaders: 1, url: true },
+  },
   {
     loader: 'postcss-loader',
     options: {
-      plugins: loader => [require('autoprefixer')], // eslint-disable-line
       config: {
-        path: configPath + 'postcss.config.js',
+        path: postCssConfigPath + 'postcss.config.js',
       },
     },
   },
 ]
 
 let setFileFolder = file => {
-  const dir = path.relative(urls.dev.base, path.parse(file).dir + '/')
-
+  const dir = path.relative(urls.dev.root, path.parse(file).dir + '/')
   const filename = env.devMode ? '[name].[ext]' : '[name].[hash].[ext]'
-
   return dir + (dir ? '/' : '') + filename
 }
 
@@ -64,19 +54,13 @@ module.exports = {
   css: {
     test: /\.css$/,
     exclude: /node_modules/,
-    use: extractSass.extract({
-      fallback: 'style-loader',
-      use: [...cssLoaders],
-    }),
+    use: [...cssLoaders],
   },
   sass: {
-    test: /\.scss$/,
+    test: /\.s?[ac]ss$/,
     include: urls.aliases['@sass'],
     exclude: /node_modules/,
-    use: extractSass.extract({
-      use: [...cssLoaders, 'sass-loader'],
-      fallback: 'style-loader',
-    }),
+    use: [...cssLoaders, 'sass-loader'],
   },
   files: {
     test: /\.(mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|svg)$/i,
@@ -90,6 +74,8 @@ module.exports = {
       },
     ],
   },
+  twig: { test: /\.twig$/, loader: 'twig-loader' },
+
   imgs: {
     test: /\.(jpg|png|jpeg|gif|tiff|cr2)$/i,
     include: urls.aliases['@img'],
@@ -134,5 +120,4 @@ module.exports = {
         : []
     ),
   },
-  extractSass,
 }

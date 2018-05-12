@@ -2,11 +2,10 @@
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
 const ip = require('ip')
-// const urls = require("./urls");
+const urls = require('./urls')
 
 module.exports = {
-  // contentBase: urls.dev.base,
-  // watchContentBase: true, // enable reload on save for html
+  // contentBase: urls.dev.root,
   // change this as you want
   compress: true, //gzip
   inline: true,
