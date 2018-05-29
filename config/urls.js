@@ -3,7 +3,6 @@
 // =======================================================================//
 
 const path = require('path')
-const env = require('./env')
 
 const base_url = path.resolve(__dirname, '../')
 
@@ -32,10 +31,4 @@ const aliases = {
   '@video': path.resolve(urls.dev.assets, 'video/'),
 }
 
-const publicPath = () => {
-  if (!env.devMode) return env.prodUrl || ''
-  if (!env.serverMode) return urls.prod.root
-  return ''
-}
-
-module.exports = { ...urls, aliases, publicPath: publicPath() }
+module.exports = { ...urls, aliases }

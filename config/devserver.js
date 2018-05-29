@@ -2,10 +2,14 @@
 // !  CONFIG DEV SERVER                                                   //
 // =======================================================================//
 const ip = require('ip')
-// const urls = require('./urls')
+const env = require('./env')
+
 const serverIp = ip.address()
-const serverPort = 8899
-const serverHttps = false
+const serverPort = env.DEV_SERVER_PORT
+const serverHttps = env.DEV_SERVER_HTTPS === 'true'
+const serverUseLocalIp = env.DEV_SERVER_LOCAL_IP === 'true'
+const serverHost = serverUseLocalIp ? serverIp : null
+
 module.exports = {
   // contentBase: urls.dev.root,
   // change this as you want
@@ -18,7 +22,7 @@ module.exports = {
       'Project is running at http' +
         s +
         '://' +
-        serverIp +
+        (serverHost || 'localhost') +
         ':' +
         serverPort +
         '/'
@@ -34,8 +38,8 @@ module.exports = {
   https: serverHttps,
   open: false,
   progress: false,
-  port: 8899,
-  useLocalIp: true,
-  host: serverIp,
+  port: serverPort,
+  useLocalIp: serverUseLocalIp,
+  host: serverHost,
   quiet: false, // shut down console,
 }

@@ -30,6 +30,8 @@ $ curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/ma
 $ npm run hello
 ```
 
+At this point, you'll need to rename `.env.example` into `.env` and add your configuration
+
 ## Commands
 
 ```
@@ -45,18 +47,28 @@ $ npm run build #production
 ```
 
 ```
-$ npm run prettier #make my code pretty
+$ npm run watch #watch and ouput files
+```
+
+#### Code quality
+
+```
+$ npm run prettier format-js #make my js pretty
 ```
 
 ```
-$ npm run watch #watch and ouput files
+$ npm run prettier format-scss #make my scss pretty
 ```
 
 ## Deploy
 
-1.  Run this command: `npm run deploy`
+#### Using Github pages
+
+coming soon...
+
+<!-- 1.  Run this command: `npm run deploy`
 2.  Make sure you have activated Github pages in your repository settings and set the `gh-pages` branch as source.
-3.  your app is now live at `https://{your-github-username}.github.io/{repo-name}/`
+3.  your app is now live at `https://{your-github-username}.github.io/{repo-name}/` -->
 
 ## Features
 

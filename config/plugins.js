@@ -20,15 +20,15 @@ const sassPlugin = new MiniCssExtractPlugin({
   // both options are optional
   filename: env.serverMode
     ? relativeCssOutput + '[name].css'
-    : relativeCssOutput + '[name].[hash].css',
-  chunkFilename: env.devMode ? '[id].css' : '[id].[hash].css',
+    : relativeCssOutput + '[name].[contenthash].css',
+  chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 
 const views = entries.views({ multi: false })
 const htmlExport = views.map(
   view =>
     new HtmlWebpackPlugin({
-      title: env.appTitle,
+      title: env.APP_TITLE,
       template: `${urls.dev.root + view}`,
       filename: `${view.replace('.ejs', '.html')}`,
       inject: 'body',
@@ -90,11 +90,14 @@ if (!env.serverMode) {
       new webpack.optimize.AggressiveMergingPlugin() //Merge chunks
     )
 
-    // const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-    // generate favicons
-    // mainConfigPlugins.push(
-    //   new FaviconsWebpackPlugin(urls.dev.root + 'favicon.png')
-    // )
+    const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+    mainConfigPlugins.push(
+      new FaviconsWebpackPlugin({
+        logo: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
+        emitStats: true,
+        statsFilename: 'favicon.json',
+      })
+    )
 
     // const CompressionPlugin = require('compression-webpack-plugin')
     // mainConfigPlugins.push(

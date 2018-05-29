@@ -19,14 +19,14 @@ const mainConfig = {
   },
   output: {
     path: urls.prod.root,
-    publicPath: urls.publicPath,
+    publicPath: env.publicPath,
     // not at the root
     chunkFilename: '[name].bundle.js',
     filename: env.serverMode
       ? jsOutput + '/[name].js'
       : jsOutput + '/[name].[hash:8].js',
   },
-  devtool: env.devMode ? 'cheap-module-eval-source-map' : 'sourcemap',
+  devtool: env.devMode ? 'cheap-module-eval-source-map' : 'source-map',
   mode: 'development',
   module: {
     rules: [
