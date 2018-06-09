@@ -45,7 +45,7 @@ module.exports = {
   },
   clientLogLevel: 'error',
   historyApiFallback: true,
-  hot: env.DEV_SERVER_HMR,
+  hot: env.DEV_SERVER_HMR === 'true',
   https: serverHttps,
   open: false,
   progress: false,
