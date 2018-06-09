@@ -54,8 +54,8 @@ const htmlExport = views.map(
     new HtmlWebpackPlugin({
       title: env.APP_TITLE,
       description: env.APP_DESCRIPTION,
-      template: `${urls.dev.root + view}`,
-      filename: `${view.replace('.ejs', '.html')}`,
+      template: urls.dev.root + view,
+      filename: view.replace('.ejs', '.html'),
       inject: 'body',
       showErrors: env.devMode ? true : false,
       excludeChunks: Object.keys(entries.imgs),

@@ -26,7 +26,7 @@ const scripts = (options = {}) => {
       .map(path => {
         const bundle_name = path.replace('.js', '')
         // add suffix _bundle to script name
-        SCRIPTS[`${bundle_name}_bundle`] = [`${jsPath}/${path}`]
+        SCRIPTS[bundle_name + '_bundle'] = [jsPath + '/' + path]
       })
     return SCRIPTS
   }
@@ -55,7 +55,7 @@ const walkSync = (dir, filelist = {}) => {
   let resfilelist = filelist
   files.forEach((file, index) => {
     if (fs.statSync(dir + '/' + file).isDirectory()) {
-      resfilelist = walkSync(dir + '/' + file + '/', resfilelist)
+      resfilelist = walkSync(`${dir}/${file}/`, resfilelist)
     } else {
       if (file.split('.')[0])
         resfilelist['.to_delete/' + index + '_' + file] =

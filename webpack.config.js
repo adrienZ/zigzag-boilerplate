@@ -10,8 +10,7 @@ const plugins = require('./config/plugins')
 // src/js
 const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
 
-const mainConfig = {
-  name: 'MAIN CONFIG',
+module.exports = {
   devServer: devServer,
   entry: { ...entries.scripts({ multi: false }), ...entries.imgs },
   resolve: {
@@ -20,13 +19,14 @@ const mainConfig = {
   output: {
     path: urls.prod.root,
     publicPath: env.publicPath,
-    // not at the root
+    // TODO: no idea why i wrote this line
     chunkFilename: '[name].bundle.js',
     filename: env.serverMode
       ? jsOutput + '/[name].js'
       : jsOutput + '/[name].[hash:8].js',
   },
   devtool: env.devMode ? 'cheap-module-eval-source-map' : 'source-map',
+  // TODO: improve mode handling
   mode: 'development',
   module: {
     rules: [
@@ -39,4 +39,3 @@ const mainConfig = {
   },
   plugins,
 }
-module.exports = mainConfig
