@@ -2,17 +2,27 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
-const OfflinePlugin = require('offline-plugin')
-const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 const path = require('path')
 
 const env = require('./env')
 const entries = require('./entries')
 const urls = require('./urls')
+const pwa = require('./pwa')
 const devServer = require('./devserver')
 
-// css output
+/*
+// =======================================================================//
+//                                                                        //
+// !  ✅ CSS OUTPUT PLUGIN                                                //
+//                                                                        //
+// *  Transform .scss into .css and add hash if prod                      //
+//                                                                        //
+// ?  https://github.com/webpack-contrib/mini-css-extract-plugin          //
+//                                                                        //
+// =======================================================================//
+*/
+
 const cssOutputPath = path.resolve(urls.prod.code, 'css/')
 const relativeCssOutput = path.relative(urls.prod.root, cssOutputPath) + '/'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -26,11 +36,24 @@ const sassPlugin = new MiniCssExtractPlugin({
   chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 
-const views = entries.views({ multi: false })
+/*
+// =======================================================================//
+//                                                                        //
+// !  ✅ HTML OUTPUT PLUGIN                                               //
+//                                                                        //
+// *  Turn ejs into html and inject some node variables                   //
+//                                                                        //
+// ?  https://github.com/jantimon/html-webpack-plugin                     //
+//                                                                        //
+// =======================================================================//
+*/
+
+const views = entries.views()
 const htmlExport = views.map(
   view =>
     new HtmlWebpackPlugin({
       title: env.APP_TITLE,
+      description: env.APP_DESCRIPTION,
       template: `${urls.dev.root + view}`,
       filename: `${view.replace('.ejs', '.html')}`,
       inject: 'body',
@@ -43,6 +66,19 @@ const htmlExport = views.map(
     })
 )
 
+/*
+// =======================================================================//
+//                                                                        //
+// !  🤖 WEBPACK NOTIFIER  (OPTIONAL)                                      //
+//                                                                        //
+// *  improve developer workflow, but add terminal response time          //
+// *  while the popup is visible  (promise resolving)                     //
+//                                                                        //
+// ?  https://github.com/Turbo87/webpack-notifier                         //
+//                                                                        //
+// =======================================================================//
+*/
+
 const webpackNotifier = new WebpackBuildNotifierPlugin({
   title: env.appTitle,
   logo: path.resolve(urls.dev.root, 'favicon.png'),
@@ -50,60 +86,82 @@ const webpackNotifier = new WebpackBuildNotifierPlugin({
   sound: false,
 })
 
-const pwaManifest = new WebpackPwaManifest({
-  name: env.APP_TITLE,
-  filename: 'manifest.json',
-  short_name: 'Weather',
-  start_url: '.',
-  display: 'standalone',
-  background_color: '#3E4EB8',
-  icons: {
-    src: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
-    sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-  },
-  theme_color: '#2F3BA2',
-})
+/*
+  DEFAULT PLUGINS: CSS, NOTIFICATION, HTML AND PWA (service worker + manifest)
+*/
 
-const offline = new OfflinePlugin({
-  excludes: ['**/*.map', '**/*.gz'],
-  externals: htmlExport.map(f => f.options.filename),
-  ServiceWorker: {
-    events: true,
-  },
+const PLUGINS_CONFIG = [sassPlugin, webpackNotifier, ...htmlExport, ...pwa]
 
-  AppCache: false,
-})
-const mainConfigPlugins = [
-  sassPlugin,
-  webpackNotifier,
-  offline,
-  pwaManifest,
-].concat(views.length ? [...htmlExport] : [])
-
-const pluginsExport = { mainConfigPlugins }
+/*
+// =======================================================================//
+//                                                                        //
+// !  🤖 HOT MODULE RELOADING  (OPTIONAL)                                 //
+//                                                                        //
+// *  refresh ressources on filechange                                    //
+//                                                                        //
+// ?  https://webpack.js.org/concepts/hot-module-replacement/             //
+//                                                                        //
+// =======================================================================//
+*/
 
 if (env.serverMode) {
-  // HMR
-  devServer.hot &&
-    mainConfigPlugins.push(new webpack.HotModuleReplacementPlugin())
+  devServer.hot && PLUGINS_CONFIG.push(new webpack.HotModuleReplacementPlugin())
 }
 
 if (!env.serverMode) {
-  const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
-  mainConfigPlugins.push(new HardSourceWebpackPlugin())
+  /*
+  // =======================================================================//
+  //                                                                        //
+  // !  🤖 HARDSROUCE EMITTED FILES                                         //
+  //                                                                        //
+  // *  complex webpack configs like this one tend to compile slowly        //
+  // *  so we use cache.                                                    //
+  // * the cache is store in the dependecie folder, we could change this    //
+  //                                                                        //
+  // ?  https://github.com/mzgoddard/hard-source-webpack-plugin             //
+  //                                                                        //
+  // =======================================================================//
+  */
 
-  // manifest for hashes
-  mainConfigPlugins.push(
+  const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+  PLUGINS_CONFIG.push(new HardSourceWebpackPlugin())
+
+  /*
+  // =======================================================================//
+  //                                                                        //
+  // !  🤖 WEBPACK MANIFEST PLUGIN                                          //
+  //                                                                        //
+  // *  write json file containing all webpack chunks output                //
+  // *  very usefull for backend                                            //
+  //                                                                        //
+  // ?  https://github.com/danethurber/webpack-manifest-plugin              //
+  //                                                                        //
+  // =======================================================================//
+  */
+
+  PLUGINS_CONFIG.push(
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
     })
   )
 
   if (!env.devMode) {
-    // clear dist folder
+    /*
+    // =======================================================================//
+    //                                                                        //
+    // !  🤖 CLEAR DIST PLUGIN                                                //
+    //                                                                        //
+    // *  does what it say                                                    //
+    // *  usefull for production deploy and clean files with expired hash     //
+    //                                                                        //
+    // ?  https://github.com/johnagan/clean-webpack-plugin                    //
+    //                                                                        //
+    // =======================================================================//
+    */
+
     const relativeDist = path.relative(urls.BASE_URL, urls.prod.root) + '/'
     const CleanWebpackPlugin = require('clean-webpack-plugin')
-    mainConfigPlugins.push(
+    PLUGINS_CONFIG.push(
       new CleanWebpackPlugin([relativeDist], {
         root: urls.BASE_URL,
         verbose: true,
@@ -111,24 +169,70 @@ if (!env.serverMode) {
       })
     )
 
-    // some webpack optimization
-    mainConfigPlugins.push(new webpack.optimize.OccurrenceOrderPlugin())
-    mainConfigPlugins.push(new webpack.optimize.ModuleConcatenationPlugin())
-    mainConfigPlugins.push(
+    /*
+    // =======================================================================//
+    //                                                                        //
+    // !  ✅ FAVICONS OUTPUT PLUGIN                                           //
+    //                                                                        //
+    // *  improve developer workflow, but add terminal response time          //
+    // *  works with HTML WEBPACK PLUGIN, inject in <head>                    //
+    // *  When using a backend emit stats to render html                      //
+    //                                                                        //
+    // 🚨  Could also generate manifest.json for pwa                          //
+    // ➡  ️ https://github.com/jantimon/html-webpack-plugin/issues/976         //
+    //                                                                        //
+    // ?  https://github.com/jantimon/html-webpack-plugin                     //
+    //                                                                        //
+    // =======================================================================//
+    */
+    const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+    PLUGINS_CONFIG.push(
+      new FaviconsWebpackPlugin({
+        logo: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
+        prefix: path.relative(urls.prod.root, urls.prod.favicons) + '/[hash]/',
+        emitStats: !env.serverMode,
+        statsFilename: 'favicon.json',
+        icons: {
+          android: true,
+          appleIcon: true,
+          appleStartup: true,
+          coast: false,
+          favicons: true,
+          firefox: true,
+          opengraph: true,
+          twitter: true,
+          yandex: false,
+          windows: false,
+        },
+      })
+    )
+
+    /*
+      🙈 SOME WEBPACK OPTIMIZATION
+      https://github.com/webpack/docs/wiki/optimization
+    */
+
+    PLUGINS_CONFIG.push(new webpack.optimize.OccurrenceOrderPlugin())
+    PLUGINS_CONFIG.push(new webpack.optimize.ModuleConcatenationPlugin())
+    PLUGINS_CONFIG.push(
       new webpack.optimize.AggressiveMergingPlugin() //Merge chunks
     )
 
-    // const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-    // mainConfigPlugins.push(
-    //   new FaviconsWebpackPlugin({
-    //     logo: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
-    //     emitStats: true,
-    //     statsFilename: 'favicon.json',
-    //   })
-    // )
+    /*
+    // =======================================================================//
+    //    🚧 WORK IN PROGRESS !!!                                             //
+    // !  🤖 COMPRESSION PLUGIN                                               //
+    //                                                                        //
+    // *  gzip ressources                                                     //
+    // *  combined with a htaccess it will radically improve perfomance       //
+    //                                                                        //
+    // ?  https://webpack.js.org/plugins/compression-webpack-plugin/          //
+    //                                                                        //
+    // =======================================================================//
+    */
 
     // const CompressionPlugin = require('compression-webpack-plugin')
-    // mainConfigPlugins.push(
+    // PLUGINS_CONFIG.push(
     //   new CompressionPlugin({
     //     test: /\.(js|.scss|jpg|png|jpeg|gif|tiff|cr2|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|obj)$/i,
     //     deleteOriginalAssets: true,
@@ -140,4 +244,4 @@ if (!env.serverMode) {
   }
 }
 
-module.exports = pluginsExport
+module.exports = PLUGINS_CONFIG

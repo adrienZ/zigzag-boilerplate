@@ -1,27 +1,28 @@
 {
   "scripts": {
-    "build":
-      "webpack -p --mode=production --hide-modules --progress --color --display=minimal",
+    "build": "webpack -p --mode=production --hide-modules --progress --color --display=minimal",
     "start": "NODE_ENV=dev webpack-dev-server --mode=development --color",
     "code": "code app || open app -a atom",
-    "hello":
-      "(yarn install || npm i) && (yarn start --open || npm run start --open)",
+    "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "format-js": "prettier \"app/src/**/*.@(js)\" --write",
     "format-scss": "prettier \"app/src/**/*.@(scss)\" --parser scss --write",
     "precommit": "pretty-quick --staged",
-    "watch":
-      "webpack -w --mode=development --progress --colors --hide-modules --display=minimal"
+    "watch": "webpack -w --mode=development --progress --colors --hide-modules --display=minimal"
   },
   "lint-staged": {
-    "*.js": ["npm run format-js"],
-    "*.scss": ["npm run format-scss"]
+    "*.js": [
+      "npm run format-js"
+    ],
+    "*.scss": [
+      "npm run format-scss"
+    ]
   },
-  "author":
-    "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
+  "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "clean-webpack-plugin": "^0.1.19",
     "compression-webpack-plugin": "^1.1.11",
@@ -29,6 +30,7 @@
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
+    "favicons": "^5.1.1",
     "favicons-webpack-plugin": "^0.0.9",
     "file-loader": "^1.1.11",
     "hard-source-webpack-plugin": "^0.6.7",

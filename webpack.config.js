@@ -37,6 +37,6 @@ const mainConfig = {
       loaders.files,
     ],
   },
-  plugins: plugins.mainConfigPlugins,
+  plugins,
 }
 module.exports = mainConfig
