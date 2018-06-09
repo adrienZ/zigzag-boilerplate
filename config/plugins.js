@@ -2,6 +2,8 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
+const OfflinePlugin = require('offline-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 const path = require('path')
 
@@ -48,9 +50,35 @@ const webpackNotifier = new WebpackBuildNotifierPlugin({
   sound: false,
 })
 
-const mainConfigPlugins = [sassPlugin, webpackNotifier].concat(
-  views.length ? [...htmlExport] : []
-)
+const pwaManifest = new WebpackPwaManifest({
+  name: env.APP_TITLE,
+  filename: 'manifest.json',
+  short_name: 'Weather',
+  start_url: '.',
+  display: 'standalone',
+  background_color: '#3E4EB8',
+  icons: {
+    src: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
+    sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+  },
+  theme_color: '#2F3BA2',
+})
+
+const offline = new OfflinePlugin({
+  excludes: ['**/*.map', '**/*.gz'],
+  externals: htmlExport.map(f => f.options.filename),
+  ServiceWorker: {
+    events: true,
+  },
+
+  AppCache: false,
+})
+const mainConfigPlugins = [
+  sassPlugin,
+  webpackNotifier,
+  offline,
+  pwaManifest,
+].concat(views.length ? [...htmlExport] : [])
 
 const pluginsExport = { mainConfigPlugins }
 
@@ -90,14 +118,14 @@ if (!env.serverMode) {
       new webpack.optimize.AggressiveMergingPlugin() //Merge chunks
     )
 
-    const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-    mainConfigPlugins.push(
-      new FaviconsWebpackPlugin({
-        logo: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
-        emitStats: true,
-        statsFilename: 'favicon.json',
-      })
-    )
+    // const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+    // mainConfigPlugins.push(
+    //   new FaviconsWebpackPlugin({
+    //     logo: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
+    //     emitStats: true,
+    //     statsFilename: 'favicon.json',
+    //   })
+    // )
 
     // const CompressionPlugin = require('compression-webpack-plugin')
     // mainConfigPlugins.push(

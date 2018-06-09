@@ -12,7 +12,7 @@ const devMode =
 const buildPublicPath = url =>
   path.join(url, path.relative(urls.BASE_URL, urls.prod.root), '/')
 const setPublicPath = () => {
-  if (!devMode) return buildPublicPath(dotenv.PROD_URL) || ''
+  if (!devMode) return ''
   if (!serverMode) {
     return dotenv.WP_HOME || ''
   }
