@@ -23,11 +23,13 @@ const urls = {
 }
 
 const aliases = {
-  '@base': path.resolve(urls.dev.root),
-  '@js': path.resolve(urls.dev.code, 'js/'),
-  '@page': path.resolve(urls.dev.code, 'js/pages/'),
-  '@sass': path.resolve(urls.dev.code, 'sass/'),
+  // REQUIRED ALIASES
   '@img': path.resolve(urls.dev.assets, 'img/'),
+  '@js': path.resolve(urls.dev.code, 'js/'),
+  '@sass': path.resolve(urls.dev.code, 'sass/'),
+  // OPTIONAL ALIASES
+  '@base': path.resolve(urls.dev.root),
+  '@page': path.resolve(urls.dev.code, 'js/pages/'),
   '@fonts': path.resolve(urls.dev.assets, 'fonts/'),
   '@video': path.resolve(urls.dev.assets, 'video/'),
 }
