@@ -74,7 +74,7 @@ coming soon...
 ## Features
 
 When you follow the folder structure, it give you access to some handy aliases.
-You can found them in `config/urls.js`.
+You can found them in `webpack/urls.js`.
 
 Adding media has never been so easy !
 

@@ -1,11 +1,11 @@
 const path = require('path')
 
-const urls = require('./config/urls')
-const devServer = require('./config/devserver')
-const entries = require('./config/entries')
-const env = require('./config/env')
-const loaders = require('./config/loaders')
-const plugins = require('./config/plugins')
+const urls = require('./webpack/urls')
+const devServer = require('./webpack/devserver')
+const entries = require('./webpack/entries')
+const env = require('./webpack/env')
+const loaders = require('./webpack/loaders')
+const plugins = require('./webpack/plugins')
 
 // src/js
 const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
@@ -18,24 +18,21 @@ module.exports = {
   },
   output: {
     path: urls.prod.root,
-    publicPath: env.publicPath,
-    // TODO: no idea why i wrote this line
+    pathinfo: false,
+    // publicPath: env.publicPath,
     chunkFilename: '[name].bundle.js',
     filename: env.serverMode
       ? jsOutput + '/[name].js'
       : jsOutput + '/[name].[hash:8].js',
   },
   devtool: env.devMode ? 'cheap-module-eval-source-map' : 'source-map',
-  // TODO: improve mode handling
-  mode: 'development',
+  mode: !env.devMode ? 'production' : 'development',
   module: {
-    rules: [
-      loaders.sass,
-      loaders.js,
-      loaders.eslint,
-      loaders.imgs,
-      loaders.files,
-    ],
+    rules: [loaders.sass, loaders.js, loaders.eslint, loaders.files],
+  },
+  optimization: {
+    removeAvailableModules: !env.devMode,
+    removeEmptyChunks: !env.devMode,
   },
   plugins,
 }

@@ -1,0 +1,7 @@
+{
+  "errors": [],
+  "warnings": [
+    "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  assets/img/ing.99ba562f0dd78e3e8e8cc864ff708afb.jpg (1.36 MiB)\n  icons/ddfb11a8a378324cfc69dc89bbb931e7/apple-touch-startup-image-1242x2148.png (254 KiB)\n  icons/ddfb11a8a378324cfc69dc89bbb931e7/apple-touch-startup-image-1496x2048.png (319 KiB)\n  icons/ddfb11a8a378324cfc69dc89bbb931e7/apple-touch-startup-image-1536x2008.png (354 KiB)",
+    "webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/"
+  ]
+}
