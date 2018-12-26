@@ -12,7 +12,7 @@ const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
 
 module.exports = {
   devServer: devServer,
-  entry: { ...entries.scripts({ multi: false }), ...entries.imgs },
+  entry: { ...entries.scripts({ multi: false }) }, // ...entries.imgs },
   resolve: {
     alias: urls.aliases,
   },

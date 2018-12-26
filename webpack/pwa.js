@@ -6,19 +6,17 @@ const path = require('path')
 const urls = require('./urls')
 const config = require('./config')
 const entries = require('./entries')
+const env = require('./env')
 
-const freeOptions = {
+const manifestOptions = {
   icons: {
     src: `./${path.relative(urls.BASE_URL, urls.dev.root)}/favicon.png`,
     sizes: [96, 128, 192, 256, 384, 512], // multiple sizes,
-    destination: path.relative(urls.prod.root, urls.prod.favicons) + '/pwa/',
+    destination: path.relative(urls.prod.root, urls.prod.favicons),
   },
   theme_color: config.THEME_COLOR || config.BACKGROUND_COLOR,
   ios: true,
-  filename: config.features.pwa ? 'manifest.json' : ' ',
-}
-
-const premiumOptions = {
+  filename: 'manifest.json',
   name: config.APP_TITLE,
   short_name: config.APP_TITLE,
   start_url: '.',
@@ -29,22 +27,21 @@ const premiumOptions = {
   background_color: config.BACKGROUND_COLOR || config.THEME_COLOR,
 }
 
-const pwaOptions = Object.assign(
-  {},
-  freeOptions,
-  config.features.pwa ? premiumOptions : {}
-)
+const pwaManifest = new WebpackPwaManifest(manifestOptions)
 
-const pwaManifest = new WebpackPwaManifest(pwaOptions)
-
-const offline = new OfflinePlugin({
+const serviceWorker = new OfflinePlugin({
   excludes: ['**/*.map', '**/*.gz'],
   externals: entries.views().map(v => v.replace('.ejs', '.html')),
+  responseStrategy: 'cache-first',
+  autoUpdate: false,
   ServiceWorker: {
     events: true,
+    output: 'sw.js',
+    entry: urls.dev.code + 'js/sw.js',
+    minify: env.devMode ? false : true,
   },
 
-  AppCache: true,
+  AppCache: false,
 })
 
-module.exports = [pwaManifest].concat(config.features.pwa ? [offline] : [])
+module.exports = [pwaManifest].concat([serviceWorker])

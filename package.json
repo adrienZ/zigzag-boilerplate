@@ -2,7 +2,6 @@
   "scripts": {
     "build": "webpack -p --mode=production --hide-modules --progress --color --display=minimal",
     "start": "NODE_ENV=dev webpack-dev-server --mode=development --color",
-    "code": "code app || open app -a atom",
     "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "format-js": "prettier \"app/src/**/*.@(js)\" --write",
     "format-scss": "prettier \"app/src/**/*.@(scss)\" --parser scss --write",
