@@ -35,14 +35,14 @@ module.exports = {
     enforce: 'pre',
     test: /\.js$/,
     exclude: /node_modules/,
-    // include: urls.aliases['@js'],
+    include: urls.aliases['@js'],
     loaders: ['eslint-loader'],
   },
   js: {
     // ES6
     test: /\.js$/,
     exclude: /(node_modules|bower_components)/,
-    // include: urls.aliases['@js'],
+    include: urls.aliases['@js'],
     loaders: [
       {
         loader: 'babel-loader',
@@ -59,65 +59,53 @@ module.exports = {
   },
   sass: {
     test: /\.s?[ac]ss$/,
-    // include: urls.aliases['@sass'],
+    include: urls.aliases['@sass'],
     exclude: /node_modules/,
     use: [...cssLoaders, 'sass-loader'],
   },
   files: {
-    test: /\.(mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|obj)$/i,
-    exclude: /node_modules/,
-    use: [
-      {
-        loader: 'file-loader',
-        options: {
-          // publicPath: env.publicPath,
-          name: file => setFileFolder(file),
-        },
-      },
-    ],
-  },
-  imgs: {
-    test: /\.(jpg|png|jpeg|gif|tiff|cr2|svg)$/i,
+    test: /\.(jpg|png|jpeg|gif|tiff|cr2|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|obj)$/i,
     // include: urls.aliases['@img'],
     exclude: /node_modules/,
     use: [
       {
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 1000,
           name: file => setFileFolder(file),
         },
       },
-    ].concat(
-      !env.devMode
-        ? [
-            {
-              loader: 'image-webpack-loader',
-              options: {
-                mozjpeg: {
-                  progressive: true,
-                  quality: 80,
-                },
-                optipng: {},
-                pngquant: {
-                  quality: '70-85',
-                  speed: 6,
-                },
-                svgo: {
-                  addClassesToSVGElement: true,
-                },
-                gifsicle: {
-                  interlaced: true,
-                  color: 286,
-                },
-                // the webp option will enable WEBP
-                webp: {
-                  quality: 80,
-                },
-              },
-            },
-          ]
-        : []
-    ),
+    ],
+    // .concat(
+    //   !env.devMode
+    //     ? [
+    //       {
+    //         loader: 'image-webpack-loader',
+    //         options: {
+    //           mozjpeg: {
+    //             progressive: true,
+    //             quality: 80,
+    //           },
+    //           optipng: {},
+    //           pngquant: {
+    //             quality: '70-85',
+    //             speed: 6,
+    //           },
+    //           svgo: {
+    //             addClassesToSVGElement: true,
+    //           },
+    //           gifsicle: {
+    //             interlaced: true,
+    //             color: 286,
+    //           },
+    //           // the webp option will enable WEBP
+    //           webp: {
+    //             quality: 80,
+    //           },
+    //         },
+    //       },
+    //     ]
+    //     : []
+    // ),
   },
 }

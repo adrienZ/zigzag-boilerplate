@@ -1,4 +1,5 @@
 import '@sass/style.scss'
+import '@js/features/serviceWorkerRuntime'
 
 import Navigo from 'navigo'
 import HomePage from '@page/Home'

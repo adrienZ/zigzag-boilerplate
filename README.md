@@ -11,6 +11,7 @@
 * ES6, SASS and EJS syntax support.
 * Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
 * A live development server that warns about common mistakes.
+* Out-of-the-box Progressive web app support
 * ~~Easily deploy your app to Github Pages.~~
 * A build script to bundle JS, CSS, and images for production, with hashes.
 * Non obtrusive linter with prettier.
@@ -73,7 +74,7 @@ coming soon...
 ## Features
 
 When you follow the folder structure, it give you access to some handy aliases.
-You can found them in `config/urls.js`.
+You can found them in `webpack/urls.js`.
 
 Adding media has never been so easy !
 
