@@ -24,12 +24,16 @@ const devServer = require('./devserver')
 // =======================================================================//
 */
 
+const cssOutputPath = path.resolve(urls.prod.code, 'css/')
+const relativeCssOutput = path.relative(urls.prod.root, cssOutputPath) + '/'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const sassPlugin = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
-  filename: env.serverMode ? '[name].css' : '[name].[contenthash].css',
+  filename: env.serverMode
+    ? relativeCssOutput + '[name].css'
+    : relativeCssOutput + '[name].[contenthash].css',
   chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 

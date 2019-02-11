@@ -8,10 +8,21 @@ const parentConfigFolder = path.resolve(urls.CONFIG, '../')
 const postCssConfigPath = path.relative(parentConfigFolder, urls.CONFIG)
 
 const cssLoaders = [
-  env.serverMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+  env.serverMode
+    ? 'style-loader'
+    : {
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        // fix urls of fonts, img.. etc
+        publicPath: urls.prod.root,
+      },
+    },
   {
     loader: 'css-loader',
-    options: { importLoaders: 1, url: true },
+    options: {
+      importLoaders: 1,
+      url: true,
+    },
   },
   {
     loader: 'postcss-loader',
