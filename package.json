@@ -5,7 +5,7 @@
     "hello": "(yarn install || npm i) && (yarn start --open || npm run start --open)",
     "format-js": "prettier \"app/src/**/*.@(js)\" --write",
     "format-scss": "prettier \"app/src/**/*.@(scss)\" --parser scss --write",
-    "broken-precommit": "pretty-quick --staged",
+    "pre-precommit": "pretty-quick --staged",
     "watch": "webpack -w --mode=development --progress --colors --hide-modules --display=minimal"
   },
   "lint-staged": {

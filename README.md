@@ -54,11 +54,11 @@ $ npm run watch #watch and ouput files
 #### Code quality
 
 ```
-$ npm run prettier format-js #make my js pretty
+$ npm run format-js #run prettier on your js
 ```
 
 ```
-$ npm run prettier format-scss #make my scss pretty
+$ npm run format-scss #run prettier on your scss
 ```
 
 ## Deploy
