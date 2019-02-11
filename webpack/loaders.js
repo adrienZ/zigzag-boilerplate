@@ -11,12 +11,12 @@ const cssLoaders = [
   env.serverMode
     ? 'style-loader'
     : {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        // fix urls of fonts, img.. etc
-        publicPath: urls.prod.root,
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          // fix urls of fonts, img.. etc
+          publicPath: urls.prod.root,
+        },
       },
-    },
   {
     loader: 'css-loader',
     options: {

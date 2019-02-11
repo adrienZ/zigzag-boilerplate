@@ -21,7 +21,8 @@ const scripts = (options = {}) => {
 
   if (options.multi) {
     let SCRIPTS = {}
-    fs.readdirSync(jsPath)
+    fs
+      .readdirSync(jsPath)
       .filter(file => file.match(/.js/))
       .map(path => {
         const bundle_name = path.replace('.js', '')
