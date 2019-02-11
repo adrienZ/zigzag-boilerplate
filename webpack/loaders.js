@@ -23,7 +23,8 @@ const cssLoaders = [
   },
 ]
 
-let setFileFolder = file => {
+//  shorten manifest paths, to reduce manifest size
+const relativePath = file => {
   const dir = path.relative(urls.dev.root, path.parse(file).dir + '/')
   const filename = env.devMode ? '[name].[ext]' : '[name].[hash].[ext]'
   return dir + (dir ? '/' : '') + filename
@@ -72,7 +73,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: file => setFileFolder(file),
+          name: relativePath,
         },
       },
     ],

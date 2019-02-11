@@ -15,28 +15,23 @@ const config = require('./config')
 // =======================================================================//
 */
 
-const serverIp = ip.address()
-const serverPort = config.DEV_SERVER_PORT
-const serverHttps = config.DEV_SERVER_HTTPS === 'true'
 const serverUseLocalIp = config.DEV_SERVER_LOCAL_IP === 'true'
-const serverHost = serverUseLocalIp ? serverIp : null
+const server = {
+  host: serverUseLocalIp ? ip.address() : 'localhost',
+  port: config.DEV_SERVER_PORT,
+  isHttps: config.DEV_SERVER_HTTPS === 'true',
+  isLocalIP: serverUseLocalIp,
+}
 
 module.exports = {
-  // i will never know how to use this ⬇️
-  // contentBase: urls.dev.root,
   compress: true, // gzip
   inline: true,
   noInfo: true,
   before: () => {
-    const s = serverHttps ? 's' : ''
+    const s = server.isHttps ? 's' : ''
     console.info(
-      'Project is running at http' +
-        s +
-        '://' +
-        (serverHost || 'localhost') +
-        ':' +
-        serverPort +
-        '/'
+      `Project is running at http${s}://${server.host}:${server.port}/
+      webpack is watching files... press Ctrl+c to quit`
     )
   },
   overlay: {
@@ -46,11 +41,11 @@ module.exports = {
   clientLogLevel: 'error',
   historyApiFallback: true,
   hot: config.DEV_SERVER_HMR === 'true',
-  https: serverHttps,
+  https: server.isHttps,
   open: false,
   progress: false,
-  port: serverPort,
+  port: server.port,
   useLocalIp: serverUseLocalIp,
-  host: serverHost,
+  host: server.host,
   quiet: false, // shut down console,
 }
