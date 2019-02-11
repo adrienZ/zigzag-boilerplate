@@ -54,7 +54,5 @@
     "webpack-manifest-plugin": "^2.0.3",
     "webpack-pwa-manifest": "^3.6.2"
   },
-  "dependencies": {
-    "navigo": "^7.1.2"
-  }
+  "dependencies": {}
 }
