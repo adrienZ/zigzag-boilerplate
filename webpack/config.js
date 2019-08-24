@@ -5,7 +5,7 @@ const features = {
 
 // webpack-dev-server settings
 // local ip is useful for testing responsive with webpack-dev-server since you can share an url
-const DEV_SERVER_LOCAL_IP = false
+const DEV_SERVER_LOCAL_IP = true
 const DEV_SERVER_PORT = 8899
 const DEV_SERVER_HTTPS = false
 const DEV_SERVER_HMR = true
