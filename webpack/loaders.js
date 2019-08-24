@@ -75,6 +75,11 @@ module.exports = {
     exclude: /node_modules/,
     use: [...cssLoaders, 'sass-loader'],
   },
+  shader: {
+    test: /\.(glsl|frag|vert)$/,
+    exclude: /node_modules/,
+    use: ['raw-loader', 'glslify-loader'],
+  },
   files: {
     test: /\.(jpg|png|jpeg|gif|tiff|cr2|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|obj)$/i,
     // include: urls.aliases['@img'],

@@ -28,7 +28,13 @@ module.exports = {
   devtool: env.devMode ? 'cheap-module-eval-source-map' : 'source-map',
   mode: !env.devMode ? 'production' : 'development',
   module: {
-    rules: [loaders.sass, loaders.js, loaders.eslint, loaders.files],
+    rules: [
+      loaders.sass,
+      loaders.js,
+      loaders.eslint,
+      loaders.files,
+      loaders.shader,
+    ],
   },
   optimization: {
     removeAvailableModules: !env.devMode,
