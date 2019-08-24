@@ -1,7 +1,10 @@
 const ManifestPlugin = require('webpack-manifest-plugin')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+// dev xp
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
+const WebpackBar = require('webpackbar')
 
 const path = require('path')
 
@@ -31,9 +34,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sassPlugin = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
-  filename: env.serverMode ?
-    relativeCssOutput + '[name].css' :
-    relativeCssOutput + '[name].[contenthash].css',
+  filename: env.serverMode
+    ? relativeCssOutput + '[name].css'
+    : relativeCssOutput + '[name].[contenthash].css',
   chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 
@@ -52,19 +55,19 @@ const sassPlugin = new MiniCssExtractPlugin({
 const views = entries.views()
 const htmlExport = views.map(
   view =>
-  new HtmlWebpackPlugin({
-    title: config.APP_TITLE,
-    description: config.APP_DESCRIPTION,
-    template: urls.dev.root + view,
-    filename: view.replace('.ejs', '.html'),
-    inject: 'body',
-    showErrors: env.devMode ? true : false,
-    excludeChunks: Object.keys(entries.imgs),
-    minify: {
-      removeComments: true,
-      removeRedundantAttributes: true,
-    },
-  })
+    new HtmlWebpackPlugin({
+      title: config.APP_TITLE,
+      description: config.APP_DESCRIPTION,
+      template: urls.dev.root + view,
+      filename: view.replace('.ejs', '.html'),
+      inject: 'body',
+      showErrors: env.devMode ? true : false,
+      excludeChunks: Object.keys(entries.imgs),
+      minify: {
+        removeComments: true,
+        removeRedundantAttributes: true,
+      },
+    })
 )
 
 /*
@@ -110,6 +113,20 @@ if (env.serverMode) {
 }
 
 if (!env.serverMode) {
+  /*
+  // =======================================================================//
+  //                                                                        //
+  // ! 📊 WEBPACK BAR                                                      //
+  //                                                                        //
+  // * pretty build progress bar in the CLI                                 //
+  //                                                                        //
+  // ?  https://github.com/mzgoddard/hard-source-webpack-plugin             //
+  //                                                                        //
+  // =======================================================================//
+  */
+
+  PLUGINS_CONFIG.push(new WebpackBar())
+
   /*
   // =======================================================================//
   //                                                                        //
@@ -174,6 +191,8 @@ if (!env.serverMode) {
       🙈 SOME WEBPACK OPTIMIZATION
       https://github.com/webpack/docs/wiki/optimization
     */
+
+    console.log(webpack.optimize.AggressiveMergingPlugin)
 
     PLUGINS_CONFIG.push(new webpack.optimize.OccurrenceOrderPlugin())
     PLUGINS_CONFIG.push(new webpack.optimize.ModuleConcatenationPlugin())

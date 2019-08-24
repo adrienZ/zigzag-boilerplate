@@ -1,4 +1,3 @@
-const dotenv = require('dotenv').config().parsed
 const path = require('path')
 const urls = require('./urls')
 
@@ -20,8 +19,11 @@ const setPublicPath = () => {
   return ''
 }
 
-module.exports = Object.assign({}, dotenv, {
-  serverMode,
-  devMode,
-  publicPath: setPublicPath(),
-})
+module.exports = Object.assign(
+  {},
+  {
+    serverMode,
+    devMode,
+    publicPath: setPublicPath(),
+  }
+)
