@@ -6,7 +6,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path')
 
 const env = require('./env')
-const config = require('./config')
 const entries = require('./entries')
 const urls = require('./urls')
 // const pwa = require('./pwa')
@@ -43,8 +42,6 @@ const views = entries.views()
 const htmlExport = views.map(
   view =>
     new HtmlWebpackPlugin({
-      title: config.APP_TITLE,
-      description: config.APP_DESCRIPTION,
       template: urls.dev.root + view,
       filename: view.replace('.ejs', '.html'),
       inject: 'body',
@@ -53,6 +50,7 @@ const htmlExport = views.map(
         removeComments: true,
         removeRedundantAttributes: true,
       },
+      templateParameters: urls.aliasesHTML
     })
 )
 
@@ -73,10 +71,8 @@ const assetsInclusion = new CopyPlugin([
   }
 ])
 
-/*
-  DEFAULT PLUGINS: CSS, NOTIFICATION, HTML AND PWA (service worker + manifest)
-*/
 
+// DEFAULT PLUGINS:
 const PLUGINS_CONFIG = [sassPlugin, webpackNotifier, ...htmlExport, assetsInclusion]
 
 // 🤖 HOT MODULE RELOADING  (OPTIONAL)

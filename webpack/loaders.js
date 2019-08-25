@@ -10,18 +10,13 @@ const postCssConfigPath = path.relative(parentConfigFolder, urls.CONFIG)
 const cssLoaders = [
   env.serverMode
     ? 'style-loader'
-    : {
-      loader: MiniCssExtractPlugin.loader,
-      options: {
-        // fix urls of fonts, img.. etc
-        publicPath: urls.prod.root,
-      },
-    },
+    : MiniCssExtractPlugin.loader,
   {
     loader: 'css-loader',
     options: {
       importLoaders: 1,
-      url: true,
+      // dont check urls because relative aliases can't be resolved during compilation
+      url: false,
     },
   },
   {
@@ -34,13 +29,6 @@ const cssLoaders = [
   },
 ]
 
-//  shorten manifest paths, to reduce manifest size
-const relativePath = file => {
-  const dir = path.relative(urls.dev.root, path.parse(file).dir + '/')
-  const filename = env.devMode ? '[name].[ext]' : '[name].[hash].[ext]'
-  return dir + (dir ? '/' : '') + filename
-}
-
 module.exports = {
   eslint: {
     // ES6
@@ -48,7 +36,7 @@ module.exports = {
     test: /\.js$/,
     exclude: /node_modules/,
     include: urls.aliases['@js'],
-    loaders: ['eslint-loader'],
+    loader: 'eslint-loader',
   },
   js: {
     // ES6
@@ -73,7 +61,12 @@ module.exports = {
     test: /\.s?[ac]ss$/,
     include: urls.aliases['@sass'],
     exclude: /node_modules/,
-    use: [...cssLoaders, 'sass-loader'],
+    use: [...cssLoaders, {
+      loader: 'sass-loader',
+      options: {
+        data: urls.aliasesSASS
+      }
+    }],
   },
   shader: {
     test: /\.(glsl|frag|vert)$/,

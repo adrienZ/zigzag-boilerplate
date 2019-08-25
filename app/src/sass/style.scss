@@ -6,7 +6,7 @@ h3 {
 
 @font-face {
   font-family: 'exampleFont';
-  src: url(~@fonts/example-font.ttf);
+  src: url(#{$fonts}example-font.ttf);
   font-weight: normal;
   font-style: normal;
 }

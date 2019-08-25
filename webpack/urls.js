@@ -32,4 +32,26 @@ const aliases = {
   '@fonts': path.relative(urls.dev.root, urls.dev.assets + "/fonts") + "/",
 }
 
-module.exports = { ...urls, aliases }
+
+
+/**
+ * we reuse our aliases in severals plugins
+ * this allow us to use the across the in several language
+ *
+ * since relative alias won't be resolved by webpack
+ * we must replace the '@' character, in this case by '$'
+ */
+
+// htmlWebpackPlugin
+const aliasesHTML = {}
+// sass loader
+let aliasesSASS = ''
+
+Object.keys(aliases).forEach(key => {
+  const keyWithoutArobase = key.replace('@', '$')
+
+  aliasesHTML[keyWithoutArobase] = aliases[key]
+  aliasesSASS += `${keyWithoutArobase}: "${aliases[key]}";`
+})
+
+module.exports = { ...urls, aliases, aliasesHTML, aliasesSASS }

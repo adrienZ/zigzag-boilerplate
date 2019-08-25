@@ -77,35 +77,37 @@ You can found them in `webpack/urls.js`.
 
 Adding media has never been so easy !
 
-In javascript:
+In javascript, we rely on webpack aliases
 
 ```javascript
-import myImgPath from '@img/test.jpg'
+import myImgPath from '@img/example.jpg'
 ```
 
-In sass:
+In sass, we inject vars through the `sass-loader`:
 
 ```sass
 .myDiv {
-  background: url("~@img/test.jpg")
+  background: url("#{$img}/example.jpg")
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src: url(#{$fonts}example-font.ttf);
+  font-weight: normal;
+  font-style: normal;
 }
 ```
 
-In html (.ejs)
+In html (.ejs), we inject vars through the `htmlWebpackPlugin`
 
 ```ejs
-<img src="<%= require("@img/test.jpg") %>">
+<img src="<%= $img %>example.jpg">
 ```
 
 Font face
 
 ```css
-@font-face {
-  font-family: 'MyFont';
-  src: url(~@fonts/font.ttf);
-  font-weight: normal;
-  font-style: normal;
-}
+
 ```
 
 ## Caveats
