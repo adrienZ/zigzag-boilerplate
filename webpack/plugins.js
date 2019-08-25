@@ -1,10 +1,8 @@
 const ManifestPlugin = require('webpack-manifest-plugin')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
-// dev xp
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
-const WebpackBar = require('webpackbar')
+const CopyPlugin = require('copy-webpack-plugin');
 
 const path = require('path')
 
@@ -40,18 +38,8 @@ const sassPlugin = new MiniCssExtractPlugin({
   chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 
-/*
-// =======================================================================//
-//                                                                        //
-// !  ✅ HTML OUTPUT PLUGIN                                               //
-//                                                                        //
-// *  Turn ejs into html and inject some node variables                   //
-//                                                                        //
-// ?  https://github.com/jantimon/html-webpack-plugin                     //
-//                                                                        //
-// =======================================================================//
-*/
 
+// Turn ejs into html and inject some node variables
 const views = entries.views()
 const htmlExport = views.map(
   view =>
@@ -70,19 +58,8 @@ const htmlExport = views.map(
     })
 )
 
-/*
-// =======================================================================//
-//                                                                        //
-// !  🤖 WEBPACK NOTIFIER  (OPTIONAL)                                      //
-//                                                                        //
-// *  improve developer workflow, but add terminal response time          //
-// *  while the popup is visible  (promise resolving)                     //
-//                                                                        //
-// ?  https://github.com/Turbo87/webpack-notifier                         //
-//                                                                        //
-// =======================================================================//
-*/
 
+// improve developer workflow, but add terminal response time
 const webpackNotifier = new WebpackBuildNotifierPlugin({
   title: env.appTitle,
   logo: path.resolve(urls.dev.root, 'favicon.png'),
@@ -90,11 +67,19 @@ const webpackNotifier = new WebpackBuildNotifierPlugin({
   sound: false,
 })
 
+// copy all assets, (uselless if you use a backend)
+const assetsInclusion = new CopyPlugin([
+  {
+    from: urls.dev.assets,
+    to: './assets'
+  }
+])
+
 /*
   DEFAULT PLUGINS: CSS, NOTIFICATION, HTML AND PWA (service worker + manifest)
 */
 
-const PLUGINS_CONFIG = [sassPlugin, webpackNotifier, ...htmlExport]
+const PLUGINS_CONFIG = [sassPlugin, webpackNotifier, ...htmlExport, assetsInclusion]
 
 /*
 // =======================================================================//
@@ -125,16 +110,17 @@ if (!env.serverMode) {
   // =======================================================================//
   */
 
+  const WebpackBar = require('webpackbar')
   PLUGINS_CONFIG.push(new WebpackBar())
 
   /*
   // =======================================================================//
   //                                                                        //
-  // !  🤖 HARDSROUCE EMITTED FILES                                         //
+  // !  🤖 HARD SOURCE EMITTED FILES                                        //
   //                                                                        //
-  // *  complex webpack configs like this one tend to compile slowly        //
-  // *  so we use cache.                                                    //
-  // * the cache is store in the dependecie folder, we could change this    //
+  // * complex webpack configs like this one tend to compile slowly         //
+  // * so we use cache.                                                     //
+  // * the cache is stored in the dependecy folder, we could change this    //
   //                                                                        //
   // ?  https://github.com/mzgoddard/hard-source-webpack-plugin             //
   //                                                                        //
@@ -191,8 +177,6 @@ if (!env.serverMode) {
       🙈 SOME WEBPACK OPTIMIZATION
       https://github.com/webpack/docs/wiki/optimization
     */
-
-    console.log(webpack.optimize.AggressiveMergingPlugin)
 
     PLUGINS_CONFIG.push(new webpack.optimize.OccurrenceOrderPlugin())
     PLUGINS_CONFIG.push(new webpack.optimize.ModuleConcatenationPlugin())

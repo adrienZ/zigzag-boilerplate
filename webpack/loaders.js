@@ -11,12 +11,12 @@ const cssLoaders = [
   env.serverMode
     ? 'style-loader'
     : {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          // fix urls of fonts, img.. etc
-          publicPath: urls.prod.root,
-        },
+      loader: MiniCssExtractPlugin.loader,
+      options: {
+        // fix urls of fonts, img.. etc
+        publicPath: urls.prod.root,
       },
+    },
   {
     loader: 'css-loader',
     options: {
@@ -80,49 +80,35 @@ module.exports = {
     exclude: /node_modules/,
     use: ['raw-loader', 'glslify-loader'],
   },
-  files: {
-    test: /\.(jpg|png|jpeg|gif|tiff|cr2|svg|mp4|avi|ogg|webm|json|woff|woff2|eot|ttf|obj)$/i,
-    // include: urls.aliases['@img'],
-    exclude: /node_modules/,
-    use: [
-      {
-        loader: 'url-loader',
-        options: {
-          limit: 1000,
-          name: relativePath,
-        },
-      },
-    ],
-    // .concat(
-    //   !env.devMode
-    //     ? [
-    //       {
-    //         loader: 'image-webpack-loader',
-    //         options: {
-    //           mozjpeg: {
-    //             progressive: true,
-    //             quality: 80,
-    //           },
-    //           optipng: {},
-    //           pngquant: {
-    //             quality: '70-85',
-    //             speed: 6,
-    //           },
-    //           svgo: {
-    //             addClassesToSVGElement: true,
-    //           },
-    //           gifsicle: {
-    //             interlaced: true,
-    //             color: 286,
-    //           },
-    //           // the webp option will enable WEBP
-    //           webp: {
-    //             quality: 80,
-    //           },
-    //         },
-    //       },
-    //     ]
-    //     : []
-    // ),
-  },
+  // .concat(
+  //   !env.devMode
+  //     ? [
+  //       {
+  //         loader: 'image-webpack-loader',
+  //         options: {
+  //           mozjpeg: {
+  //             progressive: true,
+  //             quality: 80,
+  //           },
+  //           optipng: {},
+  //           pngquant: {
+  //             quality: '70-85',
+  //             speed: 6,
+  //           },
+  //           svgo: {
+  //             addClassesToSVGElement: true,
+  //           },
+  //           gifsicle: {
+  //             interlaced: true,
+  //             color: 286,
+  //           },
+  //           // the webp option will enable WEBP
+  //           webp: {
+  //             quality: 80,
+  //           },
+  //         },
+  //       },
+  //     ]
+  //     : []
+  // ),
 }

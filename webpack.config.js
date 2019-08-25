@@ -32,7 +32,6 @@ module.exports = {
       loaders.sass,
       loaders.js,
       loaders.eslint,
-      loaders.files,
       loaders.shader,
     ],
   },
