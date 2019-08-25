@@ -23,15 +23,13 @@ const urls = {
 }
 
 const aliases = {
-  // REQUIRED ALIASES
-  '@img': path.resolve(urls.dev.assets, 'img/'),
+  // ABSOLUTE ALIASES
   '@js': path.resolve(urls.dev.code, 'js/'),
   '@sass': path.resolve(urls.dev.code, 'sass/'),
-  // OPTIONAL ALIASES
   '@base': path.resolve(urls.dev.root),
-  '@page': path.resolve(urls.dev.code, 'js/pages/'),
-  '@fonts': path.resolve(urls.dev.assets, 'fonts/'),
-  '@video': path.resolve(urls.dev.assets, 'video/'),
+  // RELATIVE ALIASES
+  '@img': path.relative(urls.dev.root, urls.dev.assets + "/img") + "/",
+  '@fonts': path.relative(urls.dev.root, urls.dev.assets + "/fonts") + "/",
 }
 
 module.exports = { ...urls, aliases }

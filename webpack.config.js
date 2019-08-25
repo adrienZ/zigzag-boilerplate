@@ -12,14 +12,11 @@ const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
 
 module.exports = {
   devServer: devServer,
-  entry: { ...entries.scripts({ multi: false }) }, // ...entries.imgs },
+  entry: entries.js,
   resolve: {
     alias: urls.aliases,
   },
   output: {
-    path: urls.prod.root,
-    pathinfo: false,
-    // publicPath: env.publicPath,
     chunkFilename: '[name].bundle.js',
     filename: env.serverMode
       ? jsOutput + '/[name].js'

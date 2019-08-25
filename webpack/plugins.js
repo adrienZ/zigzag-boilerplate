@@ -1,4 +1,3 @@
-const ManifestPlugin = require('webpack-manifest-plugin')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
@@ -50,7 +49,6 @@ const htmlExport = views.map(
       filename: view.replace('.ejs', '.html'),
       inject: 'body',
       showErrors: env.devMode ? true : false,
-      excludeChunks: Object.keys(entries.imgs),
       minify: {
         removeComments: true,
         removeRedundantAttributes: true,
@@ -81,35 +79,14 @@ const assetsInclusion = new CopyPlugin([
 
 const PLUGINS_CONFIG = [sassPlugin, webpackNotifier, ...htmlExport, assetsInclusion]
 
-/*
-// =======================================================================//
-//                                                                        //
-// !  🤖 HOT MODULE RELOADING  (OPTIONAL)                                 //
-//                                                                        //
-// *  refresh ressources on filechange                                    //
-//                                                                        //
-// ?  https://webpack.js.org/concepts/hot-module-replacement/             //
-//                                                                        //
-// =======================================================================//
-*/
-
+// 🤖 HOT MODULE RELOADING  (OPTIONAL)
 if (env.serverMode) {
   devServer.hot && PLUGINS_CONFIG.push(new webpack.HotModuleReplacementPlugin())
 }
 
 if (!env.serverMode) {
-  /*
-  // =======================================================================//
-  //                                                                        //
-  // ! 📊 WEBPACK BAR                                                      //
-  //                                                                        //
-  // * pretty build progress bar in the CLI                                 //
-  //                                                                        //
-  // ?  https://github.com/mzgoddard/hard-source-webpack-plugin             //
-  //                                                                        //
-  // =======================================================================//
-  */
 
+  // pretty build progress bar in the CLI
   const WebpackBar = require('webpackbar')
   PLUGINS_CONFIG.push(new WebpackBar())
 
@@ -130,19 +107,8 @@ if (!env.serverMode) {
   const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
   PLUGINS_CONFIG.push(new HardSourceWebpackPlugin())
 
-  /*
-  // =======================================================================//
-  //                                                                        //
-  // !  🤖 WEBPACK MANIFEST PLUGIN                                          //
-  //                                                                        //
-  // *  write json file containing all webpack chunks output                //
-  // *  very usefull for backend                                            //
-  //                                                                        //
-  // ?  https://github.com/danethurber/webpack-manifest-plugin              //
-  //                                                                        //
-  // =======================================================================//
-  */
-
+  // write json file containing all webpack chunks output
+  const ManifestPlugin = require('webpack-manifest-plugin')
   PLUGINS_CONFIG.push(
     new ManifestPlugin({
       fileName: 'webpack-manifest.json',
