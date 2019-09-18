@@ -8,12 +8,10 @@ const features = {
 const DEV_SERVER_LOCAL_IP = true
 const DEV_SERVER_PORT = 8899
 const DEV_SERVER_HTTPS = false
-const DEV_SERVER_HMR = true
+const DEV_SERVER_HMR = false
 
 // PWA
 // also page title
-const APP_TITLE = '👋 Give me a title 🔥'
-const APP_DESCRIPTION = 'My super website'
 const THEME_COLOR = '#fff'
 // splashscreen color
 const BACKGROUND_COLOR = '#fff'
@@ -23,9 +21,6 @@ module.exports = {
   DEV_SERVER_PORT,
   DEV_SERVER_HTTPS,
   DEV_SERVER_HMR,
-
-  APP_TITLE,
-  APP_DESCRIPTION,
   THEME_COLOR,
   BACKGROUND_COLOR,
 

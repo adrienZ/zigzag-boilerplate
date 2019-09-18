@@ -67,7 +67,8 @@ const webpackNotifier = new WebpackBuildNotifierPlugin({
 const assetsInclusion = new CopyPlugin([
   {
     from: urls.dev.assets,
-    to: './assets'
+    to: './assets',
+    ignore: ['.DS_Store', '.gitkeep'],
   }
 ])
 

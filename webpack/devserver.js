@@ -40,7 +40,7 @@ module.exports = {
   },
   clientLogLevel: 'error',
   historyApiFallback: true,
-  hot: config.DEV_SERVER_HMR === 'true',
+  hot: config.DEV_SERVER_HMR,
   https: server.isHttps,
   open: false,
   progress: false,
