@@ -35,4 +35,16 @@ body {
   height: #{map-get($map: $imgSizes, $key: small)}px;
 }
 
+p {
+  --test: 32px;
+
+  color: white;
+  font-size: var(--test);
+
+  @media screen and (max-width: 720px) {
+    --test: 11px;
+
+  }
+}
+
 // DONT WRITE CODE AFTER IMPORTS

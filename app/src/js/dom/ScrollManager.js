@@ -2,55 +2,6 @@ import RafManager from '@js/dom/RafManager'
 
 let INSTANCE = null
 
-class ScrollItem {
-  constructor($el, options = {}) {
-    Object.assign(this, {
-      $el,
-      callback: options.callback || null,
-      props: {},
-    })
-  }
-
-  setCallback(callback) {
-    this.callback = callback
-  }
-
-  cache() {
-    const { $el } = this
-    const style = window.getComputedStyle($el, null)
-
-    const boundings = $el.getBoundingClientRect()
-
-    // const marginTop = parseInt(style.getPropertyValue('margin-top'))
-    const offsetTop = boundings.top + window.pageYOffset
-
-    const height = $el.offsetHeight
-    const width = $el.offsetWidth
-
-    this.props = {
-      offsetTop,
-      style,
-      height,
-      width,
-    }
-  }
-
-  update(screen) {
-    const { props } = this
-
-    const pageY = window.pageYOffset
-    const reached = -(props.offsetTop - pageY - screen.height)
-    const hidden = props.height - reached
-    const remaining = hidden + screen.height
-    const center = (screen.height - props.height - 1) / 2 + hidden
-
-    if (reached > 0 && remaining > 0) {
-      typeof this.callback === 'function' &&
-        this.callback({ pageY, reached, hidden, remaining, center })
-    }
-  }
-}
-
 class ScrollManager {
   constructor(options = {}) {
     this.onResize = this.onResize.bind(this)
@@ -105,6 +56,56 @@ class ScrollManager {
 
   static debug() {
     return INSTANCE
+  }
+}
+
+
+class ScrollItem {
+  constructor($el, options = {}) {
+    Object.assign(this, {
+      $el,
+      callback: options.callback || null,
+      props: {},
+    })
+  }
+
+  setCallback(callback) {
+    this.callback = callback
+  }
+
+  cache() {
+    const { $el } = this
+    const style = window.getComputedStyle($el, null)
+
+    const boundings = $el.getBoundingClientRect()
+
+    // const marginTop = parseInt(style.getPropertyValue('margin-top'))
+    const offsetTop = boundings.top + window.pageYOffset
+
+    const height = $el.offsetHeight
+    const width = $el.offsetWidth
+
+    this.props = {
+      offsetTop,
+      style,
+      height,
+      width,
+    }
+  }
+
+  update(screen) {
+    const { props } = this
+
+    const pageY = window.pageYOffset
+    const reached = -(props.offsetTop - pageY - screen.height)
+    const hidden = props.height - reached
+    const remaining = hidden + screen.height
+    const center = (screen.height - props.height - 1) / 2 + hidden
+
+    if (reached > 0 && remaining > 0) {
+      typeof this.callback === 'function' &&
+        this.callback({ pageY, reached, hidden, remaining, center })
+    }
   }
 }
 
