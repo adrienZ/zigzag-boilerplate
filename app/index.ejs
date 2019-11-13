@@ -14,7 +14,35 @@
   </head>
 
   <body>
-    <h3>Title color <%= titleColor %></h3>
+
+    <a
+      class="underline--hover"
+      style='
+        font-size: 40px;
+        cursor: pointer;
+      '
+
+    > test linqqkyyyyjj
+    <br> multine link
+  </a>
+    <br>
+    <a
+      class="underline--link"
+      style='
+        font-size: 40px;
+        cursor: pointer;
+      '
+
+    > test linqqkyyyyjj
+    <br> multine link
+  </a>
+
+
+    <h3>Comment est votre blanquette ?</h3>
+    <% users =  ['Athos', 'Porthos', 'Aramis', '', '', '']; %>
+    <% users.forEach(function(user){ %>
+      <div class="section" style="margin: 100px 0; height: 50vh; width: 100%; background: rgba(<%= Math.ceil(Math.random() * 255) %>, <%= Math.ceil(Math.random() * 255) %>, <%= Math.ceil(Math.random() * 255) %>, 255)">
+        <p><%= user %></p>
 
     <% listTest.forEach(function(item){ %>
       <p class="text-<%= item %>">test text-<%= item %></p>
