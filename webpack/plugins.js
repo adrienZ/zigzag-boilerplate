@@ -149,10 +149,11 @@ if (!env.serverMode) {
 
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const imageminMozjpeg = require('imagemin-mozjpeg')
+const imageminWebp = require('imagemin-webp')
 
 PLUGINS_CONFIG.push(new ImageminPlugin({
   disable: env.devMode || env.serverMode,
-  test: /\.(jpe?g|png|gif|svg)$/i,
+  test: /\.(jpe?g|png|gif|svg|webp)$/i,
   optipng: null,
   gifsicle: {
     optimizationLevel: 3,
@@ -172,6 +173,10 @@ PLUGINS_CONFIG.push(new ImageminPlugin({
     imageminMozjpeg({
       quality: 75,
       progressive: true
+    }),
+    imageminWebp({
+      lossless: true,
+      quality: 75,
     })
   ],
   // sizes in bytes, 10000 = 10kb
