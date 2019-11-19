@@ -9,7 +9,6 @@ const env = require('./env')
 const entries = require('./entries')
 const urls = require('./urls')
 // const pwa = require('./pwa')
-const devServer = require('./devserver')
 
 /*
 // =======================================================================//
@@ -57,9 +56,10 @@ const htmlExport = views.map(
 
 // improve developer workflow, but add terminal response time
 const webpackNotifier = new WebpackBuildNotifierPlugin({
-  title: env.appTitle,
-  logo: path.resolve(urls.dev.root, 'favicon.png'),
+  title: path.basename(urls.BASE_URL),
   suppressSuccess: true,
+  suppressWarning: true,
+  activateTerminalOnError: true,
   sound: false,
 })
 
@@ -76,31 +76,13 @@ const assetsInclusion = new CopyPlugin([
 // DEFAULT PLUGINS:
 const PLUGINS_CONFIG = [sassPlugin, webpackNotifier, ...htmlExport, assetsInclusion]
 
-// 🤖 HOT MODULE RELOADING  (OPTIONAL)
-if (env.serverMode) {
-  devServer.hot && PLUGINS_CONFIG.push(new webpack.HotModuleReplacementPlugin())
-}
-
 if (!env.serverMode) {
 
   // pretty build progress bar in the CLI
   const WebpackBar = require('webpackbar')
   PLUGINS_CONFIG.push(new WebpackBar())
 
-  /*
-  // =======================================================================//
-  //                                                                        //
-  // !  🤖 HARD SOURCE EMITTED FILES                                        //
-  //                                                                        //
-  // * complex webpack configs like this one tend to compile slowly         //
-  // * so we use cache.                                                     //
-  // * the cache is stored in the dependecy folder, we could change this    //
-  //                                                                        //
-  // ?  https://github.com/mzgoddard/hard-source-webpack-plugin             //
-  //                                                                        //
-  // =======================================================================//
-  */
-
+  // cache emitted file to reduce compilation time
   const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
   PLUGINS_CONFIG.push(new HardSourceWebpackPlugin())
 
@@ -114,18 +96,8 @@ if (!env.serverMode) {
 
   if (!env.devMode) {
     /*
-    // =======================================================================//
-    //                                                                        //
-    // !  🤖 CLEAR DIST PLUGIN                                                //
-    //                                                                        //
-    // *  does what it say                                                    //
-    // *  usefull for production deploy and clean files with expired hash     //
-    //                                                                        //
-    // ?  https://github.com/johnagan/clean-webpack-plugin                    //
-    //                                                                        //
-    // =======================================================================//
+      CLEAR DIST FOLDER ON BUILD
     */
-
     const relativeDist = path.relative(urls.BASE_URL, urls.prod.root) + '/'
     const CleanWebpackPlugin = require('clean-webpack-plugin')
     PLUGINS_CONFIG.push(

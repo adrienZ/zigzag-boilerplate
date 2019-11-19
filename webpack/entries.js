@@ -1,10 +1,7 @@
 const fs = require('fs')
 const urls = require('./urls')
 
-const js = (options = {}) => {
-  const jsPath = urls.aliases['@js']
-  return `${jsPath}/main`
-}
+const js = `${urls.aliases['@js']}/main`
 
 // return all .ejs files at the root of /app
 const views = () =>

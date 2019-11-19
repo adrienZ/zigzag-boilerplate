@@ -11,7 +11,7 @@ const plugins = require('./webpack/plugins')
 const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
 
 module.exports = {
-  devServer: devServer,
+  devServer,
   entry: entries.js,
   resolve: {
     alias: urls.aliases,
@@ -35,6 +35,7 @@ module.exports = {
   optimization: {
     removeAvailableModules: !env.devMode,
     removeEmptyChunks: !env.devMode,
+    minimize: !env.devMode,
   },
   plugins,
 }
