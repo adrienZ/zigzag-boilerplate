@@ -73,35 +73,4 @@ module.exports = {
     exclude: /node_modules/,
     use: ['raw-loader', 'glslify-loader'],
   },
-  // .concat(
-  //   !env.devMode
-  //     ? [
-  //       {
-  //         loader: 'image-webpack-loader',
-  //         options: {
-  //           mozjpeg: {
-  //             progressive: true,
-  //             quality: 80,
-  //           },
-  //           optipng: {},
-  //           pngquant: {
-  //             quality: '70-85',
-  //             speed: 6,
-  //           },
-  //           svgo: {
-  //             addClassesToSVGElement: true,
-  //           },
-  //           gifsicle: {
-  //             interlaced: true,
-  //             color: 286,
-  //           },
-  //           // the webp option will enable WEBP
-  //           webp: {
-  //             quality: 80,
-  //           },
-  //         },
-  //       },
-  //     ]
-  //     : []
-  // ),
 }

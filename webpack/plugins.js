@@ -145,4 +145,39 @@ if (!env.serverMode) {
   }
 }
 
+
+
+const ImageminPlugin = require('imagemin-webpack-plugin').default
+const imageminMozjpeg = require('imagemin-mozjpeg')
+
+PLUGINS_CONFIG.push(new ImageminPlugin({
+  disable: env.devMode || env.serverMode,
+  test: /\.(jpe?g|png|gif|svg)$/i,
+  optipng: null,
+  gifsicle: {
+    optimizationLevel: 3,
+    // color: 286,
+  },
+  svgo: {
+    addClassesToSVGElement: true,
+  },
+  jpegtran: null,
+  pngquant: {
+    quality: '60-80',
+    speed: 1,
+    strip: true,
+    dithering: 0.15,
+  },
+  plugins: [
+    imageminMozjpeg({
+      quality: 75,
+      progressive: true
+    })
+  ],
+  // sizes in bytes, 10000 = 10kb
+  // maxFileSize: 10000000
+  // minFileSize: 0
+}))
+
+
 module.exports = PLUGINS_CONFIG
