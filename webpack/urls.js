@@ -23,17 +23,22 @@ const urls = {
   BASE_URL: base_url,
 }
 
+
+/**
+ * COMING SOON !!!!
+ * the new alisases syntax allow us to use system path as usual
+ * we also want to use relative path to use it with a backend
+ * also some of the aliases could be used in our data injection code bellow
+ */
+
+
 const aliases = {
-  // ABSOLUTE ALIASES
   '@js': path.resolve(urls.dev.code, 'js/'),
   '@sass': path.resolve(urls.dev.code, 'sass/'),
   '@base': path.resolve(urls.dev.root),
-  // RELATIVE ALIASES
-  '@img': path.relative(urls.dev.root, urls.dev.assets + "/img") + "/",
-  '@fonts': path.relative(urls.dev.root, urls.dev.assets + "/fonts") + "/",
+  '@img': path.resolve(urls.dev.assets, 'img/'),
+  '@fonts': path.resolve(urls.dev.assets, 'fonts/'),
 }
-
-
 
 /**
  * we reuse our aliases in severals plugins
@@ -51,16 +56,23 @@ const dataInjection = {
   sass: ''
 }
 
+const relatives = {
+  '@relative-img': path.relative(urls.dev.root, urls.dev.assets + "/img"),
+  '@relative-fonts': path.relative(urls.dev.root, urls.dev.assets + "/fonts"),
+}
 
-Object.keys(aliases).forEach(key => {
-  const keyWithoutArobase = key.replace('@', '$')
+Object.keys(relatives).forEach(key => {
+  const keyWithoutArobase = key
+    .replace('relative-', '')
+    .replace('@', '$')
 
-  dataInjection.html[keyWithoutArobase] = aliases[key]
+  dataInjection.html[keyWithoutArobase] = relatives[key]
 
+  // fix css broken relatives path in build
   const prodCssUrl = path.resolve(urls.prod.code, '/css/')
   const $sassUrl = env.serverMode ?
-    aliases[key]
-    : path.resolve(prodCssUrl, urls.prod.root, aliases[key])
+    relatives[key]
+    : path.resolve(prodCssUrl, urls.prod.root, relatives[key])
 
   dataInjection.sass += `${keyWithoutArobase}: "${$sassUrl}";`
 })

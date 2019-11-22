@@ -67,6 +67,9 @@ const webpackNotifier = new WebpackBuildNotifierPlugin({
 const assetsInclusion = new CopyPlugin([
   {
     from: urls.dev.assets,
+    // waiting for webpack 5 asset type... hashes assets
+    // to: env.devMode ? './assets/img/[name].[ext]' : './assets/[name].[hash].[ext]',
+    // toType: 'template',
     to: './assets',
     ignore: ['.DS_Store', '.gitkeep'],
   }
@@ -126,10 +129,11 @@ if (!env.serverMode) {
       https://github.com/webpack/docs/wiki/optimization
     */
 
-    PLUGINS_CONFIG.push(new webpack.optimize.OccurrenceOrderPlugin())
-    PLUGINS_CONFIG.push(new webpack.optimize.ModuleConcatenationPlugin())
     PLUGINS_CONFIG.push(
-      new webpack.optimize.AggressiveMergingPlugin() //Merge chunks
+      new webpack.optimize.OccurrenceOrderPlugin(),
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      //Merge chunks
+      new webpack.optimize.AggressiveMergingPlugin()
     )
 
     /*
