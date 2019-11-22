@@ -3,6 +3,7 @@
 // =======================================================================//
 
 const path = require('path')
+const env = require('./env')
 
 const base_url = path.resolve(__dirname, '../')
 
@@ -42,16 +43,27 @@ const aliases = {
  * we must replace the '@' character, in this case by '$'
  */
 
-// htmlWebpackPlugin
-const aliasesHTML = {}
-// sass loader
-let aliasesSASS = ''
+
+const dataInjection = {
+  // htmlWebpackPlugin
+  html: {},
+  // sass loader
+  sass: ''
+}
+
 
 Object.keys(aliases).forEach(key => {
   const keyWithoutArobase = key.replace('@', '$')
 
-  aliasesHTML[keyWithoutArobase] = aliases[key]
-  aliasesSASS += `${keyWithoutArobase}: "${aliases[key]}";`
+  dataInjection.html[keyWithoutArobase] = aliases[key]
+
+  const prodCssUrl = path.resolve(urls.prod.code, '/css/')
+  const $sassUrl = env.serverMode ?
+    aliases[key]
+    : path.resolve(prodCssUrl, urls.prod.root, aliases[key])
+
+  dataInjection.sass += `${keyWithoutArobase}: "${$sassUrl}";`
 })
 
-module.exports = { ...urls, aliases, aliasesHTML, aliasesSASS }
+
+module.exports = { ...urls, aliases, ...dataInjection }

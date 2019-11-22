@@ -49,7 +49,7 @@ const htmlExport = views.map(
         removeComments: true,
         removeRedundantAttributes: true,
       },
-      templateParameters: urls.aliasesHTML
+      templateParameters: urls.html
     })
 )
 
@@ -95,9 +95,9 @@ if (!env.serverMode) {
   )
 
   if (!env.devMode) {
-    /*
-      CLEAR DIST FOLDER ON BUILD
-    */
+    /**
+     * CLEAR DIST FOLDER ON BUILD
+     */
     const relativeDist = path.relative(urls.BASE_URL, urls.prod.root) + '/'
     const CleanWebpackPlugin = require('clean-webpack-plugin')
     PLUGINS_CONFIG.push(
@@ -107,6 +107,19 @@ if (!env.serverMode) {
         dry: false,
       })
     )
+
+
+    /**
+     * reload css and fonts
+     */
+    const Critters = require('critters-webpack-plugin');
+    PLUGINS_CONFIG.push(new Critters({
+      // Outputs: <link rel="preload" onload="this.rel='stylesheet'">
+      preload: 'swap',
+
+      // Don't inline critical font-face rules, but preload the font URLs:
+      preloadFonts: false
+    }))
 
     /*
       🙈 SOME WEBPACK OPTIMIZATION
@@ -164,7 +177,7 @@ PLUGINS_CONFIG.push(new ImageminPlugin({
   },
   jpegtran: null,
   pngquant: {
-    quality: '60-80',
+    quality: '70-80',
     speed: 1,
     strip: true,
     dithering: 0.15,

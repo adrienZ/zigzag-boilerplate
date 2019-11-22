@@ -6,7 +6,7 @@ h3 {
 
 @font-face {
   font-family: 'exampleFont';
-  src: url(#{$fonts}example-font.ttf);
+  src: url(#{$fonts}/example-font.ttf);
   font-weight: normal;
   font-style: normal;
 }
@@ -16,6 +16,12 @@ body {
     font-family: 'exampleFont';
     -webkit-font-smoothing: antialiased;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+#testImg {
+  width: 150px;
+  height: 150px;
+  background: url(#{$img}/example.jpg) no-repeat center/cover;
 }
 
 // DONT WRITE CODE AFTER IMPORTS

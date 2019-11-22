@@ -4,9 +4,6 @@ const path = require('path')
 const env = require('./env')
 const urls = require('./urls')
 
-const parentConfigFolder = path.resolve(urls.CONFIG, '../')
-const postCssConfigPath = path.relative(parentConfigFolder, urls.CONFIG)
-
 const cssLoaders = [
   env.serverMode
     ? 'style-loader'
@@ -23,7 +20,8 @@ const cssLoaders = [
     loader: 'postcss-loader',
     options: {
       config: {
-        path: postCssConfigPath + '/postcss.config.js',
+        // postcss path is relative to the root
+        path: path.relative(urls.BASE_URL, urls.CONFIG) + '/postcss.config.js',
       },
     },
   },
@@ -64,7 +62,7 @@ module.exports = {
     use: [...cssLoaders, {
       loader: 'sass-loader',
       options: {
-        data: urls.aliasesSASS
+        data: urls.sass
       }
     }],
   },

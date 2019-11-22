@@ -15,7 +15,9 @@ console.info('elle est bonne')
  * see more: https://webpack.js.org/guides/code-splitting/
  */
 
-const ModuleAsyncImportPromise = import(/* webpackChunkName: "ip-async-test" */ 'ip')
+const ModuleAsyncImportPromise = import(
+  /* webpackChunkName: "ip-async-test" */ 'ip'
+)
 ModuleAsyncImportPromise.then(module => {
   console.log('async import works !', module.address(), module)
 })
