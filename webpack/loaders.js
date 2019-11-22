@@ -52,13 +52,13 @@ module.exports = {
   },
   css: {
     test: /\.css$/,
-    exclude: /node_modules/,
+    // exclude: /node_modules/,
     use: [...cssLoaders],
   },
   sass: {
     test: /\.s?[ac]ss$/,
-    include: urls.aliases['@sass'],
-    exclude: /node_modules/,
+    // include: urls.aliases['@sass'],
+    // exclude: /node_modules/,
     use: [...cssLoaders, {
       loader: 'sass-loader',
       options: {
