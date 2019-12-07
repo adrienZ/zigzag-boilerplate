@@ -31,9 +31,10 @@ const aliases = {
 }
 
 // these paths are used for our loaders
+// respect the nomenclature
 const relatives = {
-  '@relative-img': path.relative(urls.dev.root, urls.dev.assets + '/img'),
-  '@relative-fonts': path.relative(urls.dev.root, urls.dev.assets + '/fonts'),
+  '@relative-img': path.relative(urls.dev.root, aliases['@img']),
+  '@relative-fonts': path.relative(urls.dev.root, aliases['@fonts']),
 }
 
 module.exports = {

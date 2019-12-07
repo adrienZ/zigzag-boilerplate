@@ -4,7 +4,7 @@
 
 # ZigZag Boilerplate
 
-#### The no-framework boilerplate
+#### The modern no-framework boilerplate
 
 ## What’s Included?
 
@@ -14,9 +14,10 @@
 * Aliases (@) to easily include files, also availble in html and sass.
 * On build, compress images, autoprefix, minify files and cache busting
 * Non obtrusive linter with prettier and ESLint.
-* ~~Out-of-the-box Progressive web app support
+* Async modules and polyfills.
+* ~~Out-of-the-box Progressive web app support ~~
 * ~~Easily deploy your app to Github Pages.~~
-* ~~Javascript and sass files are prettyfied on save and on commits
+* ~~Javascript and sass files are prettyfied on save and on commits ~~
 
 ## Installation
 
@@ -80,7 +81,7 @@ In sass, we inject vars through the `sass-loader`:
 
 @font-face {
   font-family: 'MyFont';
-  src: url(#{$fonts}example-font.ttf);
+  src: url(#{$fonts}/example-font.ttf);
   font-weight: normal;
   font-style: normal;
 }
