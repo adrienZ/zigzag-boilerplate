@@ -2,7 +2,7 @@
 
 ## How does your data injection works ?
 
-Webpack aliases are defined in `webpack.urls`. They can be used in your js and your html,
+Webpack aliases are defined in `webpack/urls.js`. They can be used in your js and your html,
 they are useful for cache busting and shorten code.
 
 ```javascript
@@ -14,11 +14,11 @@ import '@js/polyfills'
 <h3>Title color <%= titleColor %></h3>
 ```
 
-Internally those aliases are send in the sass and the html trought a relative path.
-It allow us to not use `file-loader` and speed build time !
+Internally those aliases are send in the sass and the html through a relative path.
+It allow us to not use `file-loader` and reduce build time !
 
 ```ejs
-    <img src="<%= $img %>/example.jpg">
+<img src="<%= $img %>/example.jpg">
 ```
 
 We also have a `GLOBALS` object in `webpack/dataInjection.js` where you can send data
