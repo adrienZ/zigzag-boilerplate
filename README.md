@@ -9,14 +9,14 @@
 ## What’s Included?
 
 * ES6, SASS and EJS syntax support.
-* Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
+* Global variables between scss and html.
 * A live development server that warns about common mistakes.
-* Out-of-the-box Progressive web app support
+* Aliases (@) to easily include files, also availble in html and sass.
+* On build, compress images, autoprefix, minify files and cache busting
+* Non obtrusive linter with prettier and ESLint.
+* ~~Out-of-the-box Progressive web app support
 * ~~Easily deploy your app to Github Pages.~~
-* A build script to bundle JS, CSS, and images for production, with hashes.
-* Non obtrusive linter with prettier.
-* Aliases (@) to easily include files.
-* Javascript and sass files are prettyfied on save and on commits
+* ~~Javascript and sass files are prettyfied on save and on commits
 
 ## Installation
 
@@ -29,8 +29,6 @@ $ cd my-app
 $ curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
 $ npm run hello
 ```
-
-At this point, you'll need to rename `.env.example` into `.env` and add your configuration
 
 ## Commands
 
@@ -59,16 +57,6 @@ $ npm run format-js #run prettier on your js
 ```
 $ npm run format-scss #run prettier on your scss
 ```
-
-## Deploy
-
-#### Using Github pages
-
-coming soon...
-
-<!-- 1.  Run this command: `npm run deploy`
-2.  Make sure you have activated Github pages in your repository settings and set the `gh-pages` branch as source.
-3.  your app is now live at `https://{your-github-username}.github.io/{repo-name}/` -->
 
 ## Features
 
@@ -102,12 +90,6 @@ In html (.ejs), we inject vars through the `htmlWebpackPlugin`
 
 ```ejs
 <img src="<%= $img %>example.jpg">
-```
-
-Font face
-
-```css
-
 ```
 
 ## Caveats
