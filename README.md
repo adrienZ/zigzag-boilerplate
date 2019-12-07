@@ -4,25 +4,25 @@
 
 # ZigZag Boilerplate
 
-#### The no-framework boilerplate
+#### The modern no-framework boilerplate
 
 ## What’s Included?
 
 * ES6, SASS and EJS syntax support.
-* Autoprefixed CSS, so you don’t need `-webkit-` or other prefixes.
+* Global variables between scss and html.
 * A live development server that warns about common mistakes.
-* Out-of-the-box Progressive web app support
+* Aliases (@) to easily include files, also availble in html and sass.
+* On build, compress images, autoprefix, minify files and cache busting
+* Non obtrusive linter with prettier and ESLint.
+* Async modules and polyfills.
+* ~~Out-of-the-box Progressive web app support ~~
 * ~~Easily deploy your app to Github Pages.~~
-* A build script to bundle JS, CSS, and images for production, with hashes.
-* Non obtrusive linter with prettier.
-* Aliases (@) to easily include files.
-* Javascript and sass files are prettyfied on save and on commits
+* ~~Javascript and sass files are prettyfied on save and on commits ~~
 
 ## Installation
 
 This boilerplate requires:
 [Node.js](https://nodejs.org/) v6+ and [Webpack](https://webpack.js.org/).
-[Yarn](https://yarnpkg.com/) is also great.
 
 ```
 $ mkdir my-app
@@ -30,8 +30,6 @@ $ cd my-app
 $ curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
 $ npm run hello
 ```
-
-At this point, you'll need to rename `.env.example` into `.env` and add your configuration
 
 ## Commands
 
@@ -61,16 +59,6 @@ $ npm run format-js #run prettier on your js
 $ npm run format-scss #run prettier on your scss
 ```
 
-## Deploy
-
-#### Using Github pages
-
-coming soon...
-
-<!-- 1.  Run this command: `npm run deploy`
-2.  Make sure you have activated Github pages in your repository settings and set the `gh-pages` branch as source.
-3.  your app is now live at `https://{your-github-username}.github.io/{repo-name}/` -->
-
 ## Features
 
 When you follow the folder structure, it give you access to some handy aliases.
@@ -78,35 +66,31 @@ You can found them in `webpack/urls.js`.
 
 Adding media has never been so easy !
 
-In javascript:
+In javascript, we rely on webpack aliases
 
 ```javascript
-import myImgPath from '@img/test.jpg'
+import myImgPath from '@img/example.jpg'
 ```
 
-In sass:
+In sass, we inject vars through the `sass-loader`:
 
 ```sass
 .myDiv {
-  background: url("~@img/test.jpg")
+  background: url("#{$img}/example.jpg")
 }
-```
 
-In html (.ejs)
-
-```ejs
-<img src="<%= require("@img/test.jpg") %>">
-```
-
-Font face
-
-```css
 @font-face {
   font-family: 'MyFont';
-  src: url(~@fonts/font.ttf);
+  src: url(#{$fonts}/example-font.ttf);
   font-weight: normal;
   font-style: normal;
 }
+```
+
+In html (.ejs), we inject vars through the `htmlWebpackPlugin`
+
+```ejs
+<img src="<%= $img %>example.jpg">
 ```
 
 ## Caveats
@@ -133,3 +117,27 @@ import 'ejs-loader!@base/index.ejs'
 ## Warning
 
 Do not forget to edit your `package.json` before publishing your repo !
+
+## LICENSE
+
+MIT License
+
+Copyright (c) 2018 Adrien Zaganelli
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

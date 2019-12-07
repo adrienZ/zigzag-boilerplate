@@ -11,15 +11,12 @@ const plugins = require('./webpack/plugins')
 const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
 
 module.exports = {
-  devServer: devServer,
-  entry: { ...entries.scripts({ multi: false }) }, // ...entries.imgs },
+  devServer,
+  entry: entries.js,
   resolve: {
     alias: urls.aliases,
   },
   output: {
-    path: urls.prod.root,
-    pathinfo: false,
-    // publicPath: env.publicPath,
     chunkFilename: '[name].bundle.js',
     filename: env.serverMode
       ? jsOutput + '/[name].js'
@@ -28,11 +25,17 @@ module.exports = {
   devtool: env.devMode ? 'cheap-module-eval-source-map' : 'source-map',
   mode: !env.devMode ? 'production' : 'development',
   module: {
-    rules: [loaders.sass, loaders.js, loaders.eslint, loaders.files],
+    rules: [
+      loaders.sass,
+      loaders.js,
+      loaders.eslint,
+      loaders.shader,
+    ],
   },
   optimization: {
     removeAvailableModules: !env.devMode,
     removeEmptyChunks: !env.devMode,
+    minimize: !env.devMode,
   },
   plugins,
 }

@@ -15,7 +15,7 @@ const config = require('./config')
 // =======================================================================//
 */
 
-const serverUseLocalIp = config.DEV_SERVER_LOCAL_IP === 'true'
+const serverUseLocalIp = config.DEV_SERVER_LOCAL_IP === true
 const server = {
   host: serverUseLocalIp ? ip.address() : 'localhost',
   port: config.DEV_SERVER_PORT,
@@ -40,12 +40,12 @@ module.exports = {
   },
   clientLogLevel: 'error',
   historyApiFallback: true,
-  hot: config.DEV_SERVER_HMR === 'true',
+  hot: config.DEV_SERVER_HMR,
   https: server.isHttps,
   open: false,
   progress: false,
   port: server.port,
   useLocalIp: serverUseLocalIp,
-  host: server.host,
+  host: '0.0.0.0',
   quiet: false, // shut down console,
 }

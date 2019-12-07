@@ -1,9 +1,8 @@
 // =======================================================================//
-// !  CONFIG URLS                                                         //
+// ?  CONFIG URLS                                                         //
 // =======================================================================//
 
 const path = require('path')
-
 const base_url = path.resolve(__dirname, '../')
 
 const urls = {
@@ -22,16 +21,24 @@ const urls = {
   BASE_URL: base_url,
 }
 
+// these paths are used for our webpack congig
 const aliases = {
-  // REQUIRED ALIASES
-  '@img': path.resolve(urls.dev.assets, 'img/'),
   '@js': path.resolve(urls.dev.code, 'js/'),
   '@sass': path.resolve(urls.dev.code, 'sass/'),
-  // OPTIONAL ALIASES
   '@base': path.resolve(urls.dev.root),
-  '@page': path.resolve(urls.dev.code, 'js/pages/'),
+  '@img': path.resolve(urls.dev.assets, 'img/'),
   '@fonts': path.resolve(urls.dev.assets, 'fonts/'),
-  '@video': path.resolve(urls.dev.assets, 'video/'),
 }
 
-module.exports = { ...urls, aliases }
+// these paths are used for our loaders
+// respect the nomenclature
+const relatives = {
+  '@relative-img': path.relative(urls.dev.root, aliases['@img']),
+  '@relative-fonts': path.relative(urls.dev.root, aliases['@fonts']),
+}
+
+module.exports = {
+  ...urls,
+  aliases,
+  relatives,
+}
