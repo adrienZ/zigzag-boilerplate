@@ -1,19 +1,20 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin')
 
 const path = require('path')
 
 const env = require('./env')
 const entries = require('./entries')
 const urls = require('./urls')
+const data = require('./dataInjection')
 // const pwa = require('./pwa')
 
 /*
 // =======================================================================//
 //                                                                        //
-// !  ✅ CSS OUTPUT PLUGIN                                                //
+// ? ✅ CSS OUTPUT PLUGIN                                                //
 //                                                                        //
 // *  Transform .scss into .css and add hash if prod                      //
 //                                                                        //
@@ -35,7 +36,6 @@ const sassPlugin = new MiniCssExtractPlugin({
   chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 
-
 // Turn ejs into html and inject some node variables
 const views = entries.views()
 const htmlExport = views.map(
@@ -49,10 +49,9 @@ const htmlExport = views.map(
         removeComments: true,
         removeRedundantAttributes: true,
       },
-      templateParameters: urls.html
+      templateParameters: data.html,
     })
 )
-
 
 // improve developer workflow, but add terminal response time
 const webpackNotifier = new WebpackBuildNotifierPlugin({
@@ -72,15 +71,18 @@ const assetsInclusion = new CopyPlugin([
     // toType: 'template',
     to: './assets',
     ignore: ['.DS_Store', '.gitkeep'],
-  }
+  },
 ])
 
-
 // DEFAULT PLUGINS:
-const PLUGINS_CONFIG = [sassPlugin, webpackNotifier, ...htmlExport, assetsInclusion]
+const PLUGINS_CONFIG = [
+  sassPlugin,
+  webpackNotifier,
+  ...htmlExport,
+  assetsInclusion,
+]
 
 if (!env.serverMode) {
-
   // pretty build progress bar in the CLI
   const WebpackBar = require('webpackbar')
   PLUGINS_CONFIG.push(new WebpackBar())
@@ -111,18 +113,19 @@ if (!env.serverMode) {
       })
     )
 
-
     /**
      * reload css and fonts
      */
-    const Critters = require('critters-webpack-plugin');
-    PLUGINS_CONFIG.push(new Critters({
-      // Outputs: <link rel="preload" onload="this.rel='stylesheet'">
-      preload: 'swap',
+    const Critters = require('critters-webpack-plugin')
+    PLUGINS_CONFIG.push(
+      new Critters({
+        // Outputs: <link rel="preload" onload="this.rel='stylesheet'">
+        preload: 'swap',
 
-      // Don't inline critical font-face rules, but preload the font URLs:
-      preloadFonts: false
-    }))
+        // Don't inline critical font-face rules, but preload the font URLs:
+        preloadFonts: false,
+      })
+    )
 
     /*
       🙈 SOME WEBPACK OPTIMIZATION
@@ -139,7 +142,7 @@ if (!env.serverMode) {
     /*
     // =======================================================================//
     //    🚧 WORK IN PROGRESS !!!                                             //
-    // !  🤖 COMPRESSION PLUGIN                                               //
+    // ?  🤖 COMPRESSION PLUGIN                                               //
     //                                                                        //
     // *  gzip ressources                                                     //
     // *  combined with a htaccess it will radically improve perfomance       //
@@ -162,44 +165,43 @@ if (!env.serverMode) {
   }
 }
 
-
-
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 const imageminMozjpeg = require('imagemin-mozjpeg')
 const imageminWebp = require('imagemin-webp')
 
-PLUGINS_CONFIG.push(new ImageminPlugin({
-  disable: env.devMode || env.serverMode,
-  test: /\.(jpe?g|png|gif|svg|webp)$/i,
-  optipng: null,
-  gifsicle: {
-    optimizationLevel: 3,
-    // color: 286,
-  },
-  svgo: {
-    addClassesToSVGElement: true,
-  },
-  jpegtran: null,
-  pngquant: {
-    quality: '70-80',
-    speed: 1,
-    strip: true,
-    dithering: 0.15,
-  },
-  plugins: [
-    imageminMozjpeg({
-      quality: 75,
-      progressive: true
-    }),
-    imageminWebp({
-      lossless: true,
-      quality: 75,
-    })
-  ],
-  // sizes in bytes, 10000 = 10kb
-  // maxFileSize: 10000000
-  // minFileSize: 0
-}))
-
+PLUGINS_CONFIG.push(
+  new ImageminPlugin({
+    disable: env.devMode || env.serverMode,
+    test: /\.(jpe?g|png|gif|svg|webp)$/i,
+    optipng: null,
+    gifsicle: {
+      optimizationLevel: 3,
+      // color: 286,
+    },
+    svgo: {
+      addClassesToSVGElement: true,
+    },
+    jpegtran: null,
+    pngquant: {
+      quality: '70-80',
+      speed: 1,
+      strip: true,
+      dithering: 0.15,
+    },
+    plugins: [
+      imageminMozjpeg({
+        quality: 75,
+        progressive: true,
+      }),
+      imageminWebp({
+        lossless: true,
+        quality: 75,
+      }),
+    ],
+    // sizes in bytes, 10000 = 10kb
+    // maxFileSize: 10000000
+    // minFileSize: 0
+  })
+)
 
 module.exports = PLUGINS_CONFIG

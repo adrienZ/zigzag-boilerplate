@@ -1,5 +1,5 @@
 h3 {
-  color: #d81b60;
+  color: $titleColor;
   display: flex;
   transition: 1s ease-in;
 }
@@ -11,17 +11,28 @@ h3 {
   font-style: normal;
 }
 
-
 body {
-    font-family: 'exampleFont';
-    -webkit-font-smoothing: antialiased;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  font-family: 'exampleFont';
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
 
 #testImg {
-  width: 150px;
-  height: 150px;
   background: url(#{$img}/example.jpg) no-repeat center/cover;
+}
+
+@each $size in $listTest {
+  .text-#{$size} {
+    font-size: #{$size}px;
+  }
+}
+
+.img-120 {
+  width: #{map-get($map: $imgSizes, $key: medium)}px;
+}
+.img-60 {
+  width: #{map-get($map: $imgSizes, $key: small)}px;
+  height: #{map-get($map: $imgSizes, $key: small)}px;
 }
 
 // DONT WRITE CODE AFTER IMPORTS

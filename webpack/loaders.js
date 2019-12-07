@@ -3,11 +3,10 @@ const path = require('path')
 
 const env = require('./env')
 const urls = require('./urls')
+const data = require('./dataInjection')
 
 const cssLoaders = [
-  env.serverMode
-    ? 'style-loader'
-    : MiniCssExtractPlugin.loader,
+  env.serverMode ? 'style-loader' : MiniCssExtractPlugin.loader,
   {
     loader: 'css-loader',
     options: {
@@ -59,12 +58,15 @@ module.exports = {
     test: /\.s?[ac]ss$/,
     // include: urls.aliases['@sass'],
     // exclude: /node_modules/,
-    use: [...cssLoaders, {
-      loader: 'sass-loader',
-      options: {
-        data: urls.sass
-      }
-    }],
+    use: [
+      ...cssLoaders,
+      {
+        loader: 'sass-loader',
+        options: {
+          data: data.sass,
+        },
+      },
+    ],
   },
   shader: {
     test: /\.(glsl|frag|vert)$/,

@@ -14,21 +14,21 @@
   </head>
 
   <body>
-    <h3>Comment est votre blanquette ?</h3>
-    <% users =  ['Athos', 'Porthos', 'Aramis']; %>
-    <% users.forEach(function(user){ %>
-      <%= user %>
+    <h3>Title color <%= titleColor %></h3>
+
+    <% listTest.forEach(function(item){ %>
+      <p class="text-<%= item %>">test text-<%= item %></p>
     <% }); %>
     <br>
     <br>
 
 
     <h3>Test alias img tag</h3>
-    <img src="<%= $img %>/example.jpg">
+    <img class="img-<%= imgSizes.medium %>" src="<%= $img %>/example.jpg">
 
 
     <h3>Test alias sass image</h3>
-    <div id="testImg"></div>
+    <div class="img-<%= imgSizes.small %>" id="testImg"></div>
 
     <!--SCRIPTS are auto-imported-->
   </body>

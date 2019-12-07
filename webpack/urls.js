@@ -3,8 +3,6 @@
 // =======================================================================//
 
 const path = require('path')
-const env = require('./env')
-
 const base_url = path.resolve(__dirname, '../')
 
 const urls = {
@@ -23,15 +21,7 @@ const urls = {
   BASE_URL: base_url,
 }
 
-
-/**
- * COMING SOON !!!!
- * the new alisases syntax allow us to use system path as usual
- * we also want to use relative path to use it with a backend
- * also some of the aliases could be used in our data injection code bellow
- */
-
-
+// these paths are used for our webpack congig
 const aliases = {
   '@js': path.resolve(urls.dev.code, 'js/'),
   '@sass': path.resolve(urls.dev.code, 'sass/'),
@@ -40,42 +30,14 @@ const aliases = {
   '@fonts': path.resolve(urls.dev.assets, 'fonts/'),
 }
 
-/**
- * we reuse our aliases in severals plugins
- * this allow us to use the across the in several language
- *
- * since relative alias won't be resolved by webpack
- * we must replace the '@' character, in this case by '$'
- */
-
-
-const dataInjection = {
-  // htmlWebpackPlugin
-  html: {},
-  // sass loader
-  sass: ''
-}
-
+// these paths are used for our loaders
 const relatives = {
-  '@relative-img': path.relative(urls.dev.root, urls.dev.assets + "/img"),
-  '@relative-fonts': path.relative(urls.dev.root, urls.dev.assets + "/fonts"),
+  '@relative-img': path.relative(urls.dev.root, urls.dev.assets + '/img'),
+  '@relative-fonts': path.relative(urls.dev.root, urls.dev.assets + '/fonts'),
 }
 
-Object.keys(relatives).forEach(key => {
-  const keyWithoutArobase = key
-    .replace('relative-', '')
-    .replace('@', '$')
-
-  dataInjection.html[keyWithoutArobase] = relatives[key]
-
-  // fix css broken relatives path in build
-  const prodCssUrl = path.resolve(urls.prod.code, '/css/')
-  const $sassUrl = env.serverMode ?
-    relatives[key]
-    : path.resolve(prodCssUrl, urls.prod.root, relatives[key])
-
-  dataInjection.sass += `${keyWithoutArobase}: "${$sassUrl}";`
-})
-
-
-module.exports = { ...urls, aliases, ...dataInjection }
+module.exports = {
+  ...urls,
+  aliases,
+  relatives,
+}
