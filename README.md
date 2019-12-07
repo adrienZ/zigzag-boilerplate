@@ -15,9 +15,9 @@
 * On build, compress images, autoprefix, minify files and cache busting
 * Non obtrusive linter with prettier and ESLint.
 * Async modules and polyfills.
-* ~~Out-of-the-box Progressive web app support ~~
+* ~~Out-of-the-box Progressive web app support.~~
 * ~~Easily deploy your app to Github Pages.~~
-* ~~Javascript and sass files are prettyfied on save and on commits ~~
+* ~~Javascript and sass files are prettyfied on save and on commits.~~
 
 ## Installation
 
