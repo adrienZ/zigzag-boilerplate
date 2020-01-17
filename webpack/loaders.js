@@ -45,6 +45,8 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
+          presets: [['env', { modules: false }]],
+          plugins: ['syntax-dynamic-import', 'transform-object-rest-spread'],
         },
       },
     ],
