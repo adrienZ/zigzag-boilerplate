@@ -1,3 +1,5 @@
+@import 'effects/underline.scss';
+
 h3 {
   color: $titleColor;
   display: flex;
@@ -33,6 +35,18 @@ body {
 .img-60 {
   width: #{map-get($map: $imgSizes, $key: small)}px;
   height: #{map-get($map: $imgSizes, $key: small)}px;
+}
+
+p {
+  --test: 32px;
+
+  color: white;
+  font-size: var(--test);
+
+  @media screen and (max-width: 720px) {
+    --test: 11px;
+
+  }
 }
 
 // DONT WRITE CODE AFTER IMPORTS
