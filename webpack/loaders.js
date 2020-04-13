@@ -40,14 +40,18 @@ module.exports = {
     test: /\.js$/,
     exclude: /(node_modules|bower_components)/,
     include: urls.aliases['@js'],
-    loaders: [
-      {
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-        },
+    loaders: [{
+      loader: 'babel-loader',
+      options: {
+        cacheDirectory: true,
+        presets: [
+          ['env', {
+            modules: false
+          }]
+        ],
+        plugins: ['syntax-dynamic-import', 'transform-object-rest-spread']
       },
-    ],
+    }, ],
   },
   css: {
     test: /\.css$/,

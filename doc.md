@@ -31,7 +31,7 @@ those data are send via the `sass-loader` and the `htmlWebpackPlugin` options.
 Imagine you want to load a big module of javascript... but you only need it for a specific task.
 Instead of including it in your bundle and increase load time... load it later !
 
-in your `.babel.rc` we desactivate modules and use the `syntax-dynamic-import` plugin.
+in your babel configuration (`webpack/loaders.js`, see babel-loader) we desactivate modules and use the `syntax-dynamic-import` plugin.
 
 ```javascript
 /**
