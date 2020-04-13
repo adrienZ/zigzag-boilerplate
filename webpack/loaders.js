@@ -73,4 +73,8 @@ module.exports = {
     exclude: /node_modules/,
     use: ['raw-loader', 'glslify-loader'],
   },
+  vue: {
+    test: /\.vue$/,
+    loader: 'vue-loader',
+  },
 }

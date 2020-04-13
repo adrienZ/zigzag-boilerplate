@@ -30,6 +30,7 @@ module.exports = {
       loaders.js,
       loaders.eslint,
       loaders.shader,
+      loaders.vue,
     ],
   },
   optimization: {
