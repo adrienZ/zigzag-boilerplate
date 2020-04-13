@@ -5,6 +5,8 @@ const env = require('./env')
 const urls = require('./urls')
 const data = require('./dataInjection')
 
+const broswerSupport = require('./config').compatibility || {}
+
 const cssLoaders = [
   env.serverMode ? 'style-loader' : MiniCssExtractPlugin.loader,
   {
@@ -45,11 +47,13 @@ module.exports = {
       options: {
         cacheDirectory: true,
         presets: [
-          ['env', {
-            modules: false
-          }]
-        ],
-        plugins: ['syntax-dynamic-import', 'transform-object-rest-spread']
+          ["@babel/preset-env",
+            {
+              debug: false,
+              ...broswerSupport
+            }
+          ],
+        ]
       },
     }, ],
   },

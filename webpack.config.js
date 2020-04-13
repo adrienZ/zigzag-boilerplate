@@ -18,9 +18,8 @@ module.exports = {
   },
   output: {
     chunkFilename: '[name].bundle.js',
-    filename: env.serverMode
-      ? jsOutput + '/[name].js'
-      : jsOutput + '/[name].[hash:8].js',
+    filename: env.serverMode ?
+      jsOutput + '/[name].js' : jsOutput + '/[name].[hash:8].js',
   },
   devtool: env.devMode ? 'cheap-module-eval-source-map' : 'source-map',
   mode: !env.devMode ? 'production' : 'development',
@@ -40,3 +39,5 @@ module.exports = {
   },
   plugins,
 }
+
+console.log(loaders.js.loaders[0].options.presets[0]);

@@ -1,7 +1,7 @@
 <template>
   <div class="sample-vue">
     <fieldset>
-      <legend>Sample Vue component (monofile / clientsides)</legend>
+      <legend>Sample Vue component (monofile / clientside)</legend>
       <p>{{sampleValue }}</p>
       <input type="text" v-model="sampleValue">
     </fieldset>

@@ -1,4 +1,5 @@
 import '@sass/style.scss'
+// necessary for dynamic imports
 import '@js/polyfills'
 
 import Vue from 'vue'

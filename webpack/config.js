@@ -3,6 +3,16 @@ const features = {
   analytics: false,
 }
 
+const compatibility = {
+  useBuiltIns: "usage",
+
+  // https://babeljs.io/docs/en/babel-preset-env#targets
+  // https://browserl.ist/
+  targets: {
+    browsers: "cover 99.5%, not dead"
+  }
+}
+
 // webpack-dev-server settings
 // local ip is useful for testing responsive with webpack-dev-server since you can share an url
 const DEV_SERVER_LOCAL_IP = true
@@ -24,5 +34,6 @@ module.exports = {
   THEME_COLOR,
   BACKGROUND_COLOR,
 
+  compatibility,
   features,
 }

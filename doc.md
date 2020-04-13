@@ -1,5 +1,11 @@
 # Doc
 
+
+## My site must be compatible with IE, what can I do ?
+
+(https://github.com/browserslist/browserslist)[browserslist] is included in `(https://babeljs.io/docs/en/babel-preset-env)[@babel/preset-env]`.
+In this boilerplate, you can change the `compatibility` variable in `webpack/config.js`.
+
 ## How does your data injection works ?
 
 Webpack aliases are defined in `webpack/urls.js`. They can be used in your js and your html,

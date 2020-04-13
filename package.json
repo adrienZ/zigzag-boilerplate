@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "cross-env webpack -p --mode=production --hide-modules --progress --color --display=minimal",
+    "build": "cross-env webpack -p --mode=production --hide-modules --progress --color",
     "start": "cross-env NODE_ENV=dev webpack-dev-server --mode=development --color",
     "hello": "cross-env npm install && npm run start",
     "format-js": "cross-env prettier \"app/src/**/*.@(js)\" --write",
@@ -18,13 +18,11 @@
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "autoprefixer": "^9.7.6",
-    "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^0.1.19",
     "compression-webpack-plugin": "^1.1.11",
     "copy-webpack-plugin": "^5.1.1",
