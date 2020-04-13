@@ -31,8 +31,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sassPlugin = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
-  filename: env.serverMode ?
-    relativeCssOutput + '[name].css' : relativeCssOutput + '[name].[contenthash].css',
+  filename: env.serverMode
+    ? relativeCssOutput + '[name].css'
+    : relativeCssOutput + '[name].[contenthash].css',
   chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 
@@ -40,17 +41,17 @@ const sassPlugin = new MiniCssExtractPlugin({
 const views = entries.views()
 const htmlExport = views.map(
   view =>
-  new HtmlWebpackPlugin({
-    template: urls.dev.root + view,
-    filename: view.replace('.ejs', '.html'),
-    inject: 'body',
-    showErrors: env.devMode ? true : false,
-    minify: {
-      removeComments: true,
-      removeRedundantAttributes: true,
-    },
-    templateParameters: data.html,
-  })
+    new HtmlWebpackPlugin({
+      template: urls.dev.root + view,
+      filename: view.replace('.ejs', '.html'),
+      inject: 'body',
+      showErrors: env.devMode ? true : false,
+      minify: {
+        removeComments: true,
+        removeRedundantAttributes: true,
+      },
+      templateParameters: data.html,
+    })
 )
 
 // improve developer workflow, but add terminal response time
@@ -63,14 +64,16 @@ const webpackNotifier = new WebpackBuildNotifierPlugin({
 })
 
 // copy all assets, (uselless if you use a backend)
-const assetsInclusion = new CopyPlugin([{
-  from: urls.dev.assets,
-  // waiting for webpack 5 asset type... hashes assets
-  // to: env.devMode ? './assets/img/[name].[ext]' : './assets/[name].[hash].[ext]',
-  // toType: 'template',
-  to: './assets',
-  ignore: ['.DS_Store', '.gitkeep'],
-}, ])
+const assetsInclusion = new CopyPlugin([
+  {
+    from: urls.dev.assets,
+    // waiting for webpack 5 asset type... hashes assets
+    // to: env.devMode ? './assets/img/[name].[ext]' : './assets/[name].[hash].[ext]',
+    // toType: 'template',
+    to: './assets',
+    ignore: ['.DS_Store', '.gitkeep'],
+  },
+])
 
 // DEFAULT PLUGINS:
 const PLUGINS_CONFIG = [
@@ -78,7 +81,7 @@ const PLUGINS_CONFIG = [
   webpackNotifier,
   ...htmlExport,
   assetsInclusion,
-  new VueLoaderPlugin()
+  new VueLoaderPlugin(),
 ]
 
 if (!env.serverMode) {

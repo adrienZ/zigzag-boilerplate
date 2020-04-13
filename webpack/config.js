@@ -4,13 +4,13 @@ const features = {
 }
 
 const compatibility = {
-  useBuiltIns: "usage",
+  useBuiltIns: 'usage',
 
   // https://babeljs.io/docs/en/babel-preset-env#targets
   // https://browserl.ist/
   targets: {
-    browsers: "cover 99.5%, not dead"
-  }
+    browsers: 'cover 99.5%, not dead',
+  },
 }
 
 // webpack-dev-server settings

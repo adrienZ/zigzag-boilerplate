@@ -3,7 +3,7 @@
 
 ## My site must be compatible with IE, what can I do ?
 
-(https://github.com/browserslist/browserslist)[browserslist] is included in `(https://babeljs.io/docs/en/babel-preset-env)[@babel/preset-env]`.
+[browserslist](https://github.com/browserslist/browserslist) is included in [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env).
 In this boilerplate, you can change the `compatibility` variable in `webpack/config.js`.
 
 ## How does your data injection works ?

@@ -42,20 +42,23 @@ module.exports = {
     test: /\.js$/,
     exclude: /(node_modules|bower_components)/,
     include: urls.aliases['@js'],
-    loaders: [{
-      loader: 'babel-loader',
-      options: {
-        cacheDirectory: true,
-        presets: [
-          ["@babel/preset-env",
-            {
-              debug: false,
-              ...broswerSupport
-            }
+    loaders: [
+      {
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                debug: false,
+                ...broswerSupport,
+              },
+            ],
           ],
-        ]
+        },
       },
-    }, ],
+    ],
   },
   css: {
     test: /\.css$/,

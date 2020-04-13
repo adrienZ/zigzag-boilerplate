@@ -39,5 +39,3 @@ module.exports = {
   },
   plugins,
 }
-
-console.log(loaders.js.loaders[0].options.presets[0]);
