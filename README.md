@@ -8,16 +8,14 @@
 
 ## What’s Included?
 
-* ES6, SASS and EJS syntax support.
-* Global variables between scss and html.
+* Modern tooling, ES6, SASS and EJS syntax support.
+* Global variables between js, scss and html.
 * A live development server that warns about common mistakes.
+* Build-in [Vue.js](https://vuejs.org/) support, optionnal.
 * Aliases (@) to easily include files, also availble in html and sass.
 * On build, compress images, autoprefix, minify files and cache busting
-* Non obtrusive linter with prettier and ESLint.
-* Async modules and polyfills.
+* WIP Non obtrusive linter with prettier and ESLint.
 * ~~Out-of-the-box Progressive web app support.~~
-* ~~Easily deploy your app to Github Pages.~~
-* ~~Javascript and sass files are prettyfied on save and on commits.~~
 
 ## Installation
 

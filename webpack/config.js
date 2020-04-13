@@ -5,6 +5,7 @@ const features = {
 
 const compatibility = {
   useBuiltIns: 'usage',
+  corejs: 3,
 
   // https://babeljs.io/docs/en/babel-preset-env#targets
   // https://browserl.ist/
