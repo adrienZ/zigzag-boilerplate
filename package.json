@@ -1,11 +1,11 @@
 {
   "scripts": {
-    "build": "cross-env webpack -p --mode=production --hide-modules --progress --color",
-    "start": "cross-env NODE_ENV=dev webpack-dev-server --mode=development --color",
+    "build": "cross-env NODE_ENV=production webpack -p --hide-modules --progress --color",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --color",
     "format-js": "cross-env prettier \"app/src/**/*.@(js)\" --write",
     "format-scss": "cross-env prettier \"app/src/**/*.@(scss)\" --parser scss --write",
     "pre-precommit": "cross-env pretty-quick --staged",
-    "watch": "cross-env webpack -w --mode=development --progress --colors --hide-modules --display=minimal"
+    "watch": "cross-env NODE_ENV=development webpack -w --mode=development --progress --colors --hide-modules --display=minimal"
   },
   "lint-staged": {
     "*.js": [
