@@ -19,7 +19,7 @@ const compatibility = {
 const DEV_SERVER_LOCAL_IP = true
 const DEV_SERVER_PORT = 8899
 const DEV_SERVER_HTTPS = false
-const DEV_SERVER_HMR = false
+const DEV_SERVER_HMR = true
 
 // PWA
 // also page title

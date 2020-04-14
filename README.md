@@ -6,6 +6,8 @@
 
 #### The modern no-framework boilerplate
 
+[documentation](doc.md)
+
 ## What’s Included?
 
 * Modern tooling, ES6, SASS and EJS syntax support.
@@ -93,11 +95,7 @@ In html (.ejs), we inject vars through the `htmlWebpackPlugin`
 
 ## Caveats
 
-the `htmlWebpackPlugin` does not allow HMR.
-you can either :
-
-* forget about it
-* activate live reload, but lose HMR. you have to include your file in your js like this:
+HMR is enabled by default for all but .html/.ejs. the `htmlWebpackPlugin` does not allow HMR, it can only live reload (reload page on save).
 
 ```javascript
 import 'ejs-loader!@base/index.ejs'

@@ -1,5 +1,6 @@
 const ip = require('ip')
 const config = require('./config')
+const urls = require('./urls')
 
 /*
 // =======================================================================//
@@ -27,11 +28,14 @@ module.exports = {
   compress: true, // gzip
   inline: true,
   noInfo: true,
-  before: () => {
+  before(app, server) {
+    server._watch(urls.dev.root + `**/*.ejs`);
+  },
+  after: () => {
     const s = server.isHttps ? 's' : ''
     console.info(
-      `Project is running at http${s}://${server.host}:${server.port}/
-      webpack is watching files... press Ctrl+c to quit`
+      `Project is running at http${s}://${server.host}:${server.port}/ ...
+       press Ctrl+c to quit`
     )
   },
   overlay: {
@@ -47,5 +51,4 @@ module.exports = {
   port: server.port,
   useLocalIp: serverUseLocalIp,
   host: '0.0.0.0',
-  quiet: false, // shut down console,
 }
