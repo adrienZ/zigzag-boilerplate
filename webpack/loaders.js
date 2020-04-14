@@ -8,7 +8,7 @@ const data = require('./dataInjection')
 const broswerSupport = require('./config').compatibility || {}
 
 const cssLoaders = [
-  env.webpack_server ? 'style-loader' : MiniCssExtractPlugin.loader,
+  env.serverMode ? 'style-loader' : MiniCssExtractPlugin.loader,
   {
     loader: 'css-loader',
     options: {

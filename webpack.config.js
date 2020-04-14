@@ -18,12 +18,11 @@ module.exports = {
   },
   output: {
     chunkFilename: '[name].bundle.js',
-    filename: env.webpack_server
-      ? jsOutput + '/[name].js'
-      : jsOutput + '/[name].[hash:8].js',
+    filename: env.serverMode ?
+      jsOutput + '/[name].js' : jsOutput + '/[name].[hash:8].js',
   },
-  devtool: env.developement ? 'cheap-module-eval-source-map' : 'source-map',
-  mode: process.env.NODE_ENV,
+  devtool: env.devMode ? 'cheap-module-eval-source-map' : 'source-map',
+  mode: !env.devMode ? 'production' : 'development',
   module: {
     rules: [
       loaders.sass,
@@ -34,9 +33,9 @@ module.exports = {
     ],
   },
   optimization: {
-    removeAvailableModules: !env.developement,
-    removeEmptyChunks: !env.developement,
-    minimize: !env.developement,
+    removeAvailableModules: !env.devMode,
+    removeEmptyChunks: !env.devMode,
+    minimize: !env.devMode,
   },
   plugins,
 }

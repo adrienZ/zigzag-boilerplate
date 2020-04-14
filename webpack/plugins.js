@@ -31,10 +31,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sassPlugin = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
-  filename: env.webpack_server
+  filename: env.serverMode
     ? relativeCssOutput + '[name].css'
     : relativeCssOutput + '[name].[contenthash].css',
-  chunkFilename: env.developement ? '[id].css' : '[id].[contenthash].css',
+  chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
 })
 
 // Turn ejs into html and inject some node variables
@@ -45,7 +45,7 @@ const htmlExport = views.map(
       template: urls.dev.root + view,
       filename: view.replace('.ejs', '.html'),
       inject: 'body',
-      showErrors: env.developement,
+      showErrors: env.devMode ? true : false,
       minify: {
         removeComments: true,
         removeRedundantAttributes: true,
@@ -84,7 +84,7 @@ const PLUGINS_CONFIG = [
   new VueLoaderPlugin(),
 ]
 
-if (!env.webpack_server) {
+if (!env.serverMode) {
   // pretty build progress bar in the CLI
   const WebpackBar = require('webpackbar')
   PLUGINS_CONFIG.push(new WebpackBar())
@@ -101,7 +101,7 @@ if (!env.webpack_server) {
     })
   )
 
-  if (!env.developement) {
+  if (!env.devMode) {
     /**
      * CLEAR DIST FOLDER ON BUILD
      */
@@ -173,7 +173,7 @@ const imageminWebp = require('imagemin-webp')
 
 PLUGINS_CONFIG.push(
   new ImageminPlugin({
-    disable: env.developement,
+    disable: env.devMode || env.serverMode,
     test: /\.(jpe?g|png|gif|svg|webp)$/i,
     optipng: null,
     gifsicle: {

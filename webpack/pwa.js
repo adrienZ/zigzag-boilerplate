@@ -38,7 +38,7 @@ const serviceWorker = new OfflinePlugin({
     events: true,
     output: 'sw.js',
     entry: urls.dev.code + 'js/sw.js',
-    minify: !env.developement,
+    minify: env.devMode ? false : true,
   },
 
   AppCache: false,

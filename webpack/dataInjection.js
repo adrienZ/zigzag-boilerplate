@@ -37,7 +37,7 @@ function aliasesToSass(aliases) {
 
     // fix css broken relatives path in build
     const prodCssUrl = path.resolve(urls.prod.code, '/css/')
-    const $sassUrl = env.webpack_server
+    const $sassUrl = env.serverMode
       ? aliases[key]
       : path.resolve(prodCssUrl, urls.prod.root, aliases[key])
 
