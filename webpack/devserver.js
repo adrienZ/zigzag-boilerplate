@@ -29,13 +29,12 @@ module.exports = {
   inline: true,
   noInfo: true,
   before(app, server) {
-    server._watch(urls.dev.root + `**/*.ejs`);
+    server._watch(urls.dev.root + `**/*.ejs`)
   },
   after: () => {
     const s = server.isHttps ? 's' : ''
     console.info(
-      `Project is running at http${s}://${server.host}:${server.port}/ ...
-       press Ctrl+c to quit`
+      `Project is running at http${s}://${server.host}:${server.port}/ ... \npress Ctrl+c to quit`
     )
   },
   overlay: {

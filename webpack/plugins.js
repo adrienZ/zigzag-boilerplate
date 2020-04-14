@@ -31,10 +31,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sassPlugin = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
-  filename: env.serverMode
+  filename: env.webpack_server
     ? relativeCssOutput + '[name].css'
     : relativeCssOutput + '[name].[contenthash].css',
-  chunkFilename: env.devMode ? '[id].css' : '[id].[contenthash].css',
+  chunkFilename: env.development ? '[id].css' : '[id].[contenthash].css',
 })
 
 // Turn ejs into html and inject some node variables
@@ -45,7 +45,7 @@ const htmlExport = views.map(
       template: urls.dev.root + view,
       filename: view.replace('.ejs', '.html'),
       inject: 'body',
-      showErrors: env.devMode ? true : false,
+      showErrors: env.development,
       minify: {
         removeComments: true,
         removeRedundantAttributes: true,
@@ -68,7 +68,7 @@ const assetsInclusion = new CopyPlugin([
   {
     from: urls.dev.assets,
     // waiting for webpack 5 asset type... hashes assets
-    // to: env.devMode ? './assets/img/[name].[ext]' : './assets/[name].[hash].[ext]',
+    // to: env.development ? './assets/img/[name].[ext]' : './assets/[name].[hash].[ext]',
     // toType: 'template',
     to: './assets',
     ignore: ['.DS_Store', '.gitkeep'],
@@ -84,7 +84,7 @@ const PLUGINS_CONFIG = [
   new VueLoaderPlugin(),
 ]
 
-if (!env.serverMode) {
+if (!env.webpack_server) {
   // pretty build progress bar in the CLI
   const WebpackBar = require('webpackbar')
   PLUGINS_CONFIG.push(new WebpackBar())
@@ -101,7 +101,7 @@ if (!env.serverMode) {
     })
   )
 
-  if (!env.devMode) {
+  if (!env.development) {
     /**
      * CLEAR DIST FOLDER ON BUILD
      */
@@ -173,7 +173,7 @@ const imageminWebp = require('imagemin-webp')
 
 PLUGINS_CONFIG.push(
   new ImageminPlugin({
-    disable: env.devMode || env.serverMode,
+    disable: env.development,
     test: /\.(jpe?g|png|gif|svg|webp)$/i,
     optipng: null,
     gifsicle: {
