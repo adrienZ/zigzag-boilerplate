@@ -25,10 +25,17 @@ This boilerplate requires:
 [Node.js](https://nodejs.org/) v6+ and [Webpack](https://webpack.js.org/).
 
 ```
-$ mkdir my-app
-$ cd my-app
-$ curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
-$ npm run hello
+npm install
+npm run start
+npm run build #prod
+```
+
+You can download this boilerplate instantly with curl.
+
+```
+mkdir my-app
+cd my-app
+curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
 ```
 
 ## Commands

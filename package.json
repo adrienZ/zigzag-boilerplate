@@ -2,7 +2,6 @@
   "scripts": {
     "build": "cross-env webpack -p --mode=production --hide-modules --progress --color",
     "start": "cross-env NODE_ENV=dev webpack-dev-server --mode=development --color",
-    "hello": "cross-env npm install && npm run start",
     "format-js": "cross-env prettier \"app/src/**/*.@(js)\" --write",
     "format-scss": "cross-env prettier \"app/src/**/*.@(scss)\" --parser scss --write",
     "pre-precommit": "cross-env pretty-quick --staged",

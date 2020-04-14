@@ -1,5 +1,4 @@
-# Doc
-
+# Documentation
 
 ## My site must be compatible with IE, what can I do ?
 
