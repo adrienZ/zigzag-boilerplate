@@ -27,5 +27,16 @@
           "}"
       ],
       "description": "::before pseudo element"
+  },
+  "m-last": {
+      "prefix": "m-last",
+      "body": [
+          "margin-right$1: 30px;",
+          "",
+          "&:last-child {",
+          "  margin-right$1: 0;",
+          "}"
+      ],
+      "description": "apply margin except on last element"
   }
 }

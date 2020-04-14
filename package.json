@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack -p --hide-modules --progress --color",
+    "build": "cross-env NODE_ENV=production webpack --hide-modules --progress --color",
     "start": "cross-env NODE_ENV=development webpack-dev-server --display=minimal --color",
     "format-js": "cross-env prettier \"app/src/**/*.@(js)\" --write",
     "format-scss": "cross-env prettier \"app/src/**/*.@(scss)\" --parser scss --write",
