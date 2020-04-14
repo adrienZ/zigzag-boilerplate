@@ -48,7 +48,7 @@ $ npm run build #production -> compilation
 ```
 
 ```
-$ npm run watch #dev -> compile local without server
+$ npm run watch #dev -> compile without server
 ```
 
 #### Code quality
