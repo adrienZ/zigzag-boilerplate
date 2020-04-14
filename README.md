@@ -24,12 +24,6 @@
 This boilerplate requires:
 [Node.js](https://nodejs.org/) v6+ and [Webpack](https://webpack.js.org/).
 
-```
-npm install
-npm run start
-npm run build #prod
-```
-
 You can download this boilerplate instantly with curl.
 
 ```
@@ -38,22 +32,23 @@ cd my-app
 curl -L -o master.zip https://github.com/adrienZ/zigzag-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./zigzag-boilerplate-master/{.,}* ./ && rm -r ./zigzag-boilerplate-master
 ```
 
+To install dependcies :
+```
+npm install
+```
+
 ## Commands
 
 ```
-$ npm run hello #setup
+$ npm run start #dev -> local server
 ```
 
 ```
-$ npm run start #dev on webpack dev server
+$ npm run build #production -> compilation
 ```
 
 ```
-$ npm run build #production
-```
-
-```
-$ npm run watch #watch and ouput files
+$ npm run watch #dev -> compile local without server
 ```
 
 #### Code quality
@@ -104,9 +99,6 @@ In html (.ejs), we inject vars through the `htmlWebpackPlugin`
 
 HMR is enabled by default for all but .html/.ejs. the `htmlWebpackPlugin` does not allow HMR, it can only live reload (reload page on save).
 
-```javascript
-import 'ejs-loader!@base/index.ejs'
-```
 
 ## Linters
 
