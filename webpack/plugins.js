@@ -84,6 +84,32 @@ const PLUGINS_CONFIG = [
   new VueLoaderPlugin(),
 ]
 
+const { devServer } = require('../zigzag.config')
+if (env.webpack_server && devServer.useBroswerSync) {
+  const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+  const protocol = devServer.isHttps ? 's' : ''
+
+  PLUGINS_CONFIG.push(
+    new BrowserSyncPlugin(
+      {
+        host: devServer.host,
+        port: devServer.port,
+        // proxy the Webpack Dev Server endpoint
+        proxy: `http${protocol}://${devServer.ip}:${devServer.port}/`,
+        open: false,
+        // prevent hard reload when using HMR
+        codeSync: false,
+      },
+      // plugin options
+      {
+        // prevent BrowserSync from reloading the page
+        // and let Webpack Dev Server take care of this
+        reload: false,
+      }
+    )
+  )
+}
+
 if (!env.webpack_server) {
   // pretty build progress bar in the CLI
   const WebpackBar = require('webpackbar')

@@ -1,6 +1,5 @@
-const ip = require('ip')
-const config = require('./config')
 const urls = require('./urls')
+const { devServer } = require('../zigzag.config')
 
 /*
 // =======================================================================//
@@ -16,14 +15,6 @@ const urls = require('./urls')
 // =======================================================================//
 */
 
-const serverUseLocalIp = config.DEV_SERVER_LOCAL_IP === true
-const server = {
-  host: serverUseLocalIp ? ip.address() : 'localhost',
-  port: config.DEV_SERVER_PORT,
-  isHttps: config.DEV_SERVER_HTTPS === 'true',
-  isLocalIP: serverUseLocalIp,
-}
-
 module.exports = {
   compress: true, // gzip
   inline: true,
@@ -32,10 +23,13 @@ module.exports = {
     server._watch(urls.dev.root + `**/*.ejs`)
   },
   after: () => {
-    const s = server.isHttps ? 's' : ''
-    console.info(
-      `Project is running at http${s}://${server.host}:${server.port}/ ... \npress Ctrl+c to quit`
-    )
+    if (!devServer.useBroswerSync) {
+      const protocol = devServer.isHttps ? 's' : ''
+      console.info(
+        `Project is running at http${protocol}://${devServer.ip}:${devServer.port}/...
+        \npress Ctrl+c to quit`
+      )
+    }
   },
   overlay: {
     warnings: false,
@@ -43,11 +37,11 @@ module.exports = {
   },
   clientLogLevel: 'error',
   historyApiFallback: true,
-  hot: config.DEV_SERVER_HMR,
-  https: server.isHttps,
+  hot: devServer.hmr,
+  https: devServer.isHttps,
   open: false,
   progress: false,
-  port: server.port,
-  useLocalIp: serverUseLocalIp,
+  port: devServer.port,
+  useLocalIp: !devServer.useBroswerSync,
   host: '0.0.0.0',
 }
