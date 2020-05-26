@@ -9,7 +9,7 @@ const path = require('path')
 const env = require('./env')
 const entries = require('./entries')
 const urls = require('./urls')
-const data = require('./dataInjection')
+const dataInjecter = require('./DataInjecter')
 // const pwa = require('./pwa')
 
 /*
@@ -50,7 +50,7 @@ const htmlExport = views.map(
         removeComments: true,
         removeRedundantAttributes: true,
       },
-      templateParameters: data.html,
+      templateParameters: dataInjecter.getData(),
     })
 )
 

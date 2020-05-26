@@ -3,7 +3,8 @@ const path = require('path')
 
 const env = require('./env')
 const urls = require('./urls')
-const data = require('./dataInjection')
+
+const dataInjecter = require('./DataInjecter')
 
 const broswerSupport = require('./config').compatibility || {}
 
@@ -74,7 +75,7 @@ module.exports = {
       {
         loader: 'sass-loader',
         options: {
-          data: data.sass,
+          data: dataInjecter.getInlineData(),
         },
       },
     ],
