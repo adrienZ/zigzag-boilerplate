@@ -10,13 +10,12 @@
 
 ## What’s Included?
 
+* Build-in [Vue.js](https://vuejs.org/) support.
 * Modern tooling, ES6, SASS and EJS syntax support.
 * Global variables between js, scss and html.
-* A live development server that warns about common mistakes.
-* Build-in [Vue.js](https://vuejs.org/) support, optionnal.
-* Aliases (@) to easily include files, also availble in html and sass.
+* A live development server that warns about common mistakes (powered by `webpack-dev-server` and/or `broswersync`).
 * On build, compress images, autoprefix, minify files and cache busting
-* WIP Non obtrusive linter with prettier and ESLint.
+* [WIP] Non obtrusive linter with prettier and ESLint.
 * ~~Out-of-the-box Progressive web app support.~~
 
 ## Installation
@@ -40,28 +39,30 @@ npm install
 ## Commands
 
 ```
-$ npm run start #dev -> local server
+npm run start #dev -> local server
 ```
 
 ```
-$ npm run build #production -> compilation
+npm run build #production -> compilation
 ```
 
 ```
-$ npm run watch #dev -> compile without server
+npm run watch #dev -> compile without server
 ```
 
 #### Code quality
 
 ```
-$ npm run format-js #run prettier on your js
+npm run format-js #run prettier on your js
 ```
 
 ```
-$ npm run format-scss #run prettier on your scss
+npm run format-scss #run prettier on your scss
 ```
 
 ## Features
+
+Most of the features are customizable in the `zigzag.config.js`.
 
 When you follow the folder structure, it give you access to some handy aliases.
 You can found them in `webpack/urls.js`.
@@ -117,7 +118,7 @@ Do not forget to edit your `package.json` before publishing your repo !
 
 MIT License
 
-Copyright (c) 2018 Adrien Zaganelli
+Copyright (c) 2020 Adrien Zaganelli
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
