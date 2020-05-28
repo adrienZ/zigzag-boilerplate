@@ -3,10 +3,10 @@ const path = require('path')
 
 const env = require('./env')
 const urls = require('./urls')
+const config = require('../zigzag.config')
 
-const dataInjecter = require('./DataInjecter')
-
-const broswerSupport = require('./config').compatibility || {}
+const { getInlineDataScss } = require('./helpers')
+const broswerSupport = config.compatibility || {}
 
 const cssLoaders = [
   env.webpack_server ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -75,7 +75,7 @@ module.exports = {
       {
         loader: 'sass-loader',
         options: {
-          data: dataInjecter.getInlineData(),
+          data: getInlineDataScss(config.globals),
         },
       },
     ],

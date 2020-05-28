@@ -10,8 +10,13 @@ module.exports = {
       medium: 120,
       small: 60,
     },
-    $img: path.relative(urls.dev.root, urls.aliases.img),
-    $fonts: path.relative(urls.dev.root, urls.aliases.fonts),
+
+    // url helpers
+    $img: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'img/')),
+    $fonts: path.relative(
+      urls.dev.root,
+      path.resolve(urls.dev.assets, 'fonts/')
+    ),
   },
 
   devServer: {
@@ -21,5 +26,16 @@ module.exports = {
     useBroswerSync: true,
     // can't touch this
     ip: ip.address(),
+  },
+
+  compatibility: {
+    useBuiltIns: 'usage',
+    corejs: 3,
+
+    // https://babeljs.io/docs/en/babel-preset-env#targets
+    // https://browserl.ist/
+    targets: {
+      browsers: 'cover 99.5%, not dead',
+    },
   },
 }

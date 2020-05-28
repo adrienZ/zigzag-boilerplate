@@ -25,9 +25,9 @@ const urls = {
 const aliases = {
   js: path.resolve(urls.dev.code, 'js/'),
   sass: path.resolve(urls.dev.code, 'sass/'),
-  base: path.resolve(urls.dev.root),
-  img: path.resolve(urls.dev.assets, 'img/'),
-  fonts: path.resolve(urls.dev.assets, 'fonts/'),
+  // base: path.resolve(urls.dev.root),
+  // img: path.resolve(urls.dev.assets, 'img/'),
+  // fonts: path.resolve(urls.dev.assets, 'fonts/'),
   components: path.resolve(urls.dev.code, 'components/'),
 }
 

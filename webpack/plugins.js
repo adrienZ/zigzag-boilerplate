@@ -10,7 +10,6 @@ const env = require('./env')
 const entries = require('./entries')
 const urls = require('./urls')
 const { globals } = require('../zigzag.config')
-// const pwa = require('./pwa')
 
 /*
 // =======================================================================//
@@ -138,20 +137,6 @@ if (!env.webpack_server) {
         root: urls.BASE_URL,
         verbose: true,
         dry: false,
-      })
-    )
-
-    /**
-     * reload css and fonts
-     */
-    const Critters = require('critters-webpack-plugin')
-    PLUGINS_CONFIG.push(
-      new Critters({
-        // Outputs: <link rel="preload" onload="this.rel='stylesheet'">
-        preload: 'swap',
-
-        // Don't inline critical font-face rules, but preload the font URLs:
-        preloadFonts: false,
       })
     )
 
