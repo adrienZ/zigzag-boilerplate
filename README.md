@@ -77,7 +77,7 @@ import myImgPath from '$img/example.jpg'
 
 In sass, we inject vars through the `sass-loader`:
 
-```sass
+```scss
 .myDiv {
   background: url("#{$img}/example.jpg")
 }
