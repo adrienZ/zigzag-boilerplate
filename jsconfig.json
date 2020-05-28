@@ -3,8 +3,8 @@
     "target": "es6",
     "baseUrl": "./app/src/js",
     "paths": {
-      "@js/*": ["./*"],
-      // "@img/*": ["../src/media/img/*"],
+      "$js/*": ["./*"],
+      // "$img/*": ["../src/media/img/*"],
     }
   },
   "include": ["app/src/**/*"],

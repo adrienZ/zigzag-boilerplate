@@ -1,4 +1,6 @@
 const ip = require('ip')
+const path = require('path')
+const urls = require('./webpack/urls')
 
 module.exports = {
   globals: {
@@ -8,6 +10,8 @@ module.exports = {
       medium: 120,
       small: 60,
     },
+    $img: path.relative(urls.dev.root, urls.aliases.img),
+    $fonts: path.relative(urls.dev.root, urls.aliases.fonts),
   },
 
   devServer: {

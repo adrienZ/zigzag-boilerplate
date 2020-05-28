@@ -35,14 +35,14 @@ module.exports = {
     enforce: 'pre',
     test: /\.js$/,
     exclude: /node_modules/,
-    include: urls.aliases['@js'],
+    include: urls.aliases.js,
     loader: 'eslint-loader',
   },
   js: {
     // ES6
     test: /\.js$/,
     exclude: /(node_modules|bower_components)/,
-    include: urls.aliases['@js'],
+    include: urls.aliases.js,
     loaders: [
       {
         loader: 'babel-loader',
@@ -68,7 +68,7 @@ module.exports = {
   },
   sass: {
     test: /\.s?[ac]ss$/,
-    // include: urls.aliases['@sass'],
+    // include: urls.aliases.sass,
     // exclude: /node_modules/,
     use: [
       ...cssLoaders,

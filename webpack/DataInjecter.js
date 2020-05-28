@@ -1,59 +1,12 @@
-const urls = require('./urls')
-const path = require('path')
-const env = require('./env')
 const { globals } = require('../zigzag.config')
-
-// TODO:
-//    - relatives gestion is fucked up
 
 class DataInjecter {
   constructor() {
     this.data = {}
   }
 
-  setData(values) {
-    // set data and handle aliases
-    this.relatives = Object.keys(urls.relatives).reduce((acc, key) => {
-      // prefix relative var with a $
-      const serializedKey = key.replace('relative-', '').replace('@', '$')
-      acc[serializedKey] = urls.relatives[key]
-      return acc
-    }, {})
-
-    this.relativesScss = this._globalizeRelativesUrls(this.relatives)
-
-    this.data = values
-  }
-
-  _globalizeRelativesUrls(aliases) {
-    const obj = {}
-
-    Object.keys(aliases).map(key => {
-      // $ for scss variable
-      const keyWithoutArobase = key.replace('$', '')
-
-      // fix css broken relatives path in build
-      const prodCssUrl = path.resolve(urls.prod.code, '/css/')
-      const $sassUrl = env.webpack_server
-        ? aliases[key]
-        : path.resolve(prodCssUrl, urls.prod.root, aliases[key])
-
-      obj[keyWithoutArobase] = $sassUrl
-    })
-
-    return obj
-  }
-
-  getData() {
-    return Object.assign({}, this.relatives, this.data)
-  }
-
   getInlineData() {
-    const data = Object.assign(
-      {},
-      this._globalizeRelativesUrls(this.relativesScss),
-      this.data
-    )
+    const data = this.data
 
     const { stringify, parse } = JSON
 
@@ -88,7 +41,10 @@ class DataInjecter {
     return (
       Object.keys(verifiedObject)
         // format for scss
-        .map(varName => `$${varName}: ${verifiedObject[varName]}`)
+        .map(
+          // remove '$' because it breaks scss variable declaration
+          varName => `$${varName.replace('$', '')}: ${verifiedObject[varName]}`
+        )
         // add commas
         .join('; ') + ';'
     )
@@ -96,6 +52,6 @@ class DataInjecter {
 }
 
 const instance = new DataInjecter()
-instance.setData(globals)
+instance.data = globals
 
 module.exports = instance

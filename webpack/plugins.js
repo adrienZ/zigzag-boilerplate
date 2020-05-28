@@ -9,7 +9,7 @@ const path = require('path')
 const env = require('./env')
 const entries = require('./entries')
 const urls = require('./urls')
-const dataInjecter = require('./DataInjecter')
+const { globals } = require('../zigzag.config')
 // const pwa = require('./pwa')
 
 /*
@@ -50,7 +50,7 @@ const htmlExport = views.map(
         removeComments: true,
         removeRedundantAttributes: true,
       },
-      templateParameters: dataInjecter.getData(),
+      templateParameters: globals,
     })
 )
 

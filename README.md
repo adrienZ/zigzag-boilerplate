@@ -72,7 +72,7 @@ Adding media has never been so easy !
 In javascript, we rely on webpack aliases
 
 ```javascript
-import myImgPath from '@img/example.jpg'
+import myImgPath from '$img/example.jpg'
 ```
 
 In sass, we inject vars through the `sass-loader`:

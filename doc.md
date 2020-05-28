@@ -11,8 +11,8 @@ Webpack aliases are defined in `webpack/urls.js`. They can be used in your js an
 they are useful for cache busting and shorten code.
 
 ```javascript
-import '@sass/style.scss'
-import '@js/polyfills'
+import '$sass/style.scss'
+import '$js/polyfills'
 ```
 
 ```html

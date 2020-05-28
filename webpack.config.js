@@ -8,13 +8,17 @@ const loaders = require('./webpack/loaders')
 const plugins = require('./webpack/plugins')
 
 // src/js
-const jsOutput = path.relative(urls.dev.root, urls.aliases['@js'])
+const jsOutput = path.relative(urls.dev.root, urls.aliases.js)
+const prefixedAliases = Object.keys(urls.aliases).reduce((acc, alias) => {
+  acc['$' + alias] = urls.aliases[alias]
+  return acc
+}, {})
 
 module.exports = {
   devServer,
   entry: entries.js,
   resolve: {
-    alias: urls.aliases,
+    alias: prefixedAliases,
   },
   output: {
     chunkFilename: '[name].bundle.js',
