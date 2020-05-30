@@ -27,15 +27,4 @@ module.exports = {
     // can't touch this
     ip: ip.address(),
   },
-
-  compatibility: {
-    useBuiltIns: 'usage',
-    corejs: 3,
-
-    // https://babeljs.io/docs/en/babel-preset-env#targets
-    // https://browserl.ist/
-    targets: {
-      browsers: 'cover 99.5%, not dead',
-    },
-  },
 }
