@@ -1,14 +1,29 @@
 # Documentation
 
+  * [My site must be compatible with IE, what can I do ?](#my-site-must-be-compatible-with-ie--what-can-i-do--)
+  * [How does your data injection works ?](#how-does-your-data-injection-works--)
+  * [Local server](#local-server)
+  * [Async Modules](#async-modules)
+
 ## My site must be compatible with IE, what can I do ?
 
-[browserslist](https://github.com/browserslist/browserslist) is included in [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env).
-In this boilerplate, you can change the `compatibility` variable in `webpack/config.js`.
+[browserslist](https://github.com/browserslist/browserslist) take care of that matter. You can find it in `package.json`.
+You can test your query on this website: [browserl.ist](https://browserl.ist/?q=cover+99.5%25%2C+not+dead)
+
+example:
+```
+...
+  "browserslist": ["cover 99.5%, not dead"],
+...
+```
+
+Autoprefixer and Babel will use this query make sure your website is compatible.
 
 ## How does your data injection works ?
 
-Webpack aliases are defined in `webpack/urls.js`. They can be used in your js and your html,
-they are useful for cache busting and shorten code.
+You can use webpack aliases in your JS and HTML (.ejs is powered by node.js).
+
+Webpack aliases are defined in `webpack/urls.js`.
 
 ```javascript
 import '$sass/style.scss'
@@ -19,17 +34,48 @@ import '$js/polyfills'
 <h3>Title color <%= titleColor %></h3>
 ```
 
-Internally those aliases are send in the sass and the html through a relative path.
+We also have a `globals` property in `zigzag.config.js` where you can send data in your HTML, SCSS and JS.
+
+In scss we use these globals, to override some aliases as relative paths.
+
 It allow us to not use `file-loader` and reduce build time !
 
 ```ejs
 <img src="<%= $img %>/example.jpg">
 ```
 
-We also have a `GLOBALS` object in `webpack/dataInjection.js` where you can send data
-in the html and sass.
+```scss
+#testImg {
+  background: url(#{$img}/example.jpg);
+}
+```
 
-those data are send via the `sass-loader` and the `htmlWebpackPlugin` options.
+Those datas are sent via the `sass-loader` and the `htmlWebpackPlugin` options.
+
+## Local server
+
+Use your local server with the following command:
+
+```
+npm run start
+````
+
+It will trigger the `webpack-dev-server`.
+Your server options are located int the `devServer` property in `zigzag.config.js`
+
+```javascript
+devServer: {
+  port: 8899,
+  isHttps: false,
+  hmr: true,
+  useBroswerSync: true,
+  // can't touch this
+  ip: ip.address(),
+}
+```
+
+As you can see, we use `BroswerSync` by default on top of the server. It allows us to use his nice debugging features, you can still disabled it by turning `useBroswerSync` to `false`.
+
 
 ## Async Modules
 
