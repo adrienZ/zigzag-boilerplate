@@ -141,18 +141,6 @@ if (!env.webpack_server) {
     )
 
     /*
-      🙈 SOME WEBPACK OPTIMIZATION
-      https://github.com/webpack/docs/wiki/optimization
-    */
-
-    PLUGINS_CONFIG.push(
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.optimize.ModuleConcatenationPlugin(),
-      //Merge chunks
-      new webpack.optimize.AggressiveMergingPlugin()
-    )
-
-    /*
     // =======================================================================//
     //    🚧 WORK IN PROGRESS !!!                                             //
     // ?  🤖 COMPRESSION PLUGIN                                               //

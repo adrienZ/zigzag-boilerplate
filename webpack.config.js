@@ -38,9 +38,12 @@ module.exports = {
     ],
   },
   optimization: {
-    removeAvailableModules: !env.development,
-    removeEmptyChunks: !env.development,
-    minimize: !env.development,
+    noEmitOnErrors: env.production,
+    splitChunks: {
+      // all chunks, not async
+      chunks: 'all',
+      minChunks: 2,
+    },
   },
   plugins,
 }

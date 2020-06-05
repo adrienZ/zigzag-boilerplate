@@ -6,7 +6,6 @@ const urls = require('./urls')
 const config = require('../zigzag.config')
 
 const { getInlineDataScss } = require('./helpers')
-const broswerSupport = config.compatibility || {}
 
 const cssLoaders = [
   env.webpack_server ? 'style-loader' : MiniCssExtractPlugin.loader,
