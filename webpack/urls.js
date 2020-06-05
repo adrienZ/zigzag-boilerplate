@@ -31,6 +31,12 @@ const aliases = {
   components: path.resolve(urls.dev.code, 'components/'),
 }
 
+urls.entriesFolder = {
+  js: path.relative(urls.dev.root, aliases.js),
+  fonts: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'fonts/')),
+  img: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'img/')),
+}
+
 module.exports = {
   ...urls,
   aliases,

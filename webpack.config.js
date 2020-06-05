@@ -43,6 +43,8 @@ module.exports = {
       // all chunks, not async
       chunks: 'all',
       minChunks: 2,
+      // output in js src, not root
+      filename: urls.entriesFolder.js + '/[name].js',
     },
   },
   plugins,

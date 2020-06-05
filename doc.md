@@ -82,8 +82,6 @@ As you can see, we use `BroswerSync` by default on top of the server. It allows 
 Imagine you want to load a big module of javascript... but you only need it for a specific task.
 Instead of including it in your bundle and increase load time... load it later !
 
-in your babel configuration (`webpack/loaders.js`, see babel-loader) we desactivate modules and use the `syntax-dynamic-import` plugin.
-
 ```javascript
 /**
  * ASYNC MODULES
@@ -94,11 +92,11 @@ in your babel configuration (`webpack/loaders.js`, see babel-loader) we desactiv
  *
  * arugments: webpackPrefetch(bool), webpackPreload(bool), webpackChunkName(string)
  *
- * see more: https://webpack.js.org/guides/code-splitting/
+ * see more: https://webpack.js.org/api/module-methods/#magic-comments
  */
 
 const ModuleAsyncImportPromise = import(
-  /* webpackChunkName: "ip-async-test" */ 'ip'
+    /* webpackChunkName: "src/js/ip-async-test" */ 'ip'
 )
 ModuleAsyncImportPromise.then(module => {
   console.log('async import works !', module.address(), module)

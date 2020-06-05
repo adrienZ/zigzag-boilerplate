@@ -1,5 +1,4 @@
 const ip = require('ip')
-const path = require('path')
 const urls = require('./webpack/urls')
 
 module.exports = {
@@ -12,11 +11,8 @@ module.exports = {
     },
 
     // url helpers
-    $img: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'img/')),
-    $fonts: path.relative(
-      urls.dev.root,
-      path.resolve(urls.dev.assets, 'fonts/')
-    ),
+    $img: urls.entriesFolder.img,
+    $fonts: urls.entriesFolder.fonts,
   },
 
   devServer: {
