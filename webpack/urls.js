@@ -23,16 +23,16 @@ const urls = {
 
 // these paths are used for our webpack congig
 const aliases = {
-  js: path.resolve(urls.dev.code, 'js/'),
-  sass: path.resolve(urls.dev.code, 'sass/'),
-  // base: path.resolve(urls.dev.root),
-  // img: path.resolve(urls.dev.assets, 'img/'),
-  // fonts: path.resolve(urls.dev.assets, 'fonts/'),
-  components: path.resolve(urls.dev.code, 'components/'),
+  $js: path.resolve(urls.dev.code, 'js/'),
+  $sass: path.resolve(urls.dev.code, 'sass/'),
+  // $base: path.resolve(urls.dev.root),
+  // $img: path.resolve(urls.dev.assets, 'img/'),
+  // $fonts: path.resolve(urls.dev.assets, 'fonts/'),
+  $components: path.resolve(urls.dev.code, 'components/'),
 }
 
 urls.entriesFolder = {
-  js: path.relative(urls.dev.root, aliases.js),
+  js: path.relative(urls.dev.root, aliases.$js),
   fonts: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'fonts/')),
   img: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'img/')),
 }
