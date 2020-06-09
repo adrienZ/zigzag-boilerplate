@@ -53,7 +53,13 @@ npm run watch #dev -> compile without server
 
 ## Linters
 
-These linters runs with your local server and on the `pre-commit` hook.
+These linters runs with your local server and with the commands
+```
+npm run lint:js
+```
+```
+npm run lint:scss
+```
 
 * [ESLint](https://eslint.org) :
   * Atom : `apm install linter-eslint`
