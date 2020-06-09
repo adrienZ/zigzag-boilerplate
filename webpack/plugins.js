@@ -23,16 +23,13 @@ const { globals } = require('../zigzag.config')
 // =======================================================================//
 */
 
-const cssOutputPath = path.resolve(urls.prod.code, 'css/')
-const relativeCssOutput = path.relative(urls.prod.root, cssOutputPath) + '/'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
 const sassPlugin = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
   filename: env.webpack_server
-    ? relativeCssOutput + '[name].css'
-    : relativeCssOutput + '[name].[contenthash].css',
+    ? urls.entriesFolder.css + '/[name].css'
+    : urls.entriesFolder.css + '/[name].[contenthash].css',
   chunkFilename: env.development ? '[id].css' : '[id].[contenthash].css',
 })
 

@@ -35,6 +35,7 @@ urls.entriesFolder = {
   js: path.relative(urls.dev.root, aliases.$js),
   fonts: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'fonts/')),
   img: path.relative(urls.dev.root, path.resolve(urls.dev.assets, 'img/')),
+  css: path.relative(urls.prod.root, path.resolve(urls.prod.code, 'css/')),
 }
 
 module.exports = {
