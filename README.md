@@ -15,7 +15,8 @@
 * Global variables between js, scss and html.
 * A live development server that warns about common mistakes (powered by `webpack-dev-server` and/or `broswersync`).
 * On build, compress images, autoprefix, minify files and cache busting
-* [WIP] Non obtrusive linter with prettier and ESLint.
+* Non obtrusive linter with prettier and ESLint.
+* IE11 compatibility (configurable)
 * ~~Out-of-the-box Progressive web app support.~~
 
 ## Installation
@@ -50,58 +51,9 @@ npm run build #production -> compilation
 npm run watch #dev -> compile without server
 ```
 
-#### Code quality
-
-```
-npm run format-js #run prettier on your js
-```
-
-```
-npm run format-scss #run prettier on your scss
-```
-
-## Features
-
-Most of the features are customizable in the `zigzag.config.js`.
-
-When you follow the folder structure, it give you access to some handy aliases.
-You can found them in `webpack/urls.js`.
-
-Adding media has never been so easy !
-
-In javascript, we rely on webpack aliases
-
-```javascript
-import myImgPath from '$img/example.jpg'
-```
-
-In sass, we inject vars through the `sass-loader`:
-
-```scss
-.myDiv {
-  background: url("#{$img}/example.jpg")
-}
-
-@font-face {
-  font-family: 'MyFont';
-  src: url(#{$fonts}/example-font.ttf);
-  font-weight: normal;
-  font-style: normal;
-}
-```
-
-In html (.ejs), we inject vars through the `htmlWebpackPlugin`
-
-```ejs
-<img src="<%= $img %>example.jpg">
-```
-
-## Caveats
-
-HMR is enabled by default for all but .html/.ejs. the `htmlWebpackPlugin` does not allow HMR, it can only live reload (reload page on save).
-
-
 ## Linters
+
+These linters runs with your local server and on the `pre-commit` hook.
 
 * [ESLint](https://eslint.org) :
   * Atom : `apm install linter-eslint`

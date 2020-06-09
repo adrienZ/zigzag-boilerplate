@@ -22,7 +22,6 @@ Autoprefixer and Babel will use this query make sure your website is compatible.
 ## How does your data injection works ?
 
 You can use webpack aliases in your JS and HTML (.ejs is powered by node.js).
-
 Webpack aliases are defined in `webpack/urls.js`.
 
 ```javascript
@@ -30,15 +29,18 @@ import '$sass/style.scss'
 import '$js/polyfills'
 ```
 
-```html
+```ejs
 <h3>Title color <%= titleColor %></h3>
 ```
+
+**You can't use them in .scss.**
+
+importing file with aliases forces us to use the `file-loader`. We avoid it because it would lock in the webpack ecosystem. in the `css-loader` we set the `url` option to `false`.
 
 We also have a `globals` property in `zigzag.config.js` where you can send data in your HTML, SCSS and JS.
 
 In scss we use these globals, to override some aliases as relative paths.
 
-It allow us to not use `file-loader` and reduce build time !
 
 ```ejs
 <img src="<%= $img %>/example.jpg">

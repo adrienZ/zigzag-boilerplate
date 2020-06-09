@@ -2,17 +2,14 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --hide-modules --progress --color",
     "start": "cross-env NODE_ENV=development webpack-dev-server --display=minimal --color",
-    "format-js": "cross-env prettier \"app/src/**/*.@(js)\" --write",
-    "format-scss": "cross-env prettier \"app/src/**/*.@(scss)\" --parser scss --write",
-    "pre-precommit": "cross-env pretty-quick --staged",
     "watch": "cross-env NODE_ENV=development webpack -w --progress --colors --hide-modules --display=minimal"
   },
   "lint-staged": {
     "*.js": [
-      "npm run format-js"
+      "cross-env prettier --write"
     ],
     "*.scss": [
-      "npm run format-scss"
+      "cross-env prettier --parser scss --write"
     ]
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
@@ -42,11 +39,11 @@
     "imagemin-webp": "^5.1.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "ip": "^1.1.5",
+    "lint-staged": "^7.3.0",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
-    "pretty-quick": "^1.11.1",
     "raw-loader": "^3.1.0",
     "sass-loader": "^7.3.1",
     "style-loader": "^0.22.1",
@@ -61,5 +58,10 @@
   },
   "dependencies": {
     "vue": "^2.6.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
