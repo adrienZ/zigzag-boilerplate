@@ -15,7 +15,6 @@ const urls = {
     root: path.join(base_url, '/dist/'),
     code: path.join(base_url, '/dist/src/'),
     assets: path.join(base_url, '/dist/assets/'),
-    favicons: path.join(base_url, '/dist/icons/'),
   },
   CONFIG: __dirname,
   BASE_URL: base_url,
