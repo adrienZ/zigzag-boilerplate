@@ -1,7 +1,5 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.ignorePath": ".prettierignore",
-  "prettier.eslintIntegration": true,
   "prettier.requireConfig": true,
   "[javascript]": {
     "editor.formatOnSave": true

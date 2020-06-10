@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --hide-modules --progress --color",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --display=minimal --color",
+    "build": "cross-env NODE_ENV=production npx webpack --hide-modules --progress --color",
+    "start": "cross-env NODE_ENV=development npx webpack-dev-server --display=minimal --color",
     "lint:js": "cross-env npx prettier \"app/src/**/*.@(js)\" --write",
     "lint:scss": "cross-env npx prettier \"app/src/**/*.@(scss)\" --parser scss --write",
-    "watch": "cross-env NODE_ENV=development webpack -w --progress --colors --hide-modules --display=minimal"
+    "watch": "cross-env NODE_ENV=development npx webpack -w --progress --colors --hide-modules --display=minimal"
   },
   "author": "Adrien Zaganelli <adrienzaganelli@gmail.com> (http://adrienzaganelli.com/)",
   "browserslist": [

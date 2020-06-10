@@ -33,7 +33,7 @@ module.exports = {
     // ES6
     enforce: 'pre',
     test: /\.js$/,
-    exclude: /node_modules/,
+    exclude: /(node_modules|bower_components)/,
     loader: 'eslint-loader',
   },
   js: {
@@ -61,12 +61,12 @@ module.exports = {
   },
   css: {
     test: /\.css$/,
-    // exclude: /node_modules/,
+    exclude: /(node_modules|bower_components)/,
     use: [...cssLoaders],
   },
   sass: {
     test: /\.s?[ac]ss$/,
-    // exclude: /node_modules/,
+    exclude: /(node_modules|bower_components)/,
     use: [
       ...cssLoaders,
       {
@@ -79,11 +79,12 @@ module.exports = {
   },
   shader: {
     test: /\.(glsl|frag|vert)$/,
-    exclude: /node_modules/,
+    exclude: /(node_modules|bower_components)/,
     use: ['raw-loader', 'glslify-loader'],
   },
   vue: {
     test: /\.vue$/,
+    exclude: /(node_modules|bower_components)/,
     loader: 'vue-loader',
   },
 }
