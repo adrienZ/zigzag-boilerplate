@@ -35,4 +35,13 @@ body {
   height: #{map-get($map: $imgSizes, $key: small)}px;
 }
 
-// DONT WRITE CODE AFTER IMPORTS
+// css var
+p.css-var {
+  --test: 24px;
+
+  font-size: var(--test);
+
+  @media screen and (max-width: 720px) {
+    --test: 9px;
+  }
+}
