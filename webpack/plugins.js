@@ -70,12 +70,25 @@ const assetsInclusion = new CopyPlugin([
   },
 ])
 
+//copy .htacess
+const htaccessInclusion = new CopyPlugin([
+  {
+    from: urls.dev.root,
+    // waiting for webpack 5 asset type... hashes assets
+    // to: env.development ? './assets/img/[name].[ext]' : './assets/[name].[hash].[ext]',
+    // toType: 'template',
+    to: './',
+    ignore: ['.DS_Store', '.gitkeep', '*.ejs'],
+  },
+])
+
 // DEFAULT PLUGINS:
 const PLUGINS_CONFIG = [
   sassPlugin,
   webpackNotifier,
   ...htmlExport,
   assetsInclusion,
+  htaccessInclusion,
   new VueLoaderPlugin(),
 ]
 
