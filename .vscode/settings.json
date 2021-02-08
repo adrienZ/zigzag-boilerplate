@@ -6,5 +6,34 @@
   },
   "[scss]": {
     "editor.formatOnSave": true
-  }
+  },
+
+
+  "editor.linkedEditing": true,
+  "html.autoClosingTags": true,
+  "javascript.autoClosingTags": true,
+  "typescript.autoClosingTags": true,
+
+
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "prompt",
+  "typescript.updateImportsOnFileMove.enabled": "prompt",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "//comment": "remove unused import on save"
+  },
+
+
+  "emmet.excludeLanguages": [],
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript":"javascriptreact",
+    "markdown": "html"
+  },
+
+  "files.trimTrailingWhitespace": false,
+  "//comment": "disabled on existing project (git diffs), enabled on new"
+
+
 }
