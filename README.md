@@ -2,12 +2,14 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/adrienz/zigzag-boilerplate.svg)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-# ZigZag Boilerplate
+# THIS REPO IS NOT MAINTAINED ANYMORE. JUST USE [VITE](https://vitejs.dev/) 💙
+
+## ZigZag Boilerplate
 
 #### The modern no-framework boilerplate
 
 [documentation](doc.md)
-
+💙
 ## What’s Included?
 
 * Build-in [Vue.js](https://vuejs.org/) support.
